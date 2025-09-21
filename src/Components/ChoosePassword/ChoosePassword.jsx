@@ -6,6 +6,7 @@ import Button from "../../Common/Button/Button";
 import ValidatationPoints from "../../Common/ValidatationPoints/ValidatationPoints";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { FaDotCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ChoosePassword = () => {
   return (
@@ -20,9 +21,11 @@ const ChoosePassword = () => {
           <p className="font-bold text-gray-500">
             Must be at least 8 characters.
           </p>
-          <Button />
+          <Link to={"/choosestaff"}>
+            <Button />
+          </Link>
         </form>
-        <ValidatationPoints iconCheck={<AiFillCheckCircle />}  />
+        <ValidatationPoints iconCheck={<AiFillCheckCircle />} />
       </div>
     </div>
   );
