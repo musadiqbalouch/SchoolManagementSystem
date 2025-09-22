@@ -1,16 +1,9 @@
 import React from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 
-const StudentForm = () => {
+const Form = ({ button }) => {
   return (
-    <div className="flex flex-col mauto items-start justify-start m-5  bg-white border-2 border-gray-500 rounded-md p-15">
-      <div className="flex flex-col gap-3 text-gray-500 px-10">
-        <h1 className="text-3xl font-semibold ">Add Student</h1>
-        <div className="flex gap-5 text-base font-semibold  justify-start items-center ">
-          <h2>Manually</h2>
-          <h2>Import CSV</h2>
-        </div>
-      </div>
+    <div>
       <form className="flex flex-row flex-wrap gap-8  p-8  text-gray-500 mt-3  items-centre  justify-start content-center">
         <label className="flex flex-col ">
           Name
@@ -63,11 +56,11 @@ const StudentForm = () => {
           Add another
         </span>
         <button className="text-center bg-gray-500 text-black px-4 py-2 rounded-md font-semibold">
-          Add Student
+          {button}
         </button>
       </form>
     </div>
   );
 };
 
-export default StudentForm;
+export default Form;

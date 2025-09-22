@@ -41,7 +41,7 @@ const SideBar = () => {
     },
   ];
   return (
-    <div className="wfit bg-[#152259] flex flex-col px-10 py2 ">
+    <div className="wfit bg-[#152259] flex flex-col px-8 py2 ">
       <div className="flex flex-col m-auto items-center justify-center p-5">
         <img
           className="h-13 w-15 object-cover rounded-[50%] "

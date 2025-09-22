@@ -2,6 +2,7 @@ import React from "react";
 import LoginHeading from "../../Common/LoginHeading/LoginHeading";
 import Input from "../../Common/Input/Input";
 import Button from "../../Common/Button/Button";
+import { Link } from "react-router-dom";
 
 const LogintoAccount = () => {
   return (
@@ -15,10 +16,13 @@ const LogintoAccount = () => {
           <Input placeholder={"Enter the name of school"} type={"text"} />
           <Input placeholder={"Enter Password"} type={"password"} />
           <Button />
-          <p className="p-2 text-gray-500">
-            Already have an account?{" "}
+          <Link
+            to={"/choosePassword"}
+            className="p-2 text-gray-500 cursor-pointer"
+          >
+            Create an account?{" "}
             <span className="text-blue-500 font-bold">Sign up</span>
-          </p>
+          </Link>
         </form>
       </div>
     </div>

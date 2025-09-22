@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+// import Navbar2 from "./Components/Navbar/Navbar2";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SideBar from "./Components/SideBar/SideBar";
-import Navbar from "./Components/Navbar/Navbar";
+import SideBar from "./LoginCriteria/SideBar/SideBar";
+import Navbar from "./LoginCriteria/Navbar/Navbar";
 import Dashbaord from "./views/DashBoard";
 import Exam from "./views/Exam";
 import Setting from "./views/Setting";
@@ -10,30 +11,35 @@ import Student from "./views/Student/Index";
 import TeacherPage from "./views/Teacher";
 import Billing from "./views/Billing";
 import StudentForm from "./views/Student/StudentForm";
-import LogintoAccount from "./Components/LogintoAccount/LogintoAccount";
-import ChoosePassword from "./Components/ChoosePassword/ChoosePassword";
-import SchoolAccount from "./Components/SchoolAccount/SchoolAccount";
-import ChooseStaff from "./Components/ChooseStaff/ChooseStaff";
+import LogintoAccount from "./LoginCriteria/LogintoAccount/LogintoAccount";
+import ChoosePassword from "./LoginCriteria/ChoosePassword/ChoosePassword";
+import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
+import ChooseStaff from "./LoginCriteria/ChooseStaff/ChooseStaff";
+import TeacherForm from "./views/Teacher/TeacherForm";
+import Navbar2 from "./Components/Navbar/Navbar2";
+import TrustedbyCompany from "./Components/TrustedbyCompany/TrustedbyCompany";
+import CreateTask from "./Components/CreateTask/CreateTask";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     console.log("is logged in ", isLoggedIn);
   }, [isLoggedIn]);
+
   return (
     <BrowserRouter>
-      <div className="flex gap-10 flexcol w-full bgred-400 ">
+      <div className="flex   w-full bgred-400 ">
         {/* Sidebar  side bar  */}
         {isLoggedIn && (
-          <div className="w-fit px10">
+          <div className="w-fit">
             <SideBar />
           </div>
         )}
-        <div className="flex flex-col m-auto container  ">
+        <div className="flex flex-col m-auto mt-0 container  ">
           {isLoggedIn && (
             <div>
-              <Navbar />
+              <Navbar setIsLoggedIn={setIsLoggedIn} />
             </div>
           )}
           {/* routes  */}
@@ -50,6 +56,7 @@ function App() {
                     <Route path="/setting" element={<Setting />} />
                     <Route path="/exam" element={<Exam />} />
                     <Route path="/studentForm" element={<StudentForm />} />
+                    <Route path="/teacherform" element={<TeacherForm />} />
                   </>
                 ) : (
                   //  </div>
@@ -65,6 +72,7 @@ function App() {
                       element={<LogintoAccount setIsLoggedIn={setIsLoggedIn} />}
                     />
                     <Route path="/choosestaff" element={<ChooseStaff />} />
+                    <Route path="/loginAcount" element={<LogintoAccount />} />
                   </>
                 )}
               </Routes>
@@ -72,6 +80,9 @@ function App() {
           </div>
         </div>
       </div>
+      <Navbar2 />
+      <TrustedbyCompany />
+      <CreateTask />
     </BrowserRouter>
   );
 }
