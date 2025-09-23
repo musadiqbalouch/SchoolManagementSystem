@@ -19,9 +19,14 @@ import TeacherForm from "./views/Teacher/TeacherForm";
 import Navbar2 from "./Components/Navbar/Navbar2";
 import TrustedbyCompany from "./Components/TrustedbyCompany/TrustedbyCompany";
 import CreateTask from "./Components/CreateTask/CreateTask";
+import HoldingPhone from "./Components/HoldingPhoneSection/HoldingPhone";
+import Cards from "./Components/Cards/Cards";
+import OptionFromCustomer from "./Components/OptionFromCustomer/OptionFromCustomer";
+import KeyboardSection from "./Components/KeyboardSection/KeyboardSection";
+import Footer from "./Common/Footer/Footer";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     console.log("is logged in ", isLoggedIn);
@@ -62,7 +67,7 @@ function App() {
                   //  </div>
                   // if user in not logged in
                   <>
-                    <Route path="/" element={<SchoolAccount />} />
+                    <Route path="/" element={<TrustedbyCompany />} />
                     <Route
                       path="/choosePassword"
                       element={<ChoosePassword />}
@@ -81,8 +86,13 @@ function App() {
         </div>
       </div>
       <Navbar2 />
-      <TrustedbyCompany />
+      {/* <TrustedbyCompany /> */}
       <CreateTask />
+      <HoldingPhone />
+      <Cards />
+      <OptionFromCustomer />
+      <KeyboardSection />
+      <Footer />
     </BrowserRouter>
   );
 }

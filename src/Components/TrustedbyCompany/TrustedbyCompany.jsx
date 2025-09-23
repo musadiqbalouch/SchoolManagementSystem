@@ -12,13 +12,13 @@ const TrustedbyCompany = () => {
       <h1 className="text-black font-semibold text-3xl  ">
         Trusted by company like
       </h1>
-      <div className="flex  flex-row gap-15  p-6 object-cover h15 w25">
-        <img src={company1logo} alt="" />
-        <img src={company2logo} alt="" />
-        <img src={company3logo} alt="" />
-        <img src={company4logo} alt="" />
-        <img src={company5logo} alt="" />
-        <img src={company6logo} alt="" />
+      <div className="flex  flex-row gap-15  p-6 object-cover mt-5">
+        <img className="h-8 w-8" src={company6logo} alt="" />
+        <img className="h-8 w-8" src={company1logo} alt="" />
+        <img className="h-8 w-8" src={company2logo} alt="" />
+        <img className="h-8 w-8" src={company3logo} alt="" />
+        <img className="h-8 w-8" src={company4logo} alt="" />
+        <img className="h-8 w-8" src={company5logo} alt="" />
       </div>
     </div>
   );
