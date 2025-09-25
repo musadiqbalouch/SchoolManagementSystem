@@ -14,7 +14,7 @@ const KeyboardSection = () => {
           mauris sed augue volutpat tortor. Condimentum facilisis aenean elit
           sed mattis porttitor duis ornare justo.
         </p>
-        <button className="bg-[#1777F7] text-white font-medium px-6 py-1  rounded-md mt-5">
+        <button className="bg-[#1777F7] text-white font-medium px-6 py-1  rounded-md mt-5 cursor-pointer">
           Choose
         </button>
       </div>

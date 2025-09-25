@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const Student = () => {
   return (
-    <div>
+    <div className="container m-auto relative ">
       <Link to={"/studentForm"}>
         <AddUserOption user={"Students"} addUser={"Add Students"} />
       </Link>

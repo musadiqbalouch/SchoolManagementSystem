@@ -45,8 +45,11 @@ const Cards = () => {
         </p>
       </div>
       <div className="flex gap-2 mt-2">
-        {cards.map((card) => (
-          <div className="w-fit border-[#FFFFFF] p-5 rounded-md py-5  shadow-md border-2 flex flex-col gap-3 ">
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className="w-fit border-[#FFFFFF] p-5 rounded-md py-5  shadow-md border-2 flex flex-col gap-3 "
+          >
             <h2 className="text-[#1777F7] bg-[#EDF5FF] w-fit px-2 py-1 rounded-md font-semibold backdrop-blur-2xl mb-2">
               {card.title}
             </h2>
@@ -71,7 +74,7 @@ const Cards = () => {
                 {card.p3}
               </p>
             </div>
-            <button className="w-full bg-[#1777F7] py-1 rounded-md">
+            <button className="w-full bg-[#1777F7] py-1 rounded-md cursor-pointer">
               Choose
             </button>
           </div>

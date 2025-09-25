@@ -6,7 +6,7 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 const TeacherPage = () => {
   return (
-    <div>
+    <div className="container m-auto relative ">
       <Link to={"/teacherform"}>
         <AddTeacherSection user={"Teacher"} addUser={"Add Teacher"} />
       </Link>

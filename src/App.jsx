@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-// import Navbar2 from "./Components/Navbar/Navbar2";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideBar from "./LoginCriteria/SideBar/SideBar";
 import Navbar from "./LoginCriteria/Navbar/Navbar";
@@ -13,23 +12,19 @@ import Billing from "./views/Billing";
 import StudentForm from "./views/Student/StudentForm";
 import LogintoAccount from "./LoginCriteria/LogintoAccount/LogintoAccount";
 import ChoosePassword from "./LoginCriteria/ChoosePassword/ChoosePassword";
-import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
 import ChooseStaff from "./LoginCriteria/ChooseStaff/ChooseStaff";
 import TeacherForm from "./views/Teacher/TeacherForm";
-import Navbar2 from "./Components/Navbar/Navbar2";
-import TrustedbyCompany from "./Components/TrustedbyCompany/TrustedbyCompany";
-import CreateTask from "./Components/CreateTask/CreateTask";
-import HoldingPhone from "./Components/HoldingPhoneSection/HoldingPhone";
-import Cards from "./Components/Cards/Cards";
-import OptionFromCustomer from "./Components/OptionFromCustomer/OptionFromCustomer";
-import KeyboardSection from "./Components/KeyboardSection/KeyboardSection";
-import Footer from "./Common/Footer/Footer";
+import LandingPage from "./Components/LandingPage/LandingPage";
+import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
+import TeachersData from "./views/Teacher/TeachersData";
+import StudentData from "./views/Student/StudentData";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
   useEffect(() => {
-    console.log("is logged in ", isLoggedIn);
+    localStorage.setItem("isLoggedIn", isLoggedIn);
   }, [isLoggedIn]);
 
   return (
@@ -41,14 +36,14 @@ function App() {
             <SideBar />
           </div>
         )}
-        <div className="flex flex-col m-auto mt-0 container  ">
+        <div className="flex flex-col m-auto mt0 w-full  ">
           {isLoggedIn && (
             <div>
               <Navbar setIsLoggedIn={setIsLoggedIn} />
             </div>
           )}
           {/* routes  */}
-          <div className="w-full">
+          <div className="w-full ">
             <>
               {/* if user is loggedin */}
               <Routes>
@@ -62,22 +57,24 @@ function App() {
                     <Route path="/exam" element={<Exam />} />
                     <Route path="/studentForm" element={<StudentForm />} />
                     <Route path="/teacherform" element={<TeacherForm />} />
+                    <Route path="/teachersdata" element={<TeachersData />} />
+                    <Route path="/studentData" element={<StudentData />} />
                   </>
                 ) : (
                   //  </div>
                   // if user in not logged in
                   <>
-                    <Route path="/" element={<TrustedbyCompany />} />
+                    <Route path="/" element={<LandingPage />} />
                     <Route
                       path="/choosePassword"
                       element={<ChoosePassword />}
                     />
+                    <Route path="/createAccount" element={<SchoolAccount />} />
                     <Route
                       path="/loginaccount"
                       element={<LogintoAccount setIsLoggedIn={setIsLoggedIn} />}
                     />
                     <Route path="/choosestaff" element={<ChooseStaff />} />
-                    <Route path="/loginAcount" element={<LogintoAccount />} />
                   </>
                 )}
               </Routes>
@@ -85,14 +82,6 @@ function App() {
           </div>
         </div>
       </div>
-      <Navbar2 />
-      {/* <TrustedbyCompany /> */}
-      <CreateTask />
-      <HoldingPhone />
-      <Cards />
-      <OptionFromCustomer />
-      <KeyboardSection />
-      <Footer />
     </BrowserRouter>
   );
 }

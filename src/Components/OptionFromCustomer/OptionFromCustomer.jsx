@@ -20,7 +20,7 @@ const OptionFromCustomer = () => {
           alt=""
         />
         <div className="w-fit  p-5 rounded-md py-5  flex flex-col gap-3 ">
-          <h2 className="text-[#1777F7] bg-[#EDF5FF] w-fit px-2 py-1 rounded-md font-semibold backdrop-blur-2xl mb-2">
+          <h2 className="text-[#1777F7] bg-[#EDF5FF] w-fit px-2 py-1 rounded-md font-semibold backdrop-blur-2xl mb-2 cursor-pointer">
             Standard
           </h2>
           <p className="text-white leading-tight mt-3 mb-5  w-70">
@@ -31,7 +31,7 @@ const OptionFromCustomer = () => {
             $15
             <span className="text-sm text-white ">/Month</span>
           </h2>
-          <button className="w-full bg-[#1777F7] py-1 rounded-md mt-15">
+          <button className="w-full bg-[#1777F7] py-1 rounded-md mt-15 cursor-pointer ">
             Choose
           </button>
         </div>

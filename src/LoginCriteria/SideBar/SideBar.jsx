@@ -1,6 +1,6 @@
 import React from "react";
 import udamyIcon from "../../assets/UdamyIon.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
 import { PiChalkboardTeacherBold } from "react-icons/pi";
 import { PiStudentBold } from "react-icons/pi";
@@ -52,20 +52,22 @@ const SideBar = () => {
           Udemy Inter. school
         </h2>
       </div>
-      {udamyDashboard.map((board, index) => (
-        <Link
-          to={board.path}
-          key={index}
-          className="flex flex-row gap-2 m-auto items-center justify-start text-sm
+      <div>
+        {udamyDashboard.map((board, index) => (
+          <NavLink
+            to={board.path}
+            key={index}
+            className="flex flex-row gap-2 m-auto items-center justify-start text-sm
            px-3 py-3 w-40  bgred-400 cursor-pointer"
-        >
-          <span className="object-cover h-6 w-6 text-white mt-2">
-            {board.image}
-          </span>
+          >
+            <span className="object-cover h-6 w-6 text-white mt-2">
+              {board.image}
+            </span>
 
-          <h3 className="text-white font-medium ">{board.title}</h3>
-        </Link>
-      ))}
+            <h3 className="text-white font-medium ">{board.title}</h3>
+          </NavLink>
+        ))}
+      </div>
       <div
         className="flex flex-row gap-2 m-auto items-center justify-start text-sm
            px-3 py-3 w-40  bgred-400 h-46 cursor-pointer "
@@ -81,3 +83,8 @@ const SideBar = () => {
 };
 
 export default SideBar;
+// className={({ isActive }) =>
+//               isActive
+//                 ? "lex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-3 w-40  bg-[#509CDB] cursor-pointer "
+//                 : " flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-3 w-40  bgred-400 cursor-pointer  "
+//             }

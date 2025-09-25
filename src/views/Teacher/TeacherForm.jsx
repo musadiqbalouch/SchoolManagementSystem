@@ -1,33 +1,90 @@
-import React from "react";
-// import Form from "../../Common/Form/Form";
+import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { useNavigate } from "react-router-dom";
 const TeacherForm = () => {
+  const navigate = useNavigate();
+  const teacherData = () => {
+    navigate("/teachersdata");
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let teachers = {
+      teacherdesignation: designation,
+      teacherName: name,
+      teacherEmail: email,
+      teacherPassword: password,
+      teacherNumber: number,
+      teacherGender: gender,
+      teacherClassname: className,
+      teacherSubject: subject,
+    };
+
+    let data = JSON.parse(localStorage.getItem("teacher")) || [];
+    data.push(teachers);
+    console.log(data);
+    localStorage.setItem("teacher", JSON.stringify(data));
+    console.log(data);
+    setDesignation("");
+    setName("");
+    setEmail("");
+    setPassword("");
+    setNumber("");
+    setGender("");
+    setClassName("");
+    setSubject("");
+  };
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [number, setNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [className, setClassName] = useState("");
+  const [subject, setSubject] = useState("");
+  const [designation, setDesignation] = useState("");
+
+  let validatation =
+    name === "" ||
+    email === "" ||
+    password === "" ||
+    number === "" ||
+    gender === "" ||
+    className === "" ||
+    subject === "" ||
+    designation === "";
+
   return (
     <div className="flex flex-col mauto items-start justify-start m-5  bg-white border-2 border-gray-500 rounded-md p-10">
-      <div className="flex flex-col gap-3 text-gray-500 px-10 relative">
-        <h1 className="text-3xl font-semibold ">Add Student</h1>
+      <div className="flex flex-col gap-3 text-gray-500 px-10 ">
+        <h1 className="text-3xl font-semibold ">Add Teacher</h1>
         <div className="flex gap-5 text-base font-semibold  justify-start items-center ">
           <h2>Manually</h2>
           <h2>Import CSV</h2>
         </div>
-        <label className="flex flex-col absolute left-120">
+      </div>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-row h-fit flex-wrap gap-4  px-8 py-2  text-gray-500 mt-3  items-centre  justify-start content-center"
+      >
+        <label className="flex flex-col  left120">
           Designation
           <input
             type="text"
             name=""
             id=""
-            className="border-2 py-1 px-2 rounded-md border-gray-500 w-60"
+            className="border-2 py-1 px-2 rounded-md border-gray-500 w-100"
+            value={designation}
+            onChange={(e) => setDesignation(e.target.value)}
           />
         </label>
-      </div>
-      <form className="flex flex-row h-fit flex-wrap gap-4 bg-purple-200 px-8 py-2  text-gray-500 mt-3  items-centre  justify-start content-center">
-        <label className="flex flex-col ">
+        <label className="flex flex-col  ">
           Name
           <input
-            className="border-2 py-1 px-2 rounded-md border-gray-500 w-160"
+            className="border-2 py-1 px-2 rounded-md border-gray-500 w-100"
             type="text"
             name=""
             id=""
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </label>
         <label className="flex flex-col w-70">
@@ -35,17 +92,27 @@ const TeacherForm = () => {
           <input
             type="email"
             className="border-2 py-1 px-2 rounded-md border-gray-500 "
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </label>
         <select
           id="class"
           className="border-2  h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 "
+          value={className}
+          onChange={(e) => setClassName(e.target.value)}
         >
           <option>Class</option>
+          <option>9th</option>
+          <option>10th</option>
+          <option>firstYear</option>
+          <option>Inter</option>
         </select>
         <select
           id="gender"
           className="border-2  h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500"
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
         >
           <option>Gender</option>
           <option>Male</option>
@@ -56,6 +123,8 @@ const TeacherForm = () => {
           <input
             type="password"
             className="border-2 py-1 px-2 rounded-md border-gray-500 w-70"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </label>
         <label className="flex flex-col w-50">
@@ -65,14 +134,20 @@ const TeacherForm = () => {
             name=""
             id=""
             className="border-2 py-1 px-2 rounded-md border-gray-500 w-70"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
           />
         </label>
-        <select className="border-2  h-9 w7 mt-5 px-2 py-0 rounded-md border-gray-500 w-full">
-          <option value="">Subject</option>
-          <option value="">Science</option>
-          <option value="">Physics</option>
-          <option value="">English</option>
-          <option value="">Math</option>
+        <select
+          className="border-2  h-9 w7 mt-5 px-2 py-0 rounded-md border-gray-500 w-full"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+        >
+          <option>Subject</option>
+          <option>Science</option>
+          <option>Physics</option>
+          <option>English</option>
+          <option>Math</option>
         </select>
 
         <span className="flex gap-2 items-center">
@@ -80,7 +155,11 @@ const TeacherForm = () => {
           Add another
         </span>
 
-        <button className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold wfull">
+        <button
+          disabled={validatation}
+          onClick={teacherData}
+          className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold wfull"
+        >
           Add Teacher
         </button>
       </form>

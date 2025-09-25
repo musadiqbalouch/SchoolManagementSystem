@@ -28,7 +28,7 @@ const DashboardPage = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center content-center relative">
+    <div className="flex flex-col items-center content-center relative container m-auto">
       <div className="h-30 bgpurple-500 text-[#4F4F4F] font-semibold px-45 flex flex-col gap-3 mt-5 py-5">
         <h1 className="text-3xl  ">Welcome to your dashboard, Udemy school</h1>
         <h3 className="text-2xl mx-15">Uyo/school/@teachable.com</h3>

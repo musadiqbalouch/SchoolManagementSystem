@@ -11,7 +11,7 @@ const Navbar2 = () => {
           <div>
             <img className="h-6 w-25 object-cover" src={logo} alt="" />
           </div>
-          <div className="text-white flex flex-row gap-10">
+          <div className="text-white flex flex-row gap-10 cursor-pointer ">
             <h2>Home</h2>
             <h2>Pricing</h2>
             <h2>Use cases</h2>
@@ -21,7 +21,7 @@ const Navbar2 = () => {
           </div>
           <div>
             <Link
-              to={"/loginAcount"}
+              to={"/loginaccount"}
               className="text-white bg-[#0A92DD] px-4 py-1 rounded-xl font-semibold"
             >
               Login
@@ -39,7 +39,7 @@ const Navbar2 = () => {
             Statisdaa is a school management solution that offers a personalized
             portal to each type of user,
           </p>
-          <button className="text-white bg-[#0A92DD] px-4 py-2 rounded-3xl font-semibold">
+          <button className="text-white bg-[#0A92DD] px-4 py-2 rounded-3xl font-semibold cursor-pointer">
             Get started
           </button>
         </div>

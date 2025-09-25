@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 const SearchBar = () => {
   return (
-    <div className="flex items-center justify-center gap-4 ">
+    <div className="flex items-center justify-center gap-4 container m-auto ">
       <select className="px-3 py-2">
         <option>Add Filter</option>
       </select>
