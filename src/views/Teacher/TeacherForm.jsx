@@ -42,15 +42,15 @@ const TeacherForm = () => {
   const [subject, setSubject] = useState("");
   const [designation, setDesignation] = useState("");
 
-  let validatation =
-    name === "" ||
-    email === "" ||
-    password === "" ||
-    number === "" ||
-    gender === "" ||
-    className === "" ||
-    subject === "" ||
-    designation === "";
+  // let validatation =
+  //   name === "" ||
+  //   email === "" ||
+  //   password === "" ||
+  //   number === "" ||
+  //   gender === "" ||
+  //   className === "" ||
+  //   subject === "" ||
+  //   designation === "";
 
   return (
     <div className="flex flex-col mauto items-start justify-start m-5  bg-white border-2 border-gray-500 rounded-md p-10">
@@ -156,7 +156,7 @@ const TeacherForm = () => {
         </span>
 
         <button
-          disabled={validatation}
+          // disabled={validatation}
           onClick={teacherData}
           className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold wfull"
         >

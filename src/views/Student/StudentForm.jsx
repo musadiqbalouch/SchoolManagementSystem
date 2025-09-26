@@ -38,13 +38,13 @@ const StudentForm = () => {
     setNumber("");
     setPassword("");
   };
-  let validatation =
-    name === "" ||
-    className === "" ||
-    gender === "" ||
-    email === "" ||
-    number === "" ||
-    password === "";
+  // let validatation =
+  //   name === "" ||
+  //   className === "" ||
+  //   gender === "" ||
+  //   email === "" ||
+  //   number === "" ||
+  //   password === "";
   return (
     <div className="flex flex-col mauto items-start justify-start mt-5  bg-white border-2 border-gray-500 rounded-md p-15  container m-auto ">
       <div className="flex flex-col gap-3 text-gray-500 px-10">
@@ -125,7 +125,7 @@ const StudentForm = () => {
           Add another
         </span>
         <button
-          disabled={validatation}
+          // disabled={validatation}
           onClick={studentsData}
           className="text-center bg-gray-500 text-black px-4 py-2 rounded-md font-semibold"
         >

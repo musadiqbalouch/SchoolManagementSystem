@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
 const StudentData = () => {
-  let studentData = JSON.parse(localStorage.getItem("students")) || [];
+  const [studentData, setStudentData] = useState([]);
 
   const handleDelete = (index) => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     items.splice(index, 1);
     localStorage.setItem("students", JSON.stringify(items));
+    setStudentData(items);
   };
-  useEffect(() => {}, [handleDelete]);
 
+  useEffect(() => {
+    setStudentData(JSON.parse(localStorage.getItem("students")) || []);
+  }, []);
   return (
     <div className="p-2 container m-auto flex flex-col gap-3">
       <SearchBar />
