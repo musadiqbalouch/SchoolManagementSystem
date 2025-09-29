@@ -13,7 +13,7 @@ const StudentForm = () => {
   const navigate = useNavigate();
 
   const studentsData = () => {
-    navigate("/studentData");
+    navigate("/student&classes");
   };
   const handleSubmit = (e) => {
     e.preventDefault();

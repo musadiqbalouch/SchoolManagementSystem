@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+/* const deleteTeacher = (id) => {
+    const updated = data.filter((t) => t.id !== id);
+    localStorage.setItem("teacher", JSON.stringify(updated));
+    setData(updated); // yahan se re-render hoga
+  }; */
+@theme {
+  /* fonts */
+  --font-display: "Outfit", "sans-serif";
+
+  /* breakpoints */
+  /* --breakpoint-3xl: 1920px; */
+  --breakpoint-s_phone: 319px;
+  --breakpoint-m_phone: 374px;
+  --breakpoint-phone: 424px;
+  --breakpoint-tablet: 767px;
+  --breakpoint-laptop-sm: 900px;
+  --breakpoint-laptop: 1023px;
+  --breakpoint-laptop-lg: 1366px;
+  --breakpoint-desktop: 1439px;
+  --breakpoint-_4kk: 1920px;
+}

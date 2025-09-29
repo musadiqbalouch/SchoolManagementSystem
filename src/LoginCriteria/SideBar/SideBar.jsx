@@ -1,12 +1,15 @@
 import React from "react";
 import udamyIcon from "../../assets/UdamyIon.png";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HiHome } from "react-icons/hi";
-import { PiChalkboardTeacherBold } from "react-icons/pi";
-import { PiStudentBold } from "react-icons/pi";
-import { PiBankBold } from "react-icons/pi";
+import {
+  PiChalkboardTeacherBold,
+  PiStudentBold,
+  PiBankBold,
+} from "react-icons/pi";
 import { IoSettings } from "react-icons/io5";
 import { GiNewspaper } from "react-icons/gi";
+
 const SideBar = () => {
   const udamyDashboard = [
     {
@@ -41,7 +44,7 @@ const SideBar = () => {
     },
   ];
   return (
-    <div className="wfit bg-[#152259] flex flex-col px-8 py2 ">
+    <div className="wfit bg-[#152259] flex flex-col px-8 py2 laptop:w-60 ">
       <div className="flex flex-col m-auto items-center justify-center p-5">
         <img
           className="h-13 w-15 object-cover rounded-[50%] "
@@ -58,7 +61,7 @@ const SideBar = () => {
             to={board.path}
             key={index}
             className="flex flex-row gap-2 m-auto items-center justify-start text-sm
-           px-3 py-3 w-40  bgred-400 cursor-pointer"
+           px-3 py-3 w-40 laptop:w-full  bgred-400 cursor-pointer"
           >
             <span className="object-cover h-6 w-6 text-white mt-2">
               {board.image}
@@ -70,7 +73,7 @@ const SideBar = () => {
       </div>
       <div
         className="flex flex-row gap-2 m-auto items-center justify-start text-sm
-           px-3 py-3 w-40  bgred-400 h-46 cursor-pointer "
+           px-3 py-3 w-40 laptop:w-full  bgred-400 h-46 cursor-pointer "
       >
         <PiBankBold className="object-cover h-6 w-6 text-white mt-2 gap-2" />
         <h3 className="text-white font-medium">Features</h3>

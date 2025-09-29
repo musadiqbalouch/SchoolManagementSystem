@@ -10,7 +10,7 @@ import Footer from "../../Common/Footer/Footer";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className=" laptop:w-full ">
       <Navbar2 />
       <TrustedbyCompany />
       <CreateTask />

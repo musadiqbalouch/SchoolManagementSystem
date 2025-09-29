@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const TeacherForm = () => {
   const navigate = useNavigate();
   const teacherData = () => {
-    navigate("/teachersdata");
+    navigate("/teacher");
   };
   const handleSubmit = (e) => {
     e.preventDefault();

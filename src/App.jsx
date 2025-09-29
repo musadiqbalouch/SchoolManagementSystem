@@ -29,21 +29,21 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="flex   w-full bgred-400 ">
+      <div className=" desktop:flex desktop:w-full  flex w-full">
         {/* Sidebar  side bar  */}
         {isLoggedIn && (
-          <div className="w-fit">
+          <div className=" desktop:w-fit  w-fit">
             <SideBar />
           </div>
         )}
-        <div className="flex flex-col m-auto mt0 w-full  ">
+        <div className=" desktop:w-full w-full ">
           {isLoggedIn && (
             <div>
               <Navbar setIsLoggedIn={setIsLoggedIn} />
             </div>
           )}
           {/* routes  */}
-          <div className="w-full ">
+          <div className=" desktop:w-full  w-full ">
             <>
               {/* if user is loggedin */}
               <Routes>

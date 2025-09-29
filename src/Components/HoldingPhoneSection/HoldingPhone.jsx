@@ -4,30 +4,61 @@ import HoldingPhonee from "../../assets/holdingphone.png";
 
 const HoldingPhone = () => {
   return (
-    <div className="flex flex-row w-full p-10 items-center  justify-center m-auto content-center gap-40 mt-5 ">
-      <div className="w-100 bgred-500 flex flex-col gap-7 p-5">
-        <h2 className="text-2xl font-semibold  ">
+    <div
+      className="flex flex-row w-full p-10 items-center justify-center m-auto content-center gap-40 mt-5 
+                    laptop:p-6 laptop:gap-20 laptop:mt-3 tablet:p-4 tablet:gap-10 tablet:mt-2"
+    >
+      <div
+        className="w-100 flex flex-col gap-7 p-5 
+                      laptop:gap-5 laptop:p-3 tablet:gap-3 tablet:p-2"
+      >
+        <h2
+          className="text-2xl font-semibold 
+                       laptop:text-xl tablet:text-lg"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </h2>
-        <p className="text-sm text-[#667085]  leading-tight">
+
+        <p
+          className="text-sm text-[#667085] leading-tight 
+                      laptop:text-xs laptop:leading-5 tablet:text-[11px] tablet:leading-4"
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus odio
           pellentesque pellentesque a. Amet ut lobortis pellentesque a, luctus
           maecenas. <br /> <br /> Feugiat sed enim vitae viverra cras tristique
           eu. Pellentesque bibendum volutpat metus, dictum.
         </p>
-        <div className="flex gap-4">
-          <IoIosContact className="text-[#667085] h-10 w-10" />
+
+        <div className="flex gap-4 items-center laptop:gap-3 tablet:gap-2">
+          <IoIosContact
+            className="text-[#667085] h-10 w-10 
+                                   laptop:h-8 laptop:w-8 tablet:h-6 tablet:w-6"
+          />
           <div>
-            <h2 className="text-2xl font-semibold ">80,000K</h2>
-            <p className="text-[#667085] text-sm  leading-tight ">
+            <h2
+              className="text-2xl font-semibold 
+                           laptop:text-xl tablet:text-lg"
+            >
+              80,000K
+            </h2>
+            <p
+              className="text-[#667085] text-sm leading-tight 
+                          laptop:text-xs laptop:leading-4 tablet:text-[11px] tablet:leading-4"
+            >
               Lorem ipsum dolor sit amet,
               <br /> consectetur adipiscing elit.
             </p>
           </div>
         </div>
       </div>
-      <div className="w2/4">
-        <img className="h-125 w-105 object-cover" src={HoldingPhonee} alt="" />
+
+      <div className="w-2/4 flex justify-center">
+        <img
+          className="h-125 w-105 object-cover 
+                     laptop:h-96 laptop:w-80 tablet:h-72 tablet:w-60"
+          src={HoldingPhonee}
+          alt=""
+        />
       </div>
     </div>
   );

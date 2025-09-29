@@ -9,7 +9,7 @@ const SearchBar = () => {
       <div className="relative ">
         <FaSearch className="absolute h-6 w-7 left-2 top-3 object-cover text-[#4F4F4F] " />
         <input
-          className="w-230 py-3 textcenter px-13 bg-[#FCFAFA]"
+          className="w-200 py-3 textcenter px-13 bg-[#FCFAFA]"
           type="text"
           placeholder="Search for a student by name or email"
         />

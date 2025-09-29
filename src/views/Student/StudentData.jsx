@@ -3,8 +3,8 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-const StudentData = () => {
-  const [studentData, setStudentData] = useState([]);
+const StudentData = ({ studentData, setStudentData }) => {
+  // const [studentData, setStudentData] = useState([]);
 
   const handleDelete = (index) => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
@@ -18,7 +18,6 @@ const StudentData = () => {
   }, []);
   return (
     <div className="p-2 container m-auto flex flex-col gap-3">
-      <SearchBar />
       <div className="flex font-semibold text-lg bg-gray-200 py-2 px-2 gap-5 mt-5 shadow-sm border rounded-md">
         <h2 className="w-35">Name</h2>
         <h2 className="w-35">Student ID</h2>
