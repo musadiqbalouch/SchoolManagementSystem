@@ -17,17 +17,20 @@ const TeacherPage = () => {
   }, []);
 
   return (
-    <div className="container m-auto relative flex flex-col items-center justify-center w-full bgyellow-400">
+    <div className="  container m-auto relative flex flex-col items-center justify-center w-full bgyellow-400">
       <Link to={"/teacherform"}>
         <AddTeacherSection user="Teacher" addUser="Add Teacher" />
       </Link>
 
       <SearchBar />
       {data.length === 0 ? (
-        <div className="bg-[#FCFAFA] mr-25 h-85 w-230 bgred-400   mt-10 flex flex-col items-center justify-center m-auto text-center">
+        <div
+          className="bg-[#FCFAFA] laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75  laptop:w-195 w-230 bgred-400 
+          mt-10 flex flex-col items-center justify-center m-auto text-center desktop:w-235 desktop:h-100  "
+        >
           <div>
             <LoginHeading heading="No Teachers at this time" />
-            <h3 className="text-lg">
+            <h3 className="text-lg desktop:text-2xl ">
               Teachers will appear here after they enroll in your school.
             </h3>
             <SupportBtn />

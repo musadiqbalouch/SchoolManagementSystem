@@ -3,7 +3,7 @@ import React from "react";
 const LoginHeading = ({ heading }) => {
   return (
     <div>
-      <h1 className="text-gray-600 text-4xl font-semibold  w-170 text-center  ">
+      <h1 className="text-gray-600 text-4xl font-semibold  w-170 text-center desktop:text-5xl  ">
         {heading}
       </h1>
     </div>

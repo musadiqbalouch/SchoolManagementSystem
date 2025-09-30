@@ -46,44 +46,45 @@ const StudentForm = () => {
   //   number === "" ||
   //   password === "";
   return (
-    <div className="flex flex-col mauto items-start justify-start mt-5  bg-white border-2 border-gray-500 rounded-md p-15  container m-auto ">
-      <div className="flex flex-col gap-3 text-gray-500 px-10">
-        <h1 className="text-3xl font-semibold ">Add Student</h1>
-        <div className="flex gap-5 text-base font-semibold  justify-start items-center ">
+    <div className="flex flex-col items-start justify-start mt-5 bg-white border-2 border-gray-500 rounded-md p-10 container mx-auto laptop:p-6 laptop:max-w-4xl">
+      <div className="flex flex-col gap-3 text-gray-500 px-10 laptop:px-7">
+        <h1 className="text-3xl font-semibold desktop:text-4xl">Add Student</h1>
+        <div className="flex gap-5 text-base font-semibold justify-start items-center desktop:text-2xl">
           <h2>Manually</h2>
           <h2>Import CSV</h2>
         </div>
       </div>
+
       <form
         onSubmit={handleSubmit}
-        className="flex flex-row flex-wrap gap-8  p-4   text-gray-500 mt-3  items-centre  justify-start content-center"
+        className="flex flex-row flex-wrap gap-6 px-8 py-2 text-gray-500 mt-3 items-center justify-start laptop:gap-4 desktop:gap-5"
       >
-        <label className="flex flex-col ">
+        <label className="flex flex-col desktop:text-xl desktop:font-semibold">
           Name
           <input
-            className="border-2 py-1 px-2 rounded-md border-gray-500 w-50"
+            className="border-2 py-1 px-2 rounded-md border-gray-500 w-100 laptop:w-70 desktop:w-115 desktop:h-12"
             type="text"
-            name=""
-            id=""
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
+
         <select
           id="class"
-          className="border-2  h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 "
+          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl desktop:font-semibold desktop:h-13 desktop:w-55"
           value={className}
           onChange={(e) => SetClassName(e.target.value)}
         >
           <option>Class</option>
           <option>9th</option>
           <option>10th</option>
-          <option>firstyear</option>
-          <option>secondyear</option>
+          <option>First Year</option>
+          <option>Second Year</option>
         </select>
+
         <select
           id="gender"
-          className="border-2  h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500"
+          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl desktop:font-semibold desktop:h-13 desktop:w-55"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
@@ -91,43 +92,45 @@ const StudentForm = () => {
           <option>Male</option>
           <option>Female</option>
         </select>
-        <label className="flex flex-col w-60">
+
+        <label className="flex flex-col w-70 desktop:text-xl desktop:font-semibold desktop:w-100">
           Email address
           <input
             type="email"
-            className="border-2 py-1 px-2 rounded-md border-gray-500 "
+            className="border-2 py-1 px-2 rounded-md border-gray-500 desktop:h-12"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label className="flex flex-col w-60">
+
+        <label className="flex flex-col w-70 desktop:text-xl desktop:font-semibold desktop:w-100">
           Phone Number
           <input
             type="number"
-            name=""
-            id=""
-            className="border-2 py-1 px-2 rounded-md border-gray-500 w-60"
+            className="border-2 py-1 px-2 rounded-md border-gray-500 desktop:h-12 desktop:w-115"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
           />
         </label>
-        <label className="flex flex-col">
+
+        <label className="flex flex-col w-70 desktop:text-xl desktop:font-semibold desktop:w-100">
           Password
           <input
             type="password"
-            className="border-2 py-1 px-2 rounded-md border-gray-500 w-60"
+            className="border-2 py-1 px-2 rounded-md border-gray-500 desktop:h-12"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <span className="flex gap-2 items-center">
-          <HiOutlinePlusCircle className="h-7 w-6 " />
+
+        <span className="flex gap-2 items-center desktop:text-xl desktop:font-semibold">
+          <HiOutlinePlusCircle className="h-7 w-6 desktop:w-12 desktop:h-10" />
           Add another
         </span>
+
         <button
-          // disabled={validatation}
           onClick={studentsData}
-          className="text-center bg-gray-500 text-black px-4 py-2 rounded-md font-semibold"
+          className="text-center bg-gray-500 text-black px-4 py-2 rounded-md font-semibold laptop:px-3 desktop:text-xl"
         >
           Add Student
         </button>
