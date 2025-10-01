@@ -44,14 +44,14 @@ const SideBar = () => {
     },
   ];
   return (
-    <div className="wfit bg-[#152259] laptop:h-screen flex flex-col px-8 py2 laptop:w-55  laptop:px-5  desktop:w-70  ">
+    <div className="bg-[#152259] laptop:h-screen flex flex-col px-8 py2 laptop:w-55 laptop-lg:w-65  laptop:px-5  desktop:w-70  ">
       <div className="flex flex-col m-auto items-center justify-center p-5">
         <img
           className="h-13 w-15 object-cover rounded-[50%] "
           src={udamyIcon}
           alt=""
         />
-        <h2 className="text-white font-medium mt-2 w-35  text-sm text-center desktop:text-lg desktop:w-45 ">
+        <h2 className="text-white font-medium mt-2 w-35  text-sm text-center laptop-lg:text-lg laptop-lg:w-45 desktop:text-lg desktop:w-45 ">
           Udemy Inter. school
         </h2>
       </div>
@@ -61,7 +61,7 @@ const SideBar = () => {
             to={board.path}
             key={index}
             className="flex flex-row gap-2 m-auto items-center justify-start text-sm
-           px-3 py-3 w-40  laptop:w-full  bgred-400 cursor-pointer  desktop:text-lg desktop:px-5"
+           px-3 py-3 w-40  laptop:w-full  bgred-400 cursor-pointer laptop-lg:text-base laptop-lg:px-5  desktop:text-lg desktop:px-5"
           >
             <span className="object-cover h-6 w-6 text-white mt-2  desktop:h-8 desktop:w-8 desktop:mt-3">
               {board.image}
@@ -76,8 +76,10 @@ const SideBar = () => {
            px-3 py-3 w-40 laptop:w-full  bgred-400 h-46 cursor-pointer "
       >
         <PiBankBold className="object-cover h-6 w-6 text-white mt-2 gap-2" />
-        <h3 className="text-white font-medium desktop:text-lg ">Features</h3>
-        <span className="text-black bg-[#B9D7F1] px-2 py1 rounded-3xl desktop:text-lg desktop:px-3 desktop:text-center ">
+        <h3 className="text-white font-medium laptop-lg:text-base  desktop:text-lg ">
+          Features
+        </h3>
+        <span className="text-black bg-[#B9D7F1] px-2 py1 rounded-3xl laptop-lg:text-base laptop-lg:px-5 desktop:text-lg desktop:px-3 desktop:text-center ">
           New
         </span>
       </div>

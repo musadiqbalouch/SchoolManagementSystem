@@ -22,14 +22,22 @@ const Student = () => {
       </Link>
       <SearchBar />
       {data.length === 0 ? (
-        <div className="bg-[#FCFAFA] mr-25 h-85 w-230 mt-10 flex flex-col items-center justify-center m-auto text-center gap-4">
+        <div
+          className="bg-[#FCFAFA] laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
+             laptop-lg:w-230 laptop-lg:h-100 laptop:w-195 w-230 
+             mt-10 flex flex-col items-center justify-center m-auto text-center gap-4 
+             desktop:w-235 desktop:h-100"
+        >
           <img
             src={NoNotification}
             alt="No Students"
-            className="h-60 w-75 object-cover "
+            className="h-60 w-75 object-cover 
+               laptop:h-45 laptop:w-60 
+               laptop-lg:h-70 laptop-lg:w-90 
+               desktop:h-80 desktop:w-100"
           />
           <LoginHeading heading="No Students at this time" />
-          <h3 className="text-lg">
+          <h3 className="text-lg laptop-lg:text-xl desktop:text-2xl">
             Students will appear here after they enroll in your school.
           </h3>
           <SupportBtn />

@@ -14,32 +14,32 @@ const TrustedbyCompany = () => {
       </h1>
       <div className="flex flex-col laptop:flex-row gap-10 laptop:gap-15 p-6 mt-5 items-center justify-center">
         <img
-          className="h-8 w-8 desktop:h-10 desktop:w-10 "
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10 "
           src={company6logo}
           alt=""
         />
         <img
-          className="h-8 w-8 desktop:h-10 desktop:w-10 "
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10 "
           src={company1logo}
           alt=""
         />
         <img
-          className="h-8 w-8  desktop:h-10 desktop:w-10"
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10  desktop:h-10 desktop:w-10"
           src={company2logo}
           alt=""
         />
         <img
-          className="h-8 w-8  desktop:h-10 desktop:w-10"
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10"
           src={company3logo}
           alt=""
         />
         <img
-          className="h-8 w-8 desktop:h-10 desktop:w-10"
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10"
           src={company4logo}
           alt=""
         />
         <img
-          className="h-8 w-8 desktop:h-10 desktop:w-10 "
+          className="h-8 w-8 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10 "
           src={company5logo}
           alt=""
         />
