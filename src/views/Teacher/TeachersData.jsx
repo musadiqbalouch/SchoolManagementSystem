@@ -33,21 +33,21 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
         <div className=" m-auto">
           {teacherData?.map?.((teacher, index) => (
             <div
-              className="flex font-medium w-full px-12 text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
+              className="flex font  medium w-full px-12 text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
              laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5  "
               key={index}
             >
-              <h2 className="w-35 laptop:w-25 laptop-lg:w-38 desktop:w-40 ">
+              <h2 className="w-35 laptop:w-30 laptop-lg:w-38 desktop:w-40 ">
                 {teacher.teacherName}
               </h2>
-              <h2 className="w-35 laptop:w-25 laptop-lg:w-28  desktop:w-30   ">
-                {teacher.teacherSubject}
+              <h2 className="w-35 laptop:w-20  laptop-lg:w-28  desktop:w-30   ">
+                {teacher.teacherNumber}
+              </h2>
+              <h2 className="w-70 laptop:w-50 laptop-lg:bg-gray-600 laptop-lg:w-80 desktop:w-80   ">
+                {teacher.teacherEmail}
               </h2>
               <h2 className="w-35 laptop:w-25 laptop-lg:w-28 desktop:w-30  ">
                 {teacher.teacherClassname}
-              </h2>
-              <h2 className="w-70 laptop:w-50 laptop-lg:w-80 desktop:w-80   ">
-                {teacher.teacherEmail}
               </h2>
               <h2 className="w-25   laptop:w-15 laptop-lg:w-28 desktop:w-30">
                 {teacher.teacherGender}

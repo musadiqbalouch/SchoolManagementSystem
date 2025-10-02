@@ -25,12 +25,12 @@ const TeacherPage = () => {
       <SearchBar />
       {data.length === 0 ? (
         <div
-          className="bg-[#FCFAFA] laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 laptop-lg:w-230 laptop-lg:h-100  laptop:w-195 w-230 bgred-400 
+          className="bg-[#FCFAFA]  laptop:m-3 mr-25 h-85  laptop:h-75 laptop-lg:w-230 laptop-lg:h-100  laptop:w-177 w-230 bgred-400 
           mt-10 flex flex-col items-center justify-center m-auto text-center desktop:w-235 desktop:h-100  "
         >
           <div>
             <LoginHeading heading="No Teachers at this time" />
-            <h3 className="text-lg laptop-lg:text-xl  desktop:text-2xl ">
+            <h3 className="text-sm text-[#4F4F4F] laptop-lg:text-xl  desktop:text-2xl ">
               Teachers will appear here after they enroll in your school.
             </h3>
             <SupportBtn />

@@ -29,7 +29,7 @@ const DashboardPage = () => {
 
   return (
     <div className="flex flex-col items-center content-center relative container m-auto">
-      <div className="h-30  laptop:h-25 laptop:px-40 laptop:gap-2 laptop:mt-3 bgpurple-500 text-[#4F4F4F] font-semibold px-45 flex flex-col gap-3 mt-5 py-5 text-center laptop:text-left">
+      <div className="h-30  laptop:h-25 laptop:px-5 laptop:mr-25  laptop:gap-2 laptop:mt-3 bgpurple-500 text-[#4F4F4F] font-semibold px-45 flex flex-col gap-3 mt-5 py-5 text-center laptop:text-left">
         <h1 className="text-3xl  laptop:text-2xl desktop:text-4xl ">
           Welcome to your dashboard, Udemy school
         </h1>
@@ -37,27 +37,29 @@ const DashboardPage = () => {
           Uyo/school/@teachable.com
         </h3>
       </div>
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className="flex flex-col laptop:flex-row laptop:mt-3 items-center laptop:items-start
-           w-fit py-2 px-5  bgamber-400 gap-4 text-[#4F4F4F] mt-5 text-center laptop:text-left
+      <div className=" laptop:py-5 ">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col laptop:flex-row laptop:mt-3 items-center laptop:items-start
+           w-fit py-2 px-5   bgamber-400 gap-4 text-[#4F4F4F] mt-5 text-center laptop:text-left
            desktop:mt-10 "
-        >
-          <img className="mb-7 object-cover" src={item.image} alt="" />
-          <div>
-            <h2 className="text-2xl font-semibold lap laptop:text-xl desktop:text-3xl ">
-              {item.title}
-            </h2>
-            <p className=" desktop:text-lg ">
-              Create rich course content and coaching products for your
-              students.
-              <br /> When you give them a pricing plan, they’ll appear on your
-              site!
-            </p>
+          >
+            <img className="mb-7 object-cover" src={item.image} alt="" />
+            <div>
+              <h2 className="text-2xl font-medium lap laptop:text-xl desktop:text-3xl ">
+                {item.title}
+              </h2>
+              <p className=" desktop:text-lg laptop:text-sm ">
+                Create rich course content and coaching products for your
+                students.
+                <br /> When you give them a pricing plan, they’ll appear on your
+                site!
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <SupportBtn />
     </div>
   );

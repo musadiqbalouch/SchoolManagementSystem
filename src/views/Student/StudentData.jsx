@@ -26,7 +26,7 @@ const StudentData = ({ studentData, setStudentData }) => {
         {studentData.map((student, index) => (
           <div
             key={index}
-            className="flex font-medium w-full px-12 text-base bgwhite py-2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
+            className="flex  w-full px-12 text-base bgwhite py-2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
   laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5"
           >
             <h2 className="w-35 laptop:w-30 laptop-lg:w-36 desktop:w-40">
