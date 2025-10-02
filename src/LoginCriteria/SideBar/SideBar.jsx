@@ -44,7 +44,7 @@ const SideBar = () => {
     },
   ];
   return (
-    <div className="bg-[#152259] laptop:h-screen flex flex-col px-8 py2 laptop:w-55 laptop-lg:w-65  laptop:px-5  desktop:w-70  ">
+    <div className="bg-[#152259] h-screen  flex flex-col px-8 py2 laptop:w-55 laptop-lg:w-65  laptop:px-5  desktop:w-70  ">
       <div className="flex flex-col m-auto items-center justify-center p-5">
         <img
           className="h-13 w-15 object-cover rounded-[50%] "

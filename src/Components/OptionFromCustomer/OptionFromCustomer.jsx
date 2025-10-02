@@ -4,7 +4,7 @@ import customerphoto from "../../assets/customerphoto.png";
 const OptionFromCustomer = () => {
   return (
     <div className="flex flex-col items-center p-10 laptop:p-6 tablet:p-4 desktop:p-16">
-      <div className=" laptop-lg:bg-red-500  flex flex-col laptop:flex-row laptop-lg:gap-60 gap-6 laptop:gap-20 items-center laptop:items-start justify-center text-center laptop:text-left">
+      <div className="flex flex-col laptop:flex-row laptop-lg:gap-60 gap-6 laptop:gap-20 items-center laptop:items-start justify-center text-center laptop:text-left">
         <h1 className="w-full laptop:w-70 text-3xl font-semibold p-2  laptop:text-2xl laptop-lg:text-3xl tablet:text-xl  desktop:text-4xl desktop:w-80">
           Interesting option from customer
         </h1>

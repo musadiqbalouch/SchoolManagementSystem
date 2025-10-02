@@ -3,6 +3,7 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import Modal from "../../Common/Modal/Modal";
+import Dataheader from "../../Common/Dataheader/Dataheader";
 
 const TeachersData = ({ teacherData, settTeacherData }) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,30 +27,9 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
   return (
     <>
       <div
-        className={` p-2 container m-auto flex flex-col gap-3 ${showModal === true ? " opacity-50" : ""}`}
+        className={`p-0  m-auto flex flex-col gap-3 ${showModal === true ? " opacity-50" : ""}`}
       >
-        <div
-          className="flex font-semibold laptop:text-base text-lg  bg-gray-200 py-2 px-12 gap-5 mt-5 
-        m-auto shadow-sm border rounded-md lap laptop:px-2 laptop-lg:text-xl laptop-lg:px-5 laptop-lg:w-full desktop:text-2xl  desktop:px-5 desktop:w-full "
-        >
-          <h2 className="w-35  laptop:w-25 laptop-lg:w-38 desktop:w-40 ">
-            Name
-          </h2>
-          <h2 className="w-35 laptop:w-25 laptop-lg:w-28  desktop:w-30">
-            Subject
-          </h2>
-          <h2 className="w-35 laptop:w-25 laptop-lg:w-28 desktop:w-30 ">
-            Class
-          </h2>
-          <h2 className="w-70 bgpurple-400 laptop:w-50 laptop-lg:w-80 desktop:w-80 ">
-            Email address
-          </h2>
-          <h2 className="w-25  laptop:w-15 laptop-lg:w-30  desktop:w-30">
-            Gender
-          </h2>
-          <h2 className="w-10 laptop-lg:w-13  desktop:w-15 ">Edit</h2>
-          <h2 className="w-10 laptop-lg:w-13 desktop:w-20 ">Delete</h2>
-        </div>
+        <Dataheader title={"Teaher ID"} />
         <div className=" m-auto">
           {teacherData?.map?.((teacher, index) => (
             <div

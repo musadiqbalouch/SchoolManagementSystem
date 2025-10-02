@@ -31,7 +31,7 @@ const Navbar2 = () => {
           <Link
             to={"/loginaccount"}
             className="text-white bg-[#0A92DD] px-4 py-1 rounded-xl font-semibold laptop:px-5 laptop:py-1 laptop:text-base 
-           laptop-lg:text-xl  laptop-lg:px-7 laptop-lg:py-1.5  desktop:px-7 desktop:py-1 desktop:text-2xl"
+           laptop-lg:text-lg  laptop-lg:px-7 laptop-lg:py-1.5  desktop:px-7 desktop:py-1 desktop:text-2xl"
           >
             Login
           </Link>
@@ -50,7 +50,7 @@ const Navbar2 = () => {
           Statisdaa is a school management solution that offers a personalized
           portal to each type of user,
         </p>
-        <button className="text-white bg-[#0A92DD] px-4 py-2 rounded-3xl font-semibold cursor-pointer laptop:px-3 laptop:py-1 laptop:text-base laptop-lg:text-xl laptop-lg:py-1.5 laptop-lg:px-7 desktop:px-6 desktop:py-2 desktop:text-lg">
+        <button className="text-white bg-[#0A92DD] px-4 py-2 rounded-3xl font-semibold cursor-pointer laptop:px-3 laptop:py-1 laptop:text-base laptop-lg:text-lg laptop-lg:py-1.5 laptop-lg:px-7 desktop:px-6 desktop:py-2 desktop:text-lg">
           Get started
         </button>
       </div>

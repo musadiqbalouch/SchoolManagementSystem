@@ -34,10 +34,10 @@ const Footer = () => {
   return (
     <div
       className="w-full bg-[#100F57] flex flex-col laptop:flex-row items-center laptop:items-start justify-center gap-10 p-10 
-                    laptop:gap-16 desktop:gap-24 desktop:p-20"
+                    laptop:gap-16 desktop:gap-18 desktop:p-20"
     >
       {/* Left Section */}
-      <div className="p-15 flex flex-col laptop:flex-row laptop:gap5 desktop:gap-20   laptop:p-10">
+      <div className="p-15 flex flex-col laptop:flex-row laptop:gap5    laptop:p-8">
         {details.map((detail, index) => (
           <div
             className="text-white flex flex-col items-center laptop:items-start justify-center p-5 gap-2 laptop:p-3 desktop:gap-3"
@@ -70,7 +70,7 @@ const Footer = () => {
 
       <div
         className="flex flex-col items-center laptop:items-start text-center laptop:text-left laptop:mt-10 
-          desktop:mt-14 desktop:gap-6"
+          desktop:mt-14 desktop:gap-3"
       >
         <h2 className="text-white text-lg laptop:text-xl desktop:text-2xl font-semibold">
           Lorem ipsum dolor
@@ -81,15 +81,15 @@ const Footer = () => {
         </h4>
 
         <div
-          className="flex bg-white gap-5 px-3 py-2 items-center rounded-xl  laptop:w-90 laptop-lg:w-105 laptop:gap-3 laptop:px-2 
+          className="flex bg-white gap-5 px-3 py-2 items-center rounded-xl  laptop:w-85 laptop-lg:w-105 laptop:gap-3 laptop:px-2 
                         desktop:w-[500px] desktop:gap-5 desktop:px-5 desktop:py-3"
         >
-          <h3 className="font-semibold text-sm laptop:text-base laptop-lg:text-lg desktop:text-lg">
+          <h3 className="font-semibold  text-sm laptop:text-base laptop-lg:text-lg desktop:text-lg">
             Get your free consultation now
           </h3>
           <button
-            className="bg-[#0A92DD] p-2 rounded-3xl cursor-pointer 
-                             laptop:text-sm laptop:p-0 laptop:h-8 laptop:w-25 laptop:rounded-sm laptop-lg:text-lg laptop-lg:px-2 laptop-lg:w-30 laptop-lg:font-semibold laptop:px-1 
+            className="bg-[#0A92DD] p-2 rounded-3xl text-white cursor-pointer 
+                             laptop:text-sm laptop:p-0 laptop:h-8 laptop:w-25 laptop:rounded-sm laptop-lg:text-base laptop-lg:px-2 laptop-lg:w-30 laptop-lg:font-semibold laptop:px-1 
                              desktop:h-12 desktop:w-40 desktop:text-base desktop:rounded-lg"
           >
             Get Started

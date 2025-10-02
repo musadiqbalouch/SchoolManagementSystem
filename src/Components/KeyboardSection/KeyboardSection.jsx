@@ -25,7 +25,7 @@ const KeyboardSection = () => {
 
         <button
           className="bg-[#1777F7] text-white font-medium px-6 py-1 rounded-md mt-5 cursor-pointer laptop:px-5
-         laptop:py-[6px] laptop:text-sm laptop-lg:text-xl tablet:px-4 tablet:py-[4px] tablet:text-xs  desktop:px-8 desktop:py-3 desktop:text-base"
+         laptop:py-[6px] laptop:text-sm laptop-lg:text-lg tablet:px-4 tablet:py-[4px] tablet:text-xs  desktop:px-8 desktop:py-3 desktop:text-base"
         >
           Choose
         </button>
