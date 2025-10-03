@@ -22,7 +22,7 @@ const TeacherPage = () => {
         <AddTeacherSection user="Teacher" addUser="Add Teacher" />
       </Link>
 
-      <SearchBar />
+      <SearchBar placeholder={"Search for a teachers by name or email"} />
       {data.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:m-3 mr-25 h-85  laptop:h-75 laptop-lg:w-230 laptop-lg:h-100  laptop:w-177 w-230 bgred-400 

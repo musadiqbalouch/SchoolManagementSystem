@@ -41,10 +41,13 @@ const StudentData = ({ studentData, setStudentData }) => {
             <h2 className="w-35 laptop:w-25 laptop-lg:w-28 desktop:w-30">
               {student.studentClass}
             </h2>
-            <h2 className="w-20 laptop:w-15 laptop-lg:w-30 desktop:w-30">
+            <h2 className="w-20 laptop:w-15 laptop-lg:w-30 desktop:w-28">
               {student.studentGender}
             </h2>
-            <MdEdit className="h-8 w-10 laptop:h-7 laptop:w-8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10 text-[#509CDB] cursor-pointer" />
+            <MdEdit
+              className="h-8 w-10 laptop:h-7 laptop:w-8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 
+            desktop:h-10 text-[#509CDB] cursor-pointer"
+            />
             <MdDelete
               onClick={() => handleDelete(index)}
               className="h-8 w-10 text-red-500 laptop:h-7 laptop:w-8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10 cursor-pointer"

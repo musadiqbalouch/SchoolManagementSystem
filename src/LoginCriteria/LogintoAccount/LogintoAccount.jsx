@@ -2,17 +2,17 @@ import React from "react";
 import LoginHeading from "../../Common/LoginHeading/LoginHeading";
 import Input from "../../Common/Input/Input";
 import Button from "../../Common/Button/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LogintoAccount = ({ setIsLoggedIn }) => {
   const handleClick = (e) => {
     e.preventDefault();
     handle();
   };
-
+  const navigate = useNavigate();
   const handle = () => {
     setIsLoggedIn(true);
-    console.log(setIsLoggedIn, "true");
+    navigate("/");
   };
   return (
     <div className="items-center content-center justify-center flex  w-full min-h-screen bg-amber-50">

@@ -16,11 +16,11 @@ const Student = () => {
     setData(items);
   }, []);
   return (
-    <div className="container m-auto relative flex flex-col items-center justify-center w-full bgyellow-400">
+    <div className=" m-auto relative flex flex-col items-center justify-center w-full bgyellow-400">
       <Link to={"/studentForm"}>
         <AddUserOption user={"Students"} addUser={"Add Students"} />
       </Link>
-      <SearchBar />
+      <SearchBar placeholder={"Search for a student by name or email"} />
       {data.length === 0 ? (
         <div
           className="bg-[#FCFAFA] laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
@@ -33,11 +33,11 @@ const Student = () => {
             alt="No Students"
             className="h-60 w-75 object-cover 
                laptop:h-45 laptop:w-60 
-               laptop-lg:h-70 laptop-lg:w-90 
+               laptop-lg:h-60 laptop-lg:w-70 
                desktop:h-80 desktop:w-100"
           />
           <LoginHeading heading="No Students at this time" />
-          <h3 className="text-lg laptop-lg:text-xl desktop:text-2xl">
+          <h3 className="text-lg text-[#4F4F4F] laptop-lg:text-xl desktop:text-2xl">
             Students will appear here after they enroll in your school.
           </h3>
           <SupportBtn />

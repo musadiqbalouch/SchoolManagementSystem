@@ -66,7 +66,7 @@ const TeacherForm = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 laptop:grid-cols-2 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start laptop:gap-3 desktop:gap-4"
+          className="grid grid-cols-1 laptop:grid-cols-3 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start laptop:gap-3 desktop:gap-4"
         >
           <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Designation
@@ -146,7 +146,7 @@ const TeacherForm = () => {
             <option>English</option>
             <option>Math</option>
           </select>
-          <span className="flex gap-2 items-center laptop-lg:text-xl laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <span className="flex gap-2 laptop:mt-5 items-center laptop-lg:text-xl laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             <HiOutlinePlusCircle className="h-7 w-6 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10" />
             Add another
           </span>

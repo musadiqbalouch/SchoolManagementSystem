@@ -43,7 +43,7 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
               <h2 className="w-35 laptop:w-20  laptop-lg:w-28  desktop:w-30   ">
                 {teacher.teacherNumber}
               </h2>
-              <h2 className="w-70 laptop:w-50 laptop-lg:bg-gray-600 laptop-lg:w-80 desktop:w-80   ">
+              <h2 className="w-70 laptop:w-50  laptop-lg:w-80 desktop:w-80   ">
                 {teacher.teacherEmail}
               </h2>
               <h2 className="w-35 laptop:w-25 laptop-lg:w-28 desktop:w-30  ">
