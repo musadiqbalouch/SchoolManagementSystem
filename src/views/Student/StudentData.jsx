@@ -3,17 +3,15 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import Dataheader from "../../Common/Dataheader/Dataheader";
+import UserData from "./userData";
 
 const StudentData = ({ studentData, setStudentData }) => {
-  // const [studentData, setStudentData] = useState([]);
-
   const handleDelete = (index) => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     items.splice(index, 1);
     localStorage.setItem("students", JSON.stringify(items));
     setStudentData(items);
   };
-
   useEffect(() => {
     setStudentData(JSON.parse(localStorage.getItem("students")) || []);
   }, []);
@@ -26,8 +24,8 @@ const StudentData = ({ studentData, setStudentData }) => {
         {studentData.map((student, index) => (
           <div
             key={index}
-            className="flex  w-full px-12 text-base bgwhite py-2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
-  laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5"
+            className="flex w-full px-12 text-base bgwhite py-2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
+          laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5"
           >
             <h2 className="w-35 laptop:w-30 laptop-lg:w-36 desktop:w-40">
               {student.studentName}

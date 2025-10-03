@@ -42,15 +42,15 @@ const TeacherForm = () => {
   const [subject, setSubject] = useState("");
   const [designation, setDesignation] = useState("");
 
-  // let validatation =
-  //   name === "" ||
-  //   email === "" ||
-  //   password === "" ||
-  //   number === "" ||
-  //   gender === "" ||
-  //   className === "" ||
-  //   subject === "" ||
-  //   designation === "";
+  let validatation =
+    name === "" ||
+    email === "" ||
+    password === "" ||
+    number === "" ||
+    gender === "" ||
+    className === "" ||
+    subject === "" ||
+    designation === "";
 
   return (
     <div className="flex items-center justify-center bg-[#FCFAFA] desktop:mt-10  p4">
@@ -66,7 +66,7 @@ const TeacherForm = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 laptop:grid-cols-3 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start laptop:gap-3 desktop:gap-4"
+          className="grid grid-cols-1 laptop:grid-cols-3 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start content-center laptop:gap-3 desktop:gap-4"
         >
           <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Designation
@@ -106,12 +106,12 @@ const TeacherForm = () => {
           </label>
           <select
             id="class"
-            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:h-9 laptop-lg:h-12 laptop-lg:mt-7 desktop:h-12 desktop:mt-7 laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            className="border-2 h-9  px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:h-9 laptop-lg:h-12 laptop-lg:mt-7 desktop:h-12 desktop:mt-7 laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
             value={className}
             onChange={(e) => setClassName(e.target.value)}
           >
-            <option>Class</option>
-            <option>9th</option>
+            <option className="">Class</option>
+            <option className="">9th</option>
             <option>10th</option>
             <option>firstYear</option>
             <option>Inter</option>
@@ -151,8 +151,10 @@ const TeacherForm = () => {
             Add another
           </span>
           <button
+            disabled={validatation}
             onClick={teacherData}
-            className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold cursor-pointerz
+            "
           >
             Add Teacher
           </button>

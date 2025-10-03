@@ -38,13 +38,13 @@ const StudentForm = () => {
     setNumber("");
     setPassword("");
   };
-  // let validatation =
-  //   name === "" ||
-  //   className === "" ||
-  //   gender === "" ||
-  //   email === "" ||
-  //   number === "" ||
-  //   password === "";
+  let validatation =
+    name === "" ||
+    className === "" ||
+    gender === "" ||
+    email === "" ||
+    number === "" ||
+    password === "";
   return (
     <div className="flex flex-col items-start justify-start mt-5 bg-white border-2 border-gray-500 rounded-md p-10 container mx-auto laptop:p-6 laptop:max-w-4xl">
       <div className="flex flex-col gap-3 text-gray-500 px-10 laptop:px-7">
@@ -71,7 +71,8 @@ const StudentForm = () => {
 
         <select
           id="class"
-          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl desktop:font-semibold desktop:h-13 desktop:w-55"
+          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl
+           desktop:font-semibold desktop:h-12 desktop:mt-6 desktop:w-55"
           value={className}
           onChange={(e) => SetClassName(e.target.value)}
         >
@@ -84,7 +85,8 @@ const StudentForm = () => {
 
         <select
           id="gender"
-          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl desktop:font-semibold desktop:h-13 desktop:w-55"
+          className="border-2 h-9 w-45 mt-5 px-2 py-0 rounded-md border-gray-500 laptop:w-40 desktop:text-xl
+           desktop:font-semibold desktop:mt-6 desktop:h-12 desktop:w-55"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
         >
@@ -123,14 +125,15 @@ const StudentForm = () => {
           />
         </label>
 
-        <span className="flex gap-2 items-center desktop:text-xl desktop:font-semibold">
+        <span className="flex gap-2 items-center laptop:mt-5 desktop:mt-7 desktop:text-xl desktop:font-semibold">
           <HiOutlinePlusCircle className="h-7 w-6 desktop:w-12 desktop:h-10" />
           Add another
         </span>
 
         <button
+          disabled={validatation}
           onClick={studentsData}
-          className="text-center bg-gray-500 text-black px-4 py-2 rounded-md font-semibold laptop:px-3 desktop:text-xl"
+          className="text-center bg-gray-500 text-black desktop:mt-7 laptop:mt-5 px-4 py-2 rounded-md font-semibold laptop:px-3 desktop:text-xl cursor-pointer"
         >
           Add Student
         </button>

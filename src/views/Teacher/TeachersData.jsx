@@ -31,7 +31,7 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
       >
         <Dataheader title={"Teaher ID"} />
         <div className=" m-auto">
-          {teacherData?.map?.((teacher, index) => (
+          {teacherData.map((teacher, index) => (
             <div
               className="flex font  medium w-full px-12 text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
              laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5  "

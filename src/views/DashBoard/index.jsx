@@ -28,7 +28,7 @@ const DashboardPage = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center content-center relative container m-auto">
+    <div className="flex flex-col items-center content-center relative container m-auto ">
       <div className="h-30  laptop:h-25 laptop:px-5 laptop:mr-25  laptop:gap-2 laptop:mt-3 bgpurple-500 text-[#4F4F4F] font-semibold px-45 flex flex-col gap-3 mt-5 py-5 text-center laptop:text-left">
         <h1 className="text-3xl  laptop:text-2xl desktop:text-4xl ">
           Welcome to your dashboard, Udemy school

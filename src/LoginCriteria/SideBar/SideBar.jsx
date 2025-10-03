@@ -62,7 +62,7 @@ const SideBar = () => {
             key={index}
             className={({ isActive }) =>
               isActive
-                ? "flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-2 rounded-lg w-40  bg-[#509CDB] cursor-pointer desktop:w-45 desktop:text-lg "
+                ? "flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-3 ease-in duration-250 rounded-lg w-40  bg-[#509CDB] cursor-pointer desktop:w-45 desktop:text-lg "
                 : " flex flex-row gap-2 m-auto items-center justify-start text-sm desktop:text-lg px-3 py-3 w-40  bgred-400 cursor-pointer  "
             }
           >

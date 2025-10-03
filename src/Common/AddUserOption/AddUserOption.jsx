@@ -4,7 +4,7 @@ const AddUserOption = ({ user, addUser }) => {
   return (
     <div className="container m-auto m2 ">
       <div className=" flex w-full bggreen-300 py-2 items-center justify-between  ">
-        <div className="w-200 p-2 lap  laptop:w-135 laptop-lg:w-165 desktop:w-160 ">
+        <div className="w-200 p-2 lap  laptop:w-112 laptop:mr-10 laptop-lg:w-165 desktop:w-160 ">
           <h3 className="font-semibold laptop:text-lg laptop-lg:text-xl desktop:text-2xl ">
             {user}
           </h3>
