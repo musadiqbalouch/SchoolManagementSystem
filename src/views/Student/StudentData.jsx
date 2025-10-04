@@ -3,7 +3,7 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import Dataheader from "../../Common/Dataheader/Dataheader";
-import UserData from "./userData";
+// import UserData from "./userData";
 
 const StudentData = ({ studentData, setStudentData }) => {
   const handleDelete = (index) => {
