@@ -16,7 +16,7 @@ const TeacherPage = () => {
     setData(items);
   }, []);
   return (
-    <div className="  container m-auto relative flex flex-col items-center justify-center w-full bgyellow-400 ease-in duration-200">
+    <div className="  container m-auto relative flex flex-col   items-center justify-center w-full  ease-in duration-200">
       <Link to={"/teacherform"}>
         <AddTeacherSection user="Teacher" addUser="Add Teacher" />
       </Link>

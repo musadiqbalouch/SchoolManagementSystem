@@ -27,7 +27,9 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
   return (
     <>
       <div
-        className={`p-0  m-auto flex flex-col gap-3 ${showModal === true ? " opacity-50" : ""}`}
+        className={`p-0  m-auto flex flex-col gap-3 ${
+          showModal === true ? " opacity-50" : ""
+        }`}
       >
         <Dataheader title={"Teaher ID"} />
         <div className=" m-auto">
@@ -37,28 +39,28 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
              laptop:text-sm laptop:px-2 laptop-lg:text-lg laptop-lg:px-4 desktop:text-xl desktop:px-5  "
               key={index}
             >
-              <h2 className="w-35 laptop:w-30 laptop-lg:w-38 desktop:w-40 ">
+              <h2 className="w-35 laptop:w30 laptop-lg:w-38 desktop:w-40 ">
                 {teacher.teacherName}
               </h2>
-              <h2 className="w-35 laptop:w-20  laptop-lg:w-28  desktop:w-30   ">
+              <h2 className="w-35 laptop:w20  laptop-lg:w-28  desktop:w-30   ">
                 {teacher.teacherNumber}
               </h2>
-              <h2 className="w-70 laptop:w-50  laptop-lg:w-80 desktop:w-80   ">
+              <h2 className="w-70 laptop:w50  laptop-lg:w-80 desktop:w-80   ">
                 {teacher.teacherEmail}
               </h2>
-              <h2 className="w-35 laptop:w-25 laptop-lg:w-28 desktop:w-30  ">
+              <h2 className="w-35 laptop:w25 laptop-lg:w-28 desktop:w-30  ">
                 {teacher.teacherClassname}
               </h2>
-              <h2 className="w-25   laptop:w-15 laptop-lg:w-28 desktop:w-30">
+              <h2 className="w-25   laptop:w15 laptop-lg:w-28 desktop:w-30">
                 {teacher.teacherGender}
               </h2>
               <MdEdit
                 onClick={toggleModal}
-                className="h-8 w-10 laptop:h-7 laptop:w-8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10  text-[#509CDB] cursor-pointer"
+                className="h-8 w-10 laptop:h7 laptop:w8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10  text-[#509CDB] cursor-pointer"
               />
               <MdDelete
                 onClick={() => handleDelete(index)}
-                className="h-8 w-10 text-red-500 laptop:h-7 laptop:w-8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10    cursor-pointer"
+                className="h-8 w-10 text-red-500 laptop:h7 laptop:w8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 desktop:h-10    cursor-pointer"
               />
             </div>
           ))}
