@@ -43,7 +43,7 @@ const StudentData = ({ studentData, setStudentData }) => {
               {student.studentGender}
             </h2>
             <MdEdit
-              className="h8 w10 laptop:h7 laptop:w8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 
+              className="h-8 w-10 laptop:h7 laptop:w8 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-15 
             desktop:h-10 text-[#509CDB] cursor-pointer"
             />
             <MdDelete
