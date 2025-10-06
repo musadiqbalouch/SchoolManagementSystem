@@ -28,7 +28,7 @@ const Student = () => {
       {data.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
-             laptop-lg:w-234 laptop-lg:h-100 laptop:w-172 
+             laptop-lg:w-230 laptop-lg:h-100 laptop:w-172 
              mt-10 flex flex-col items-center justify-center m-auto text-center gap-4 
              desktop:w-235 desktop:h-100"
         >

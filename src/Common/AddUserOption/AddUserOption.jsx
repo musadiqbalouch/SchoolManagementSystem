@@ -25,7 +25,7 @@ const AddUserOption = ({ user, addUser, StudentData, TeachersData }) => {
           </div>
         </div>
       ) : (
-        <div className="bg-red500 py-2 flex laptop:w-180 laptop-lg:w-230 desktop:w-240  font-semibold px-2 gap-2 mr170">
+        <div className="bg-red500 py-2 flex laptop-lg:py-5 laptop:py-4 laptop:w-180 laptop-lg:w-230 desktop:w-240  font-semibold px-2 gap-2 mr170">
           <button className="laptop:text-sm px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-sm desktop:text-base">
             Export CSV
           </button>

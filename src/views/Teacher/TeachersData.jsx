@@ -39,7 +39,7 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
               className="flex font medium w-full text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
   laptop:text-sm laptop:px-2 laptop:gap-3 laptop-lg:gap-4 laptop-lg:text-base laptop-lg:px-5 desktop:text-xl desktop:px-5"
             >
-              <h2 className="laptop:w-40 laptop:bg-blue500 laptop-lg:w-40 desktop:w-45">
+              <h2 className="laptop:w-40 laptop:bg-blue500 laptop-lg:w-40 desktop:w-45 ">
                 {teacher.teacherName}
               </h2>
               <h2 className="laptop:w-25 laptop:bg-blue500 laptop-lg:w-30 desktop:w-30">
