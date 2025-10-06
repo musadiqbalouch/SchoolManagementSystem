@@ -46,7 +46,7 @@ const StudentForm = () => {
     number === "" ||
     password === "";
   return (
-    <div className="flex flex-col items-start justify-start mt-5 bg-white border-2 border-gray-500 rounded-md  container mx-auto laptop:p-6 laptop:max-w4xl">
+    <div className="flex flex-col items-start justify-start mt-5 bg-white border-2 border-gray-500 rounded-md p-10 container mx-auto laptop:p-6 laptop:max-w-4xl">
       <div className="flex flex-col gap-3 text-gray-500 px-10 laptop:px-7">
         <h1 className="text-3xl font-semibold desktop:text-4xl">Add Student</h1>
         <div className="flex gap-5 text-base font-semibold justify-start items-center desktop:text-2xl">
