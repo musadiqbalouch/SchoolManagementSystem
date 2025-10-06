@@ -68,45 +68,45 @@ const TeacherForm = () => {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 laptop:grid-cols-3 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start content-center laptop:gap-3 desktop:gap-4"
         >
-          <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Designation
             <input
               type="text"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-12 desktop:h-12"
+              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
               value={designation}
               onChange={(e) => setDesignation(e.target.value)}
             />
           </label>
-          <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Name
             <input
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-12 desktop:h-12"
+              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Email address
             <input
               type="email"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-12 desktop:h-12"
+              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Password
             <input
               type="password"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-12 desktop:h-12"
+              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
           <select
             id="class"
-            className="border-2 h-9  px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:h-9 laptop-lg:h-12 laptop-lg:mt-7 desktop:h-12 desktop:mt-7 laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            className="border-2 h-9  px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
             value={className}
             onChange={(e) => setClassName(e.target.value)}
           >
@@ -118,7 +118,7 @@ const TeacherForm = () => {
           </select>
           <select
             id="gender"
-            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:h-9 laptop-lg:h-12 laptop-lg:mt-7 desktop:h-12 desktop:mt-7 laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
@@ -126,17 +126,17 @@ const TeacherForm = () => {
             <option>Male</option>
             <option>Female</option>
           </select>
-          <label className="flex flex-col laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
             Phone Number
             <input
               type="number"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-12 desktop:h-12"
+              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
             />
           </label>
           <select
-            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:h-9 laptop-lg:h-12 laptop-lg:mt-7 desktop:h-12 desktop:mt-7 laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
           >
@@ -146,14 +146,14 @@ const TeacherForm = () => {
             <option>English</option>
             <option>Math</option>
           </select>
-          <span className="flex gap-2 laptop:mt-5 items-center laptop-lg:text-xl laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            <HiOutlinePlusCircle className="h-7 w-6 laptop-lg:h-10 laptop-lg:w-10 desktop:h-10 desktop:w-10" />
+          <span className="flex gap-2 laptop:mt-5 laptop-lg:mt-6 items-center laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
+            <HiOutlinePlusCircle className="h-7 w-6 laptop-lg:h-8 laptop-lg:w-8 desktop:h-10 desktop:w-10" />
             Add another
           </span>
           <button
             disabled={validatation}
             onClick={teacherData}
-            className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold laptop-lg:text-lg laptop-lg:font-semibold desktop:text-xl desktop:font-semibold cursor-pointerz
+            className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold cursor-pointerz
             "
           >
             Add Teacher

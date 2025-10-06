@@ -29,7 +29,7 @@ const TeacherPage = () => {
       <SearchBar placeholder={"Search for a teachers by name or email"} />
       {data.length === 0 ? (
         <div
-          className="bg-[#FCFAFA]  laptop:m-3 mr-25 h-85  laptop:h-75 laptop-lg:w-236 laptop-lg:h-100  laptop:w-177 w-230 bgred-400 
+          className="bg-[#FCFAFA]  laptop:m-3 mr-25 h-85  laptop:h-75 laptop-lg:w-233 laptop-lg:h-100  laptop:w-177 w-230 bgred-400 
           mt-10 flex flex-col items-center justify-center m-auto text-center desktop:w-235 desktop:h-100  "
         >
           <div>
