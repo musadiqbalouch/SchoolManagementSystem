@@ -6,7 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = ({ setIsLoggedIn }) => {
   const location = useLocation();
   const pathname = location.pathname;
-  console.log(pathname);
+  // console.log(pathname);
   return (
     <>
       {pathname === "/" ? (
@@ -37,10 +37,10 @@ const Navbar = ({ setIsLoggedIn }) => {
           </div>
         </div>
       ) : (
-        <div className="w-full  h-20 flex items-center justify-end-safe pr-10 container m-auto ease-in duration-300 ">
+        <div className="w-full  h-12 flex items-center  justify-end-safe pr-10 container m-auto ease-in duration-300 ">
           <FaRegBell
-            className="textwhite object-cover h-7 w-12
-          laptop:ml-6 laptop-lg:h-8 laptop-lg:w-13 laptop-lg:ml-30 desktop:ml-25
+            className="textwhite object-cover h-7 w-10
+          laptop:ml-6 laptop-lg:h-7 laptop-lg:w-10 laptop-lg:ml-30 desktop:ml-25
           desktop:h-10 desktop:w-15"
           />
           <Link

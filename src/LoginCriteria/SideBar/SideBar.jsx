@@ -77,11 +77,11 @@ const SideBar = () => {
         className="flex flex-row gap-2 m-auto items-center justify-start text-sm
            px-3 py-3 w-40 laptop:w-full  bgred-400 h-46 cursor-pointer "
       >
-        <PiBankBold className="object-cover h-6 w-6 text-white mt-2 gap-2" />
-        <h3 className="text-white font-medium laptop-lg:text-base  desktop:text-lg ">
+        <PiBankBold className="object-cover h-5 w-5 text-white mt-2 gap-2" />
+        <h3 className="text-white font-medium laptop-lg:text-sm  desktop:text-lg ">
           Features
         </h3>
-        <span className="text-black bg-[#B9D7F1] px-2 py1 rounded-3xl laptop-lg:text-base laptop-lg:px-5 desktop:text-lg desktop:px-3 desktop:text-center ">
+        <span className="text-black bg-[#B9D7F1] px-2 py1 rounded-3xl laptop-lg:text-sm laptop-lg:px-3 desktop:text-lg desktop:px-3 desktop:text-center ">
           New
         </span>
       </div>

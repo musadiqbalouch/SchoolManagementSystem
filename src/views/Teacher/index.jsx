@@ -5,6 +5,7 @@ import AddTeacherSection from "../../Common/AddUserOption/AddUserOption";
 import SearchBar from "../../Common/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import TeachersData from "./TeachersData";
+import AddUserOption from "../../Common/AddUserOption/AddUserOption";
 
 const TeacherPage = () => {
   let [data, setData] = useState(
@@ -16,9 +17,13 @@ const TeacherPage = () => {
     setData(items);
   }, []);
   return (
-    <div className="  container m-auto relative flex flex-col   items-center justify-center w-full  ease-in duration-200">
+    <div className="  container m-auto relative flex flex-col items-center  w-full  ease-in duration-200">
       <Link to={"/teacherform"}>
-        <AddTeacherSection user="Teacher" addUser="Add Teacher" />
+        <AddUserOption
+          TeachersData={data}
+          user="Teacher"
+          addUser="Add Teacher"
+        />
       </Link>
 
       <SearchBar placeholder={"Search for a teachers by name or email"} />

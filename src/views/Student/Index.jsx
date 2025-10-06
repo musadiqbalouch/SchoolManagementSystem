@@ -18,7 +18,11 @@ const Student = () => {
   return (
     <div className=" m-auto relative flex flex-col items-center justify-center w-full ">
       <Link to={"/studentForm"}>
-        <AddUserOption user={"Students"} addUser={"Add Students"} />
+        <AddUserOption
+          StudentData={data}
+          user={"Students"}
+          addUser={"Add Students"}
+        />
       </Link>
       <SearchBar placeholder={"Search for a student by name or email"} />
       {data.length === 0 ? (
