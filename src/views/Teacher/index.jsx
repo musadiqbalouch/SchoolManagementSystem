@@ -11,15 +11,10 @@ const TeacherPage = () => {
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("teacher")) || []
   );
-  // const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
     setData(items);
   }, []);
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   return (
     <div className="container m-auto relative flex flex-col items-center  w-full  ease-in duration-200">
