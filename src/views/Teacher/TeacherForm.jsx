@@ -1,29 +1,37 @@
 import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+
 const TeacherForm = () => {
   const navigate = useNavigate();
-  const teacherData = () => {
-    navigate("/teacher");
-  };
+
+  const [designation, setDesignation] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [number, setNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [className, setClassName] = useState("");
+  const [subject, setSubject] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    let teachers = {
-      teacherdesignation: designation,
+
+    const teachers = {
+      teacherDesignation: designation,
       teacherName: name,
       teacherEmail: email,
       teacherPassword: password,
       teacherNumber: number,
       teacherGender: gender,
-      teacherClassname: className,
+      teacherClassName: className,
       teacherSubject: subject,
     };
 
-    let data = JSON.parse(localStorage.getItem("teacher")) || [];
+    const data = JSON.parse(localStorage.getItem("teacher")) || [];
     data.push(teachers);
-    console.log(data);
     localStorage.setItem("teacher", JSON.stringify(data));
-    console.log(data);
+
     setDesignation("");
     setName("");
     setEmail("");
@@ -32,134 +40,142 @@ const TeacherForm = () => {
     setGender("");
     setClassName("");
     setSubject("");
-  };
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [number, setNumber] = useState("");
-  const [gender, setGender] = useState("");
-  const [className, setClassName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [designation, setDesignation] = useState("");
 
-  let validatation =
-    name === "" ||
-    email === "" ||
-    password === "" ||
-    number === "" ||
-    gender === "" ||
-    className === "" ||
-    subject === "" ||
-    designation === "";
+    navigate("/teacher");
+  };
 
   return (
-    <div className="flex items-center justify-center bg-[#FCFAFA] desktop:mt-10  p4">
-      <div className="flex flex-col w-full max-w-4xl bg-white border-2 border-gray-500 rounded-md p-10 laptop:p-5 laptop:m-2 mx-auto">
-        <div className="flex flex-col gap-3 text-gray-500 px-10 laptop:px-7">
-          <h1 className="text-3xl font-semibold laptop-lg:text-3xl desktop:text-4xl">
-            Add Teacher
-          </h1>
-          <div className="flex gap-5 text-base font-semibold justify-start items-center laptop-lg:text-xl desktop:text-2xl">
-            <h2>Manually</h2>
-            <h2>Import CSV</h2>
-          </div>
+    <div className="bg-white border border-gray-400 rounded-xl shadow-md p-10 mx-auto mt-10 max-w-4xl">
+      {/* Header Section like StudentForm */}
+      <div className="text-gray-700 mb-6">
+        <h1 className="text-3xl font-bold mb-2">Add Teacher</h1>
+        <div className="flex gap-6 font-medium text-gray-500">
+          <h2 className="cursor-pointer hover:text-gray-700">Manually</h2>
+          <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 laptop:grid-cols-3 gap-4 px-8 py2 text-gray-500 mt-3 items-center justify-start content-center laptop:gap-3 desktop:gap-4"
-        >
-          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            Designation
-            <input
-              type="text"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
-              value={designation}
-              onChange={(e) => setDesignation(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            Name
-            <input
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            Email address
-            <input
-              type="email"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            Password
-            <input
-              type="password"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+      </div>
+
+      {/* Responsive form grid */}
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-5 text-gray-700"
+      >
+        <div>
+          <label className="font-semibold">Designation</label>
+          <input
+            type="text"
+            value={designation}
+            onChange={(e) => setDesignation(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="e.g. Senior Teacher"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="e.g. John Doe"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="e.g. johndoe@gmail.com"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="Enter password"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Phone Number</label>
+          <input
+            type="number"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            placeholder="03xxxxxxxxx"
+          />
+        </div>
+
+        <div>
+          <label className="font-semibold">Gender</label>
           <select
-            id="class"
-            className="border-2 h-9  px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
-            value={className}
-            onChange={(e) => setClassName(e.target.value)}
-          >
-            <option className="">Class</option>
-            <option className="">9th</option>
-            <option>10th</option>
-            <option>firstYear</option>
-            <option>Inter</option>
-          </select>
-          <select
-            id="gender"
-            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full mt-5 laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
           >
-            <option>Gender</option>
+            <option value="">Select Gender</option>
             <option>Male</option>
             <option>Female</option>
           </select>
-          <label className="flex flex-col laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            Phone Number
-            <input
-              type="number"
-              className="border-2 py-1 px-2 rounded-md border-gray-500 w-full laptop:h-9 laptop-lg:h-10 desktop:h-12"
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </label>
+        </div>
+
+        <div>
+          <label className="font-semibold">Class</label>
           <select
-            className="border-2 h-9 px-2 py-0 rounded-md border-gray-500 w-full laptop:mt-6 laptop:h-9 laptop-lg:h-10 laptop-lg:mt-6 desktop:h-12 desktop:mt-7 laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold"
+            value={className}
+            onChange={(e) => setClassName(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          >
+            <option value="">Select Class</option>
+            <option>9th</option>
+            <option>10th</option>
+            <option>First Year</option>
+            <option>Inter</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="font-semibold">Subject</label>
+          <select
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
           >
-            <option>Subject</option>
+            <option value="">Select Subject</option>
             <option>Science</option>
             <option>Physics</option>
             <option>English</option>
             <option>Math</option>
           </select>
-          <span className="flex gap-2 laptop:mt-5 laptop-lg:mt-6 items-center laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold">
-            <HiOutlinePlusCircle className="h-7 w-6 laptop-lg:h-8 laptop-lg:w-8 desktop:h-10 desktop:w-10" />
+        </div>
+
+        {/* Add Another */}
+        <div className="flex items-center justify-start gap-2 mt-4 laptop:col-span-3">
+          <HiOutlinePlusCircle className="text-gray-600 w-6 h-6" />
+          <span className="text-gray-700 font-semibold cursor-pointer hover:underline">
             Add another
           </span>
+        </div>
+
+        {/* Submit Button */}
+        <div className="laptop:col-span-3 mt-4 flex justify-center">
           <button
-            disabled={validatation}
-            onClick={teacherData}
-            className="text-center bg-gray-500 text-black px-4 py-1 rounded-md font-semibold laptop-lg:text-base laptop-lg:font-semibold desktop:text-xl desktop:font-semibold cursor-pointerz
-            "
+            type="submit"
+            className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
           >
             Add Teacher
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
