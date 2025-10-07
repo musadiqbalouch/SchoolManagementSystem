@@ -27,44 +27,49 @@ const TeachersData = ({ teacherData, settTeacherData }) => {
   return (
     <>
       <div
-        className={`p-0  m-auto flex flex-col gap-3 ${
+        className={`p-0 w-full m-auto flex flex-col gap-3 mt-3 ${
           showModal === true ? " opacity-50" : ""
         }`}
       >
-        <Dataheader title={"Teaher ID"} />
-        <div className="mx2 m-auto">
-          {teacherData.map((teacher, index) => (
-            <div
-              key={index}
-              className="flex font medium w-full text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
-  laptop:text-sm laptop:px-2 laptop:gap-3 laptop-lg:gap-4 laptop-lg:text-base laptop-lg:px-5 desktop:text-xl desktop:px-5"
-            >
-              <h2 className="laptop:w-40 laptop:bg-blue500 laptop-lg:w-40 desktop:w-45 ">
-                {teacher.teacherName}
-              </h2>
-              <h2 className="laptop:w-25 laptop:bg-blue500 laptop-lg:w-30 desktop:w-30">
-                {teacher.teacherNumber}
-              </h2>
-              <h2 className="laptop:w-55 laptop:bg-blue500 laptop-lg:w-82 desktop:w-85">
-                {teacher.teacherEmail}
-              </h2>
-              <h2 className="laptop:w-20 laptop:bg-blue500 laptop-lg:w-28 desktop:w-30">
-                {teacher.teacherClassname}
-              </h2>
-              <h2 className="laptop:w-15 laptop:bg-blue500 laptop-lg:w-30 desktop:w-30">
-                {teacher.teacherGender}
-              </h2>
-              <MdEdit
-                onClick={toggleModal}
-                className="laptop:h-8 laptop:w-10 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-17 desktop:h-10 text-[#509CDB] cursor-pointer"
-              />
-              <MdDelete
-                onClick={() => handleDelete(index)}
-                className="text-red-500 laptop:h-8 laptop:w-10 laptop-lg:w-16 laptop-lg:h-8 desktop:w-16 desktop:h-10 cursor-pointer"
-              />
-            </div>
-          ))}
-        </div>
+        <Dataheader title={"Teacher ID"} />
+        <table className="w-full border-separate border-spacing-y-2 ">
+          <tbody>
+            {teacherData.map((teacher, index) => (
+              <tr
+                className={`${index % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm  laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden `}
+                key={index}
+              >
+                <td className=" laptop:w-42  laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
+                  {teacher.teacherName}
+                </td>
+                <td className=" laptop:w-25  laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22 ">
+                  {teacher.teacherNumber}
+                </td>
+                <td className=" laptop:w-60  laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
+                  {teacher.teacherEmail}
+                </td>
+                <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27 ">
+                  {teacher.teacherClassName}
+                </td>
+                <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center  desktop:w-27 ">
+                  {teacher.teacherGender}
+                </td>
+                <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                  <MdEdit
+                    className=" laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12 "
+                    onClick={toggleModal}
+                  />
+                </td>
+                <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                  <MdDelete
+                    className=" laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7  laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12 "
+                    onClick={() => handleDelete(index)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {/* {showModal && <Modal setShowModal={setShowModal} />} */}
       </div>
       <div className="container m-auto ">

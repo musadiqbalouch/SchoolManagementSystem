@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 const AddUserOption = ({ user, addUser, StudentData, TeachersData }) => {
   // const teacherData =
   const check = TeachersData || StudentData;
-  console.log("🚀 ~ AddUserOption ~ check:", check);
 
   return (
     <div className="container m-auto m2 w-full ">

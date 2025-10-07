@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "../../Common/SearchBar/SearchBar";
-import { MdDelete } from "react-icons/md";
-import { MdEdit } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import Dataheader from "../../Common/Dataheader/Dataheader";
-// import UserData from "./userData";
 
 const StudentData = ({ studentData, setStudentData }) => {
   const handleDelete = (index) => {
@@ -12,44 +9,50 @@ const StudentData = ({ studentData, setStudentData }) => {
     localStorage.setItem("students", JSON.stringify(items));
     setStudentData(items);
   };
+
   useEffect(() => {
     setStudentData(JSON.parse(localStorage.getItem("students")) || []);
   }, []);
+
   return (
-    <div className="wfull p-0 m-auto flex flex-col gap-3">
-      {/* Header Row */}
+    <div className={`p-0 w-full m-auto flex flex-col gap-3 mt-3 `}>
       <Dataheader title={"Student ID"} />
-      {/* Data Rows */}
-      <div className=" m-auto">
-        {studentData.map((student, index) => (
-          <div
-            key={index}
-            className="flex font medium w-full text-base bgwhite py-2 px2 gap-5 shadow-md border rounded-md border-[#FFFFFF] 
-  laptop:text-sm laptop:px-2 laptop:gap-3 laptop-lg:gap-4 laptop-lg:text-base laptop-lg:px-5 desktop:text-xl desktop:px-5"
-          >
-            <h2 className="laptop:w-40 laptop-lg:w-40 desktop:w-45">
-              {student.studentName}
-            </h2>
-            <h2 className="laptop:w-25 laptop-lg:w-30 desktop:w-30">
-              {student.studentNumber}
-            </h2>
-            <h2 className="laptop:w-55 laptop-lg:w-82 desktop:w-85">
-              {student.studentEmail}
-            </h2>
-            <h2 className="laptop:w-20 laptop-lg:w-28 desktop:w-30">
-              {student.studentClass}
-            </h2>
-            <h2 className="laptop:w-15 laptop-lg:w-30 desktop:w-30">
-              {student.studentGender}
-            </h2>
-            <MdEdit className="laptop:h-8 laptop:w-10 laptop:m-1 laptop-lg:w-13 laptop-lg:h-8 desktop:w-17 desktop:h-10 text-[#509CDB] cursor-pointer" />
-            <MdDelete
-              onClick={() => handleDelete(index)}
-              className="text-red-500 laptop:h-8 laptop:w-10 laptop-lg:w-16 laptop-lg:h-8 desktop:w-16 desktop:h-10 cursor-pointer"
-            />
-          </div>
-        ))}
-      </div>
+
+      <table className="w-full border-separate border-spacing-y-2">
+        <tbody>
+          {studentData.map((student, index) => (
+            <tr
+              className={`${index % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
+              key={index}
+            >
+              <td className="laptop:w-42 laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
+                {student.studentName}
+              </td>
+              <td className="laptop:w-25 laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22">
+                {student.studentNumber}
+              </td>
+              <td className="laptop:w-60 laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
+                {student.studentEmail}
+              </td>
+              <td className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
+                {student.studentClass}
+              </td>
+              <td className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
+                {student.studentGender}
+              </td>
+              <td className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                <MdEdit className="laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12" />
+              </td>
+              <td className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                <MdDelete
+                  onClick={() => handleDelete(index)}
+                  className="laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

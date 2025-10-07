@@ -27,6 +27,8 @@ const TeacherForm = () => {
       teacherClassName: className,
       teacherSubject: subject,
     };
+    console.log(teachers.teacherClassName);
+    console.log(teachers.teacherEmail);
 
     const data = JSON.parse(localStorage.getItem("teacher")) || [];
     data.push(teachers);
@@ -45,8 +47,10 @@ const TeacherForm = () => {
   };
 
   return (
-    <div className="bg-white border border-gray-400 rounded-xl shadow-md p-10 mx-auto mt-10 max-w-4xl">
-      {/* Header Section like StudentForm */}
+    <div
+      className="bg-white border border-gray-400 rounded-xl shadow-md laptop:m-10 laptop:p-10  laptop-lg:px-10 laptop-lg:m-auto laptop-lg:mt-10 laptop-lg:py-5 
+    mx-auto mt-10 max-w-4xl desktop:m-auto desktop:mt-10 "
+    >
       <div className="text-gray-700 mb-6">
         <h1 className="text-3xl font-bold mb-2">Add Teacher</h1>
         <div className="flex gap-6 font-medium text-gray-500">
@@ -54,11 +58,9 @@ const TeacherForm = () => {
           <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
         </div>
       </div>
-
-      {/* Responsive form grid */}
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-5 text-gray-700"
+        className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
       >
         <div>
           <label className="font-semibold">Designation</label>
@@ -78,7 +80,7 @@ const TeacherForm = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            placeholder="e.g. John Doe"
+            placeholder="e.g. Arfin Nasir"
           />
         </div>
 
@@ -88,8 +90,8 @@ const TeacherForm = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            placeholder="e.g. johndoe@gmail.com"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
+            placeholder="e.gArfinNasir@gmail.com"
           />
         </div>
 
@@ -99,7 +101,7 @@ const TeacherForm = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
             placeholder="Enter password"
           />
         </div>
@@ -110,7 +112,7 @@ const TeacherForm = () => {
             type="number"
             value={number}
             onChange={(e) => setNumber(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
             placeholder="03xxxxxxxxx"
           />
         </div>
@@ -120,7 +122,7 @@ const TeacherForm = () => {
           <select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
           >
             <option value="">Select Gender</option>
             <option>Male</option>
@@ -133,7 +135,7 @@ const TeacherForm = () => {
           <select
             value={className}
             onChange={(e) => setClassName(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Class</option>
             <option>9th</option>
@@ -148,7 +150,7 @@ const TeacherForm = () => {
           <select
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Subject</option>
             <option>Science</option>
@@ -167,7 +169,7 @@ const TeacherForm = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="laptop:col-span-3 mt-4 flex justify-center">
+        <div className="laptop:col-span-3  flex justify-center">
           <button
             type="submit"
             className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"

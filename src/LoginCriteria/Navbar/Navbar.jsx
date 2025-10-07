@@ -11,9 +11,9 @@ const Navbar = ({ setIsLoggedIn }) => {
     <>
       {pathname === "/" ? (
         <div className="bg-[#FCFAFA] w-full ease-in duration-300  ">
-          <div className="flex flex-col laptop:flex-row h-auto laptop:px-10 ease-in duration-300  laptop:h-25 items-center laptop:items-end laptop:pb-5 container m-auto desktop:h-30">
-            <div className="flex flex-col items-center laptop:mb4 px-3  ">
-              <p className="text-sm text-[#424242] font-medium px-10 laptop:px-6  laptop:w-130  text-center laptop:text-left laptop-lg:text-base laptop-lg:w-180  desktop:text-xl desktop:w-190  ">
+          <div className="flex flex-col laptop:flex-row h-auto laptop:px-10 ease-in duration-300  laptop:h-25 items-center laptop:items-end justify-evenly laptop:pb-5 container m-auto desktop:h-30">
+            <div className="flex flex-col items-center laptop:mb4 px3  ">
+              <p className="text-sm text-[#424242] font-medium w-fit text-center laptop:text-left laptop-lg:text-base desktop:text-xl">
                 Learn how to launch faster <br /> watch our webinar for tips
                 from our experts and get a limited time offer.
               </p>

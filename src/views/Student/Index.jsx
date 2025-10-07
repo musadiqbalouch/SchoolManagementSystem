@@ -16,7 +16,7 @@ const Student = () => {
     setData(items);
   }, []);
   return (
-    <div className=" m-auto relative flex flex-col items-center justify-center w-full ">
+    <div className=" container m-auto relative flex flex-col items-center justify-center w-full ">
       <Link to={"/studentForm"}>
         <AddUserOption
           StudentData={data}

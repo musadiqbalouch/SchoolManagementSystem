@@ -43,7 +43,7 @@ function App() {
             </div>
           )}
           {/* routes  */}
-          <div className=" desktop:w-full  w-full ">
+          <div className="desktop:w-full  w-full ">
             <>
               {/* if user is loggedin */}
               <Routes>

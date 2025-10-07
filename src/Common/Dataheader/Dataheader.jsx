@@ -2,20 +2,33 @@ import React from "react";
 
 const Dataheader = ({ title }) => {
   return (
-    <div
-      className="flex font-semibold laptop:text-base   text-lg w-full  bg-white py-2 gap-5 mt-5 m-auto
-      shadow-sm border laptop:gap-3 rounded-md laptop:px-2 laptop-lg:gap-4 laptop-lg:text-lg laptop-lg:px-5  desktop:text-xl desktop:px-5 "
-    >
-      <h2 className=" laptop:w-40  laptop-lg:w-40 desktop:w-45">Name</h2>
-      <h2 className="laptop:w-25  laptop-lg:w-30 desktop:w-30">{title}</h2>
-      <h2 className="laptop:w-55  laptop-lg:w-82 desktop:w-85">
-        Email address
-      </h2>
-      <h2 className="laptop:w-20  laptop-lg:w-28 desktop:w-30">Class</h2>
-      <h2 className="laptop:w-15  laptop-lg:w-30 desktop:w-30">Gender</h2>
-      <h2 className="laptop:w-10 laptop-lg:w-13  desktop:w-17">Edit</h2>
-      <h2 className="laptop:w-13 laptop-lg:w-16 desktop:w-20">Delete</h2>
-    </div>
+    <table className="w-full">
+      <thead className="border border-black laptop:h-10 laptop-lg:h-10 text-base">
+        <tr>
+          <th className="laptop:w-42 laptop-lg:w-48 laptop-lg:pl-2 desktop:w-50 font-normal">
+            Name
+          </th>
+          <th className="laptop:w-25 laptop-lg:w-20 laptop-lg:pl-2 desktop:w-22 font-normal">
+            {title}
+          </th>
+          <th className="laptop:w-60 laptop-lg:w-65 laptop-lg:pl-2 desktop:w-67 font-normal">
+            Email address
+          </th>
+          <th className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+            Class
+          </th>
+          <th className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+            Gender
+          </th>
+          <th className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+            Edit
+          </th>
+          <th className="laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+            Delete
+          </th>
+        </tr>
+      </thead>
+    </table>
   );
 };
 
