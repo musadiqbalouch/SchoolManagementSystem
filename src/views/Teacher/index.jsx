@@ -11,22 +11,25 @@ const TeacherPage = () => {
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("teacher")) || []
   );
+  const [search, setSearch] = useState("");
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
     setData(items);
   }, []);
-
   return (
     <div className="container m-auto relative flex flex-col items-center  w-full  ease-in duration-200">
       <Link to={"/teacherform"}>
         <AddUserOption
           TeachersData={data}
           user="Teacher"
-          addUser="Add Teacher"
+          addUser="Add Teachers"
         />
       </Link>
 
-      <SearchBar placeholder={"Search for a teachers by name or email"} />
+      <SearchBar
+        setSearch={setSearch}
+        placeholder={"Search for a teachers by name or email"}
+      />
       {data.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:m-3 mr-25 h-85  laptop:h-75 laptop-lg:w-233 laptop-lg:h-100  laptop:w-177 w-230 bgred-400 
@@ -41,10 +44,25 @@ const TeacherPage = () => {
           </div>
         </div>
       ) : (
-        <TeachersData teacherData={data} settTeacherData={setData} />
+        <TeachersData
+          search={search}
+          teacherData={data}
+          settTeacherData={setData}
+        />
       )}
     </div>
   );
 };
 
 export default TeacherPage;
+
+// const handleSearch = (event) => {
+//   setSearchTerm(event.target.value);
+// };
+
+// useEffect(() => {
+//   const results = items.filter((item) =>
+//     item.name.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+//   setFilteredItems(results);
+// }, [searchTerm, data]);

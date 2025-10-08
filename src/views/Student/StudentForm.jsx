@@ -38,6 +38,13 @@ const StudentForm = () => {
     setNumber("");
     setPassword("");
   };
+  const validatation =
+    name === "" ||
+    className === "" ||
+    gender === "" ||
+    email === "" ||
+    number === "" ||
+    password === "";
 
   return (
     <div className="bg-white border border-gray-400 rounded-xl shadow-md p-10 mx-auto mt-10 max-w-4xl">
@@ -133,6 +140,7 @@ const StudentForm = () => {
           </span>
 
           <button
+            disabled={validatation}
             type="submit"
             onClick={studentsData}
             className="px-6 py-2 rounded-md font-semibold bg-gray-700 text-white hover:bg-gray-800 transition-all"

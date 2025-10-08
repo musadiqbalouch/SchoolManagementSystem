@@ -45,6 +45,14 @@ const TeacherForm = () => {
 
     navigate("/teacher");
   };
+  const validatation =
+    designation === "" ||
+    name === "" ||
+    email === "" ||
+    password === "" ||
+    number === "" ||
+    gender === "";
+  className === "" || subject === "";
 
   return (
     <div
@@ -160,7 +168,7 @@ const TeacherForm = () => {
           </select>
         </div>
 
-        {/* Add Another */}
+        {/* add teacher */}
         <div className="flex items-center justify-start gap-2 mt-4 laptop:col-span-3">
           <HiOutlinePlusCircle className="text-gray-600 w-6 h-6" />
           <span className="text-gray-700 font-semibold cursor-pointer hover:underline">
@@ -168,9 +176,9 @@ const TeacherForm = () => {
           </span>
         </div>
 
-        {/* Submit Button */}
         <div className="laptop:col-span-3  flex justify-center">
           <button
+            disabled={validatation}
             type="submit"
             className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
           >

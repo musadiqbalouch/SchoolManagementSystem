@@ -10,7 +10,7 @@ const Student = () => {
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     setData(items);
@@ -24,7 +24,10 @@ const Student = () => {
           addUser={"Add Students"}
         />
       </Link>
-      <SearchBar placeholder={"Search for a student by name or email"} />
+      <SearchBar
+        setSearch={setSearch}
+        placeholder={"Search for a student by name or email"}
+      />
       {data.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
@@ -47,7 +50,11 @@ const Student = () => {
           <SupportBtn />
         </div>
       ) : (
-        <StudentData studentData={data} setStudentData={setData} />
+        <StudentData
+          search={search}
+          studentData={data}
+          setStudentData={setData}
+        />
       )}
     </div>
   );
