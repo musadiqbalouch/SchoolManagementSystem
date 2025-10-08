@@ -9,7 +9,7 @@ const StudentModal = ({ setModal }) => {
         <div className="absolute inset-0 bg-black opacity-50 "></div>
 
         {/* Modal content */}
-        <div className="relative z-10  laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p2 laptop-lg:p-6">
+        <div className="relative z-10  laptop:w-[550px] laptop:p-5 laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p2 laptop-lg:p-6">
           <ImCross
             onClick={() => setModal(false)}
             className="absolute right-4 top-4 h-5 w-5 cursor-pointer text-gray-700"
@@ -92,7 +92,7 @@ const StudentModal = ({ setModal }) => {
                   type="submit"
                   className="px-6 py-2 rounded-md font-semibold bg-gray-700 text-white hover:bg-gray-800 transition-all"
                 >
-                  Add Student
+                  Save Edit
                 </button>
               </div>
             </form>

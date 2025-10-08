@@ -114,7 +114,7 @@ const TeacherModal = ({ setShowModal }) => {
                 type="submit"
                 className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
               >
-                Add Teacher
+                Save Edit
               </button>
             </div>
           </form>

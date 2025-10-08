@@ -25,6 +25,7 @@ const StudentData = ({ studentData, setStudentData, search }) => {
 
       <table className="w-full border-separate border-spacing-y-2">
         <tbody>
+          {/* filtering data */}
           {studentData
             .filter((student) => {
               return search.toLowerCase() === ""
