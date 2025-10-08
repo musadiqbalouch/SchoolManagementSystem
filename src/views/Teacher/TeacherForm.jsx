@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
+  const data = JSON.parse(localStorage.getItem("teacher")) || [];
 
   const [designation, setDesignation] = useState("");
   const [name, setName] = useState("");
@@ -18,6 +19,7 @@ const TeacherForm = () => {
     e.preventDefault();
 
     const teachers = {
+      id: data.length + 1,
       teacherDesignation: designation,
       teacherName: name,
       teacherEmail: email,
@@ -30,7 +32,6 @@ const TeacherForm = () => {
     console.log(teachers.teacherClassName);
     console.log(teachers.teacherEmail);
 
-    const data = JSON.parse(localStorage.getItem("teacher")) || [];
     data.push(teachers);
     localStorage.setItem("teacher", JSON.stringify(data));
 

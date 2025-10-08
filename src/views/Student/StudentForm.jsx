@@ -9,6 +9,7 @@ const StudentForm = () => {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
+  const data = JSON.parse(localStorage.getItem("students")) || [];
 
   const navigate = useNavigate();
 
@@ -19,6 +20,7 @@ const StudentForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const students = {
+      id: data.length + 1,
       studentName: name,
       studentClass: className,
       studentGender: gender,
@@ -27,7 +29,6 @@ const StudentForm = () => {
       studentPassword: password,
     };
 
-    const data = JSON.parse(localStorage.getItem("students")) || [];
     data.push(students);
     localStorage.setItem("students", JSON.stringify(data));
 
