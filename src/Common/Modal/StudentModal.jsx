@@ -32,10 +32,14 @@ const StudentModal = ({ setModal, editItem }) => {
     const updatedStudents = items.map((student) =>
       student.id === editdata.id ? editdata : student
     );
-    localStorage.setItem("students", JSON.stringify(updatedStudents));
-    setItems(updatedStudents);
+    let data = localStorage.setItem(
+      "students",
+      JSON.stringify(updatedStudents)
+    );
+    setItems(data);
     setModal(false);
   };
+  useEffect(() => {}, [items]);
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">
