@@ -10,6 +10,7 @@ const StudentData = ({ studentData, setStudentData, search }) => {
     localStorage.setItem("students", JSON.stringify(items));
     setStudentData(items);
   };
+  const [editItem, setEditItem] = useState(null);
 
   useEffect(() => {
     setStudentData(JSON.parse(localStorage.getItem("students")) || []);
@@ -18,6 +19,11 @@ const StudentData = ({ studentData, setStudentData, search }) => {
 
   const handleModal = () => {
     setModal(true);
+  };
+
+  const editlist = (id) => {
+    const updateItem = [...studentData];
+    setEditItem(updateItem[id]);
   };
   return (
     <div className={`p-0 w-full m-auto flex flex-col gap-3 mt-3 `}>
@@ -33,12 +39,15 @@ const StudentData = ({ studentData, setStudentData, search }) => {
                 : student.studentName.toLowerCase().includes(search) ||
                     student.studentEmail.toLowerCase().includes(search);
             })
-            .map((student, index) => (
+            .map((student, id) => (
               <tr
-                className={`${index % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
-                key={index}
+                className={`${id % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
+                key={id}
               >
-                <td className="laptop:w-42 laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
+                <td
+                  // onClick={() => editlist(id)}
+                  className="laptop:w-42 cursor-pointer laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50"
+                >
                   {student.studentName}
                 </td>
                 <td className="laptop:w-25 laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22">
@@ -57,12 +66,15 @@ const StudentData = ({ studentData, setStudentData, search }) => {
                   onClick={handleModal}
                   className="cursor-pointer laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
                 >
-                  <MdEdit className="laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12" />
+                  <MdEdit
+                    onClick={() => editlist(id)}
+                    className="laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12"
+                  />
                   {/* {modal && <StudentModal setModal={setModal} />} */}
                 </td>
                 <td className=" cursor-pointer laptop:w-20 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
-                    onClick={() => handleDelete(index)}
+                    onClick={() => handleDelete(id)}
                     className="laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
                   />
                 </td>
@@ -70,7 +82,13 @@ const StudentData = ({ studentData, setStudentData, search }) => {
             ))}
         </tbody>
       </table>
-      {modal && <StudentModal setModal={setModal} />}
+      {modal && (
+        <StudentModal
+          editItem={editItem}
+          setModal={setModal}
+          setStudentData={setStudentData}
+        />
+      )}
     </div>
   );
 };

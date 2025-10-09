@@ -1,8 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { CgSlack } from "react-icons/cg";
 
-const StudentModal = ({ setModal }) => {
+const StudentModal = ({ setModal, editItem }) => {
+  const [editName, setEditName] = useState(editItem.studentName);
+  const [editClass, setEditClass] = useState(editItem.studentClass);
+  const [editGenger, setEditGender] = useState(editItem.studentGender);
+  const [editEmail, setEditEmail] = useState(editItem.studentEmail);
+  const [editPassword, setEditPassword] = useState(editItem.studentPassword);
+  const [editNumber, setEditNumber] = useState(editItem.studentNumber);
+
+  // let items = JSON.parse(localStorage.getItem("students")) || [];
+
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem("students")) || []
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const editdata = {
+      id: editItem.id,
+      studentName: editName,
+      studentClass: editClass,
+      studentGender: editGenger,
+      studentEmail: editEmail,
+      studentPassword: editPassword,
+      studentNumber: editNumber,
+    };
+
+    const updatedStudents = items.map((student) =>
+      student.id === editdata.id ? editdata : student
+    );
+    localStorage.setItem("students", JSON.stringify(updatedStudents));
+    setItems(updatedStudents);
+    setModal(false);
+  };
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">
@@ -25,20 +58,28 @@ const StudentModal = ({ setModal }) => {
               </div>
             </div>
 
-            <form className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700">
+            <form
+              onSubmit={handleSubmit}
+              className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700"
+            >
               <label className="flex flex-col font-medium">
                 Name
                 <input
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
                   type="text"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  placeholder="Enter full name"
+                  placeholder=""
                 />
               </label>
 
               <label className="flex flex-col font-medium">
                 Class
-                <select className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                  <option value="">Select class</option>
+                <select
+                  onChange={(e) => setEditClass(e.target.value)}
+                  value={editClass}
+                  className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                >
                   <option>9th</option>
                   <option>10th</option>
                   <option>First Year</option>
@@ -48,8 +89,11 @@ const StudentModal = ({ setModal }) => {
 
               <label className="flex flex-col font-medium">
                 Gender
-                <select className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500">
-                  <option value="">Select gender</option>
+                <select
+                  value={editGenger}
+                  onChange={(e) => setEditGender(e.target.value)}
+                  className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                >
                   <option>Male</option>
                   <option>Female</option>
                 </select>
@@ -59,26 +103,32 @@ const StudentModal = ({ setModal }) => {
                 Email
                 <input
                   type="email"
+                  value={editEmail}
+                  onChange={(e) => setEditEmail(e.target.value)}
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  placeholder="Enter email"
+                  placeholder=""
                 />
               </label>
 
               <label className="flex flex-col font-medium">
                 Phone Number
                 <input
+                  value={editNumber}
+                  onChange={(e) => setEditNumber(e.target.value)}
                   type="number"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  placeholder="03XXXXXXXXX"
+                  placeholder=""
                 />
               </label>
 
               <label className="flex flex-col font-medium">
                 Password
                 <input
+                  value={editPassword}
+                  onChange={(e) => setEditPassword(e.target.value)}
                   type="password"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
-                  placeholder="Create password"
+                  placeholder=""
                 />
               </label>
 

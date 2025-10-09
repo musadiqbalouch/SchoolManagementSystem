@@ -7,14 +7,17 @@ import NoNotification from "../../assets/nonotification.png";
 import { Link } from "react-router-dom";
 import StudentData from "./StudentData";
 const Student = () => {
+  // filteringdata state
+  const [search, setSearch] = useState("");
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
-  const [search, setSearch] = useState("");
+
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     setData(items);
   }, []);
+
   return (
     <div className=" container m-auto relative flex flex-col items-center justify-center w-full ">
       <Link to={"/studentForm"}>

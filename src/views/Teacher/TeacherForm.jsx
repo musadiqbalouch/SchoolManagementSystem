@@ -29,8 +29,6 @@ const TeacherForm = () => {
       teacherClassName: className,
       teacherSubject: subject,
     };
-    console.log(teachers.teacherClassName);
-    console.log(teachers.teacherEmail);
 
     data.push(teachers);
     localStorage.setItem("teacher", JSON.stringify(data));
