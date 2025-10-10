@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
-import e from "express";
 
-const TeacherModal = ({ setShowModal, editItem }) => {
+const TeacherModal = ({
+  setShowModal,
+  editItem,
+  teacherData,
+  settTeacherData,
+}) => {
   const [editDesignation, setEditDesignation] = useState(
     editItem.teacherDesignation
   );
@@ -15,11 +19,33 @@ const TeacherModal = ({ setShowModal, editItem }) => {
   const [editClass, setEditClass] = useState(editItem.teacherClassName);
   const [editSubject, setEditSubject] = useState(editItem.teacherSubject);
 
-  console.log(editItem);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const editData = {
+      id: editItem.id,
+      teacherDesignation: editDesignation,
+      teacherName: editName,
+      teacherEmail: editEmail,
+      teacherPassword: editPassword,
+      teacherNumber: editNumber,
+      teacherGender: editGender,
+      teacherClassName: editClass,
+      teacherSubject: editSubject,
+    };
+    // console.log(editData.teacherClass);
+
+    const updateTeacher = teacherData.map((teacher) =>
+      teacher.id === editData.id ? editData : teacher
+    );
+    localStorage.setItem("teacher", JSON.stringify(updateTeacher));
+    settTeacherData(updateTeacher);
+    setShowModal(false);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">
-      <div className={`  absolute inset-0 bg-black opacity-50 `}></div>
+      <div className={`  absolute inset-0 bg-black/40 backdrop-blur-sm `}></div>
 
       {/* Modal content */}
       <div className="relative z-10  laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p2 laptop-lg:p-6">
@@ -38,7 +64,10 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
             </div>
           </div>
-          <form className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
+          >
             <div>
               <label className="font-semibold">Designation</label>
               <input
@@ -54,7 +83,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Name</label>
               <input
                 value={editName}
-                // onChange={(e) => setEditName(e.target.value)}
+                onChange={(e) => setEditName(e.target.value)}
                 type="text"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
                 // placeholder="e.g. Arfin Nasir"
@@ -65,7 +94,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Email</label>
               <input
                 value={editEmail}
-                // onChange={(e) => setEditEmail(e.target.value)}
+                onChange={(e) => setEditEmail(e.target.value)}
                 type="email"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
                 // placeholder="e.gArfinNasir@gmail.com"
@@ -76,7 +105,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Password</label>
               <input
                 value={editPassword}
-                // onChange={(e) => setEditPassword(e.target.value)}
+                onChange={(e) => setEditPassword(e.target.value)}
                 type="password"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
                 // placeholder="Enter password"
@@ -87,7 +116,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Phone Number</label>
               <input
                 value={editNumber}
-                // onChange={(e) => editNumber(e.target.value)}
+                onChange={(e) => setEditNumber(e.target.value)}
                 type="number"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
                 // placeholder="03xxxxxxxxx"
@@ -98,7 +127,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Gender</label>
               <select
                 value={editGender}
-                // onChange={(e) => setEditGender(e.target.value)}
+                onChange={(e) => setEditGender(e.target.value)}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
               >
                 <option>Male</option>
@@ -110,7 +139,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Class</label>
               <select
                 value={editClass}
-                // onChange={(e) => setEditClass(e.target.value)}
+                onChange={(e) => setEditClass(e.target.value)}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
               >
                 <option>9th</option>
@@ -124,7 +153,7 @@ const TeacherModal = ({ setShowModal, editItem }) => {
               <label className="font-semibold">Subject</label>
               <select
                 value={editSubject}
-                // onChange={(e) => setEditSubject(e.target.value)}
+                onChange={(e) => setEditSubject(e.target.value)}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
               >
                 <option>Science</option>

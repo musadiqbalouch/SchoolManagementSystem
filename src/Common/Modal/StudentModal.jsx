@@ -11,14 +11,6 @@ const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
   const [editPassword, setEditPassword] = useState(editItem.studentPassword);
   const [editNumber, setEditNumber] = useState(editItem.studentNumber);
 
-  // let items = JSON.parse(localStorage.getItem("students")) || [];
-
-  console.log(studentData);
-
-  // const [items, setItems] = useState(
-  //   JSON.parse(localStorage.getItem("students")) || []
-  // );
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const editdata = {
@@ -42,7 +34,7 @@ const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">
-        <div className="absolute inset-0 bg-black opacity-50 "></div>
+        <div className="absolute inset-0 bg-black/40 backdrop-blur-sm "></div>
 
         {/* Modal content */}
         <div className="relative z-10  laptop:w-[550px] laptop:p-5 laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p2 laptop-lg:p-6">

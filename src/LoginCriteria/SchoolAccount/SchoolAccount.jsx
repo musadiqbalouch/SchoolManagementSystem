@@ -5,11 +5,6 @@ import Input from "../../Common/Input/Input";
 import { Link } from "react-router-dom";
 
 const SchoolAccount = () => {
-  // const formSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
-  // };
-
   return (
     <div className="items-center bg-amber-50 content-center justify-center flex  w-full min-h-screen">
       <div className="container m-auto flex flex-col items-center justify-center content-center   ">

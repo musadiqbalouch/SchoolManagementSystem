@@ -57,7 +57,6 @@ const StudentForm = () => {
         </div>
       </div>
 
-      {/* 👇 Custom grid responsiveness only for laptop, laptop-lg, desktop */}
       <form
         onSubmit={handleSubmit}
         className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700"

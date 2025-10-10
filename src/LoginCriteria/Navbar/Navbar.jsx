@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = ({ setIsLoggedIn }) => {
   const location = useLocation();
   const pathname = location.pathname;
-  // console.log(pathname);
   return (
     <>
       {pathname === "/" ? (
