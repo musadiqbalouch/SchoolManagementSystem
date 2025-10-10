@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { CgSlack } from "react-icons/cg";
 
-const StudentModal = ({ setModal, editItem }) => {
+const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
   const [editName, setEditName] = useState(editItem.studentName);
   const [editClass, setEditClass] = useState(editItem.studentClass);
   const [editGenger, setEditGender] = useState(editItem.studentGender);
@@ -13,9 +13,11 @@ const StudentModal = ({ setModal, editItem }) => {
 
   // let items = JSON.parse(localStorage.getItem("students")) || [];
 
-  const [items, setItems] = useState(
-    JSON.parse(localStorage.getItem("students")) || []
-  );
+  console.log(studentData);
+
+  // const [items, setItems] = useState(
+  //   JSON.parse(localStorage.getItem("students")) || []
+  // );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,17 +31,14 @@ const StudentModal = ({ setModal, editItem }) => {
       studentNumber: editNumber,
     };
 
-    const updatedStudents = items.map((student) =>
+    const updatedStudents = studentData.map((student) =>
       student.id === editdata.id ? editdata : student
     );
-    let data = localStorage.setItem(
-      "students",
-      JSON.stringify(updatedStudents)
-    );
-    setItems(data);
+    localStorage.setItem("students", JSON.stringify(updatedStudents));
+    setStudentData(updatedStudents);
     setModal(false);
   };
-  useEffect(() => {}, [items]);
+  // useEffect(() => {}, [items]);
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">

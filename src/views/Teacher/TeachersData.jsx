@@ -8,6 +8,8 @@ import TeacherModal from "../../Common/Modal/Teachersmodal";
 const TeachersData = ({ teacherData, settTeacherData, search }) => {
   const [showModal, setShowModal] = useState(false);
 
+  const [editItem, setEditItem] = useState(null);
+
   const toggleModal = () => {
     setShowModal(true);
   };
@@ -22,6 +24,12 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
     settTeacherData(JSON.parse(localStorage.getItem("teacher")) || []);
   }, []);
 
+  const editList = (id) => {
+    const updateItem = [...teacherData];
+    setEditItem(updateItem[id]);
+  };
+  console.log(editItem);
+
   return (
     <div className={`p-0 w-full m-auto flex flex-col gap-3 mt-3 `}>
       <Dataheader title={"Teacher ID"} />
@@ -34,10 +42,12 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
                 : teacher.teacherName.toLowerCase().includes(search) ||
                     teacher.teacherEmail.toLowerCase().includes(search);
             })
-            .map((teacher, index) => (
+            .map((teacher, id) => (
               <tr
-                className={`${index % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm  laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden `}
-                key={index}
+                className={`${
+                  id % 2 === 0 ? `bg-[#EBF6FF80]` : ``
+                } border shadow-md laptop-lg:text-sm laptop:text-sm  laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden `}
+                key={id}
               >
                 <td className=" laptop:w-42  laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
                   {teacher.teacherName}
@@ -54,23 +64,28 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
                 <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center  desktop:w-27 ">
                   {teacher.teacherGender}
                 </td>
-                <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                <td
+                  onClick={toggleModal}
+                  className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
+                >
                   <MdEdit
-                    onClick={toggleModal}
+                    onClick={() => editList(id)}
                     className="cursor-pointer laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12 "
                   />
-                  {showModal && <TeacherModal setShowModal={setShowModal} />}
                 </td>
                 <td className=" laptop:w-20  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
                     className="cursor-pointer laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7  laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12 "
-                    onClick={() => handleDelete(index)}
+                    onClick={() => handleDelete(id)}
                   />
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
+      {showModal && (
+        <TeacherModal editItem={editItem} setShowModal={setShowModal} />
+      )}
     </div>
   );
 };

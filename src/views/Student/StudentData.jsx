@@ -41,7 +41,9 @@ const StudentData = ({ studentData, setStudentData, search }) => {
             })
             .map((student, id) => (
               <tr
-                className={`${id % 2 === 0 ? `bg-[#EBF6FF80]` : ``} border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
+                className={`${
+                  id % 2 === 0 ? `bg-[#EBF6FF80]` : ``
+                } border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
                 key={id}
               >
                 <td
@@ -86,6 +88,7 @@ const StudentData = ({ studentData, setStudentData, search }) => {
         <StudentModal
           editItem={editItem}
           setModal={setModal}
+          studentData={studentData}
           setStudentData={setStudentData}
         />
       )}
