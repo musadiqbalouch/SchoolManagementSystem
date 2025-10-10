@@ -103,6 +103,7 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
           settTeacherData={settTeacherData}
           teacherData={teacherData}
           setShowModal={setShowModal}
+          showModal={showModal}
         />
       )}
       {teacherDetail && (
