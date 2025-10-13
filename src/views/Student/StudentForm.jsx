@@ -1,51 +1,43 @@
 import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { Formik, useFormik } from "formik";
 
 const StudentForm = () => {
-  const [name, setName] = useState("");
-  const [className, setClassName] = useState("");
-  const [gender, setGender] = useState("");
-  const [email, setEmail] = useState("");
-  const [number, setNumber] = useState("");
-  const [password, setPassword] = useState("");
-  const data = JSON.parse(localStorage.getItem("students")) || [];
-
+  // const [name, setName] = useState("");
+  // const [className, setClassName] = useState("");
+  // const [gender, setGender] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [number, setNumber] = useState("");
+  // const [password, setPassword] = useState("");
+  // const data = JSON.parse(localStorage.getItem("students")) || [];
   const navigate = useNavigate();
-
-  const studentsData = () => {
-    navigate("/student&classes");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const students = {
-      id: data.length + 1,
-      studentName: name,
-      studentClass: className,
-      studentGender: gender,
-      studentEmail: email,
-      studentNumber: number,
-      studentPassword: password,
-    };
-
-    data.push(students);
-    localStorage.setItem("students", JSON.stringify(data));
-
-    setName("");
-    setClassName("");
-    setGender("");
-    setEmail("");
-    setNumber("");
-    setPassword("");
-  };
-  const validatation =
-    name === "" ||
-    className === "" ||
-    gender === "" ||
-    email === "" ||
-    number === "" ||
-    password === "";
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      className: "",
+      gender: "",
+      email: "",
+      number: "",
+      password: "",
+    },
+    onSubmit: (value) => {
+      const data = JSON.parse(localStorage.getItem("students")) || [];
+      const student = {
+        id: data.length + 1,
+        studentName: value.name,
+        studentClass: value.className,
+        studentGender: value.gender,
+        studentEmail: value.email,
+        studentNumber: value.number,
+        studentPassword: value.password,
+      };
+      data.push(student);
+      localStorage.setItem("students", JSON.stringify(data));
+      formik.resetForm();
+      navigate("/student&classes");
+    },
+  });
 
   return (
     <div className="bg-white border border-gray-400 rounded-xl shadow-md p-10 mx-auto mt-10 max-w-4xl">
@@ -58,15 +50,16 @@ const StudentForm = () => {
       </div>
 
       <form
-        onSubmit={handleSubmit}
+        onSubmit={formik.handleSubmit}
         className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700"
       >
         <label className="flex flex-col font-medium">
           Name
           <input
+            name="name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formik.values.name}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Enter full name"
           />
@@ -75,8 +68,9 @@ const StudentForm = () => {
         <label className="flex flex-col font-medium">
           Class
           <select
-            value={className}
-            onChange={(e) => setClassName(e.target.value)}
+            name="className"
+            value={formik.values.className}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             <option value="">Select class</option>
@@ -90,8 +84,9 @@ const StudentForm = () => {
         <label className="flex flex-col font-medium">
           Gender
           <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            name="gender"
+            value={formik.values.gender}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             <option value="">Select gender</option>
@@ -103,9 +98,10 @@ const StudentForm = () => {
         <label className="flex flex-col font-medium">
           Email
           <input
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Enter email"
           />
@@ -114,9 +110,10 @@ const StudentForm = () => {
         <label className="flex flex-col font-medium">
           Phone Number
           <input
+            name="number"
             type="number"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            value={formik.values.number}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="03XXXXXXXXX"
           />
@@ -125,9 +122,10 @@ const StudentForm = () => {
         <label className="flex flex-col font-medium">
           Password
           <input
+            name="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formik.values.password}
+            onChange={formik.handleChange}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Create password"
           />
@@ -140,9 +138,7 @@ const StudentForm = () => {
           </span>
 
           <button
-            disabled={validatation}
             type="submit"
-            onClick={studentsData}
             className="px-6 py-2 rounded-md font-semibold bg-gray-700 text-white hover:bg-gray-800 transition-all"
           >
             Add Student

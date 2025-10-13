@@ -3,26 +3,73 @@ import Button from "../../Common/Button/Button";
 import LoginHeading from "../../Common/LoginHeading/LoginHeading";
 import Input from "../../Common/Input/Input";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Formik, useFormik } from "formik";
 
 const SchoolAccount = () => {
+  const formik = useFormik({
+    initialValues: {
+      adminName: "",
+      schoolName: "",
+      schoolEmail: "",
+      schoolPassword: "",
+    },
+    onSubmit: (value) => {
+      const data = JSON.parse(localStorage.getItem("user")) || [];
+
+      const newUser = {
+        name: value.adminName,
+        school: value.schoolName,
+        email: value.schoolEmail,
+        password: value.schoolPassword,
+      };
+      console.log(newUser);
+      data.push(newUser);
+      localStorage.setItem("user", JSON.stringify(data));
+      formik.resetForm();
+    },
+  });
+
   return (
     <div className="items-center bg-amber-50 content-center justify-center flex  w-full min-h-screen">
       <div className="container m-auto flex flex-col items-center justify-center content-center   ">
         <LoginHeading heading={"  Welcome, create your school account"} />
         <form
-          onSubmit={formSubmit}
+          onSubmit={formik.handleSubmit}
           className="bg-white flex flex-col gap-3 items-center  justify-center h-100 w-95 p-10 rounded-md mt-10 "
         >
           <h1 className="w-70 text-center text-gray-500 text-lg p-3 font-semibold">
             It is our great pleasure to have you on board!
           </h1>
-          <Input placeholder={"Enter the name of admin"} type={"text"} />
-          <Input placeholder={"Enter the name of school"} type={"text"} />
-          <Input placeholder={"Enter the school email"} type={"email"} />
-          <Link to={"/choosePassword"}>
-            <Button type={"submit"} />
-          </Link>
-          {/* <button type="submit">dsasdsda</button> */}
+          <Input
+            placeholder={"Enter the name of admin"}
+            type={"text"}
+            name={"adminName"}
+            value={formik.values.adminName}
+            onChange={formik.handleChange}
+          />
+          <Input
+            placeholder={"Enter the name of school"}
+            type={"text"}
+            name={"schoolName"}
+            value={formik.values.schoolName}
+            onChange={formik.handleChange}
+          />
+          <Input
+            placeholder={"Enter the school email"}
+            type={"email"}
+            name={"schoolEmail"}
+            value={formik.values.schoolEmail}
+            onChange={formik.handleChange}
+          />
+          <Input
+            placeholder={"Choose a password"}
+            type={"password"}
+            name={"schoolPassword"}
+            value={formik.values.schoolPassword}
+            onChange={formik.handleChange}
+          />
+          <Button type={"submit"} />
           <p className="p-2 text-gray-500">
             Already have an account?
             <Link to={"/loginaccount"} className="text-blue-500 font-bold">

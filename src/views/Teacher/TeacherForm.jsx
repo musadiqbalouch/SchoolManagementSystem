@@ -1,57 +1,42 @@
 import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
+import { Formik, useFormik } from "formik";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem("teacher")) || [];
+  // const data = JSON.parse(localStorage.getItem("teacher")) || [];
 
-  const [designation, setDesignation] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [number, setNumber] = useState("");
-  const [gender, setGender] = useState("");
-  const [className, setClassName] = useState("");
-  const [subject, setSubject] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const teachers = {
-      id: data.length + 1,
-      teacherDesignation: designation,
-      teacherName: name,
-      teacherEmail: email,
-      teacherPassword: password,
-      teacherNumber: number,
-      teacherGender: gender,
-      teacherClassName: className,
-      teacherSubject: subject,
-    };
-
-    data.push(teachers);
-    localStorage.setItem("teacher", JSON.stringify(data));
-
-    setDesignation("");
-    setName("");
-    setEmail("");
-    setPassword("");
-    setNumber("");
-    setGender("");
-    setClassName("");
-    setSubject("");
-
-    navigate("/teacher");
-  };
-  const validatation =
-    designation === "" ||
-    name === "" ||
-    email === "" ||
-    password === "" ||
-    number === "" ||
-    gender === "";
-  className === "" || subject === "";
+  const formik = useFormik({
+    initialValues: {
+      designation: "",
+      name: "",
+      email: "",
+      password: "",
+      number: "",
+      gender: "",
+      className: "",
+      subject: "",
+    },
+    onSubmit: (value) => {
+      const data = JSON.parse(localStorage.getItem("teacher")) || [];
+      const teacher = {
+        id: data.length + 1,
+        teacherDesignation: value.designation,
+        teacherName: value.name,
+        teacherEmail: value.email,
+        teacherPassword: value.password,
+        teacherNumber: value.number,
+        teacherGender: value.gender,
+        teacherClassName: value.className,
+        teacherSubject: value.subject,
+      };
+      data.push(teacher);
+      localStorage.setItem("teacher", JSON.stringify(data));
+      formik.resetForm();
+      navigate("/teacher");
+    },
+  });
 
   return (
     <div
@@ -66,15 +51,16 @@ const TeacherForm = () => {
         </div>
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={formik.handleSubmit}
         className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
       >
         <div>
           <label className="font-semibold">Designation</label>
           <input
+            name="designation"
             type="text"
-            value={designation}
-            onChange={(e) => setDesignation(e.target.value)}
+            value={formik.values.designation}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="e.g. Senior Teacher"
           />
@@ -83,9 +69,10 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Name</label>
           <input
+            name="name"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={formik.values.name}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="e.g. Arfin Nasir"
           />
@@ -94,9 +81,10 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Email</label>
           <input
+            name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
             placeholder="e.gArfinNasir@gmail.com"
           />
@@ -105,9 +93,10 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Password</label>
           <input
+            name="password"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formik.values.password}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
             placeholder="Enter password"
           />
@@ -116,9 +105,10 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Phone Number</label>
           <input
+            name="number"
             type="number"
-            value={number}
-            onChange={(e) => setNumber(e.target.value)}
+            value={formik.values.number}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
             placeholder="03xxxxxxxxx"
           />
@@ -127,8 +117,9 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Gender</label>
           <select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            name="gender"
+            value={formik.values.gender}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
           >
             <option value="">Select Gender</option>
@@ -140,8 +131,9 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Class</label>
           <select
-            value={className}
-            onChange={(e) => setClassName(e.target.value)}
+            name="className"
+            value={formik.values.className}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Class</option>
@@ -155,8 +147,9 @@ const TeacherForm = () => {
         <div>
           <label className="font-semibold">Subject</label>
           <select
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
+            name="subject"
+            value={formik.values.subject}
+            onChange={formik.handleChange}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Subject</option>
@@ -177,7 +170,7 @@ const TeacherForm = () => {
 
         <div className="laptop:col-span-3  flex justify-center">
           <button
-            disabled={validatation}
+            // disabled={validatation}
             type="submit"
             className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
           >
