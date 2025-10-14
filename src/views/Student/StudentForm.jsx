@@ -2,15 +2,24 @@ import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
+import * as Yup from "yup";
 
 const StudentForm = () => {
-  // const [name, setName] = useState("");
-  // const [className, setClassName] = useState("");
-  // const [gender, setGender] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [number, setNumber] = useState("");
-  // const [password, setPassword] = useState("");
-  // const data = JSON.parse(localStorage.getItem("students")) || [];
+  const teaherFormSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    className: Yup.string().required("please select an option"),
+    gender: Yup.string().required("please select an option"),
+    email: Yup.string()
+      .email("invalid email format")
+      .required("email is required"),
+    number: Yup.number().required("please enter a number"),
+    password: Yup.string()
+      .min(8, "password must be atleast 8 charaters")
+      .required("password is required"),
+  });
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -21,6 +30,7 @@ const StudentForm = () => {
       number: "",
       password: "",
     },
+    validationSchema: teaherFormSchema,
     onSubmit: (value) => {
       const data = JSON.parse(localStorage.getItem("students")) || [];
       const student = {
@@ -51,7 +61,7 @@ const StudentForm = () => {
 
       <form
         onSubmit={formik.handleSubmit}
-        className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700"
+        className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 laptop-lg:gap-2  gap-6 text-gray-700"
       >
         <label className="flex flex-col font-medium">
           Name
@@ -60,9 +70,15 @@ const StudentForm = () => {
             type="text"
             value={formik.values.name}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Enter full name"
           />
+          {formik.touched.name && formik.errors.name ? (
+            <p className=" text-red-400 font-medium">{formik.errors.name}</p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className="flex flex-col font-medium">
@@ -71,6 +87,7 @@ const StudentForm = () => {
             name="className"
             value={formik.values.className}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             <option value="">Select class</option>
@@ -79,6 +96,13 @@ const StudentForm = () => {
             <option>First Year</option>
             <option>Second Year</option>
           </select>
+          {formik.touched.className && formik.errors.className ? (
+            <p className=" text-red-400 font-medium">
+              {formik.errors.className}
+            </p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className="flex flex-col font-medium">
@@ -87,12 +111,18 @@ const StudentForm = () => {
             name="gender"
             value={formik.values.gender}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             <option value="">Select gender</option>
             <option>Male</option>
             <option>Female</option>
           </select>
+          {formik.touched.gender && formik.errors.gender ? (
+            <p className=" text-red-400 font-medium">{formik.errors.gender}</p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className="flex flex-col font-medium">
@@ -102,9 +132,15 @@ const StudentForm = () => {
             type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Enter email"
           />
+          {formik.touched.email && formik.errors.email ? (
+            <p className=" text-red-400 font-medium">{formik.errors.email}</p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className="flex flex-col font-medium">
@@ -114,9 +150,15 @@ const StudentForm = () => {
             type="number"
             value={formik.values.number}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="03XXXXXXXXX"
           />
+          {formik.touched.number && formik.errors.number ? (
+            <p className=" text-red-400 font-medium">{formik.errors.number}</p>
+          ) : (
+            ""
+          )}
         </label>
 
         <label className="flex flex-col font-medium">
@@ -126,9 +168,17 @@ const StudentForm = () => {
             type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
             placeholder="Create password"
           />
+          {formik.touched.password && formik.errors.password ? (
+            <p className=" text-red-400 font-medium">
+              {formik.errors.password}
+            </p>
+          ) : (
+            ""
+          )}
         </label>
 
         <div className="col-span-1 laptop:col-span-2 laptop-lg:col-span-2 desktop:col-span-2 flex justify-between items-center mt-3">

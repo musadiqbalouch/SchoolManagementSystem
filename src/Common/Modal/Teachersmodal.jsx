@@ -1,62 +1,80 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const TeacherModal = ({
   setShowModal,
-  showModal,
   editItem,
   teacherData,
   settTeacherData,
 }) => {
-  const [editDesignation, setEditDesignation] = useState(
-    editItem.teacherDesignation
-  );
+  const tacherFormSchema = Yup.object().shape({
+    editDesignation: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    editName: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    editEmail: Yup.string()
+      .email("invalid email format")
+      .required("email is required"),
+    editPassword: Yup.string()
+      .min(8, "password must be atleast 8 charaters")
+      .required("password is required"),
+    editNumber: Yup.number().required("please enter a number"),
+    editGender: Yup.string().required("please select an option"),
+    editClass: Yup.string().required("please select an option"),
+    editSubject: Yup.string().required("please select an option"),
+  });
 
-  const [editName, setEditName] = useState(editItem.teacherName);
-  const [editEmail, setEditEmail] = useState(editItem.teacherEmail);
-  const [editPassword, setEditPassword] = useState(editItem.teacherPassword);
-  const [editNumber, setEditNumber] = useState(editItem.teacherNumber);
-  const [editGender, setEditGender] = useState(editItem.teacherGender);
-  const [editClass, setEditClass] = useState(editItem.teacherClassName);
-  const [editSubject, setEditSubject] = useState(editItem.teacherSubject);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const editData = {
-      id: editItem.id,
-      teacherDesignation: editDesignation,
-      teacherName: editName,
-      teacherEmail: editEmail,
-      teacherPassword: editPassword,
-      teacherNumber: editNumber,
-      teacherGender: editGender,
-      teacherClassName: editClass,
-      teacherSubject: editSubject,
-    };
-    const updateTeacher = teacherData.map((teacher) =>
-      teacher.id === editData.id ? editData : teacher
-    );
-    localStorage.setItem("teacher", JSON.stringify(updateTeacher));
-    settTeacherData(updateTeacher);
-    setShowModal(false);
-  };
+  const formik = useFormik({
+    initialValues: {
+      editDesignation: editItem.teacherDesignation,
+      editName: editItem.teacherName,
+      editEmail: editItem.teacherEmail,
+      editPassword: editItem.teacherPassword,
+      editNumber: editItem.teacherNumber,
+      editGender: editItem.teacherGender,
+      editClass: editItem.teacherClassName,
+      editSubject: editItem.teacherSubject,
+    },
+    validationSchema: tacherFormSchema,
+    onSubmit: (value) => {
+      const editData = {
+        id: editItem.id,
+        teacherDesignation: value.editDesignation,
+        teacherName: value.editName,
+        teacherEmail: value.editEmail,
+        teacherPassword: value.editPassword,
+        teacherNumber: value.editNumber,
+        teacherGender: value.editGender,
+        teacherClassName: value.editClass,
+        teacherSubject: value.editSubject,
+      };
+      const updateTeacher = teacherData.map((teacher) =>
+        teacher.id === editData.id ? editData : teacher
+      );
+      localStorage.setItem("teacher", JSON.stringify(updateTeacher));
+      settTeacherData(updateTeacher);
+      setShowModal(false);
+    },
+  });
 
   return (
-    <div className="transform transition-all duration-1000 fixed inset-0 z-50 flex items-center justify-center   text-start">
+    <div className="transform transition-all duration-1000 fixed inset-0 z-50 flex items-center justify-center text-start">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100"></div>
 
       {/* Modal content */}
-      <div className="relative z-10  laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
+      <div className="relative z-10 laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
         <ImCross
           onClick={() => setShowModal(false)}
           className="absolute right-4 top-4 h-5 w-5 cursor-pointer text-gray-700"
         />
-        <div
-          className="bg-white border border-gray-400 rounded-xl shadow-md laptop:mx-10 laptop:p-3  laptop-lg:px-10 laptop-lg:m-auto laptop-lg:mt-10 laptop-lg:py-5
-    mx-auto mt-10 max-w-4xl desktop:m-auto desktop:mt-10 ease-in duration-300 "
-        >
+        <div className="bg-white border border-gray-400 rounded-xl shadow-md laptop:mx-10 laptop:p-3 laptop-lg:px-10 laptop-lg:m-auto laptop-lg:mt-10 laptop-lg:py-5 mx-auto mt-10 max-w-4xl desktop:m-auto desktop:mt-10 ease-in duration-300 ">
           <div className="text-gray-700 mb-6">
             <h1 className="text-2xl font-bold mb-2">Add Teacher</h1>
             <div className="flex gap-6 font-medium text-gray-500">
@@ -64,82 +82,135 @@ const TeacherModal = ({
               <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
             </div>
           </div>
+
           <form
-            onSubmit={handleSubmit}
+            onSubmit={formik.handleSubmit}
             className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
           >
             <div>
               <label className="font-semibold">Designation</label>
               <input
-                value={editDesignation}
-                onChange={(e) => setEditDesignation(e.target.value)}
+                name="editDesignation"
+                value={formik.values.editDesignation}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="text"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                // placeholder="e.g. Senior Teacher"
               />
+              {formik.touched.editDesignation &&
+              formik.errors.editDesignation ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editDesignation}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Name</label>
               <input
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
+                name="editName"
+                value={formik.values.editName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="text"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                // placeholder="e.g. Arfin Nasir"
               />
+              {formik.touched.editName && formik.errors.editName ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editName}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Email</label>
               <input
-                value={editEmail}
-                onChange={(e) => setEditEmail(e.target.value)}
+                name="editEmail"
+                value={formik.values.editEmail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="email"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
-                // placeholder="e.gArfinNasir@gmail.com"
               />
+              {formik.touched.editEmail && formik.errors.editEmail ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editEmail}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Password</label>
               <input
-                value={editPassword}
-                onChange={(e) => setEditPassword(e.target.value)}
+                name="editPassword"
+                value={formik.values.editPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="password"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
-                // placeholder="Enter password"
               />
+              {formik.touched.editPassword && formik.errors.editPassword ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editPassword}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Phone Number</label>
               <input
-                value={editNumber}
-                onChange={(e) => setEditNumber(e.target.value)}
+                name="editNumber"
+                value={formik.values.editNumber}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 type="number"
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
-                // placeholder="03xxxxxxxxx"
               />
+              {formik.touched.editNumber && formik.errors.editNumber ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editNumber}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Gender</label>
               <select
-                value={editGender}
-                onChange={(e) => setEditGender(e.target.value)}
+                name="editGender"
+                value={formik.values.editGender}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
               >
                 <option>Male</option>
                 <option>Female</option>
               </select>
+              {formik.touched.editGender && formik.errors.editGender ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editGender}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Class</label>
               <select
-                value={editClass}
-                onChange={(e) => setEditClass(e.target.value)}
+                name="editClass"
+                value={formik.values.editClass}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
               >
                 <option>9th</option>
@@ -147,13 +218,22 @@ const TeacherModal = ({
                 <option>First Year</option>
                 <option>Inter</option>
               </select>
+              {formik.touched.editClass && formik.errors.editClass ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editClass}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div>
               <label className="font-semibold">Subject</label>
               <select
-                value={editSubject}
-                onChange={(e) => setEditSubject(e.target.value)}
+                name="editSubject"
+                value={formik.values.editSubject}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
               >
                 <option>Science</option>
@@ -161,6 +241,13 @@ const TeacherModal = ({
                 <option>English</option>
                 <option>Math</option>
               </select>
+              {formik.touched.editSubject && formik.errors.editSubject ? (
+                <p className=" text-red-400 font-medium">
+                  {formik.errors.editSubject}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
 
             <div className="laptop:col-span-3  flex justify-center">

@@ -36,7 +36,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
         <LoginHeading heading={"Welcome, Log into you account"} />
         <form
           onSubmit={formik.handleSubmit}
-          className="bg-white flex flex-col gap-3 items-center  justify-center h-70 w-100 p-10 rounded-md mt-10 "
+          className="bg-white flex flex-col gap-3 items-center  justify-center h-fit w-100 p-10 rounded-md mt-10 "
         >
           <h1 className="w-70 text-center text-gray-500 text-lg p-3 font-semibold">
             It is our great pleasure to have you on board!
@@ -56,7 +56,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
             type={"password"}
           />
           <h2
-            className={`${validation ? " hidden" : " block text-red-500 font-medium"} `}
+            className={`${validation ? " hidden" : " block text-red-400 font-medium"} `}
           >
             Enter right password & name{" "}
           </h2>

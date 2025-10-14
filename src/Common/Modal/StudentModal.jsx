@@ -2,35 +2,55 @@ import React, { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { CgSlack } from "react-icons/cg";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
-  const [editName, setEditName] = useState(editItem.studentName);
-  const [editClass, setEditClass] = useState(editItem.studentClass);
-  const [editGenger, setEditGender] = useState(editItem.studentGender);
-  const [editEmail, setEditEmail] = useState(editItem.studentEmail);
-  const [editPassword, setEditPassword] = useState(editItem.studentPassword);
-  const [editNumber, setEditNumber] = useState(editItem.studentNumber);
+  const teaherDataSchema = Yup.object().shape({
+    editName: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    editClass: Yup.string().required("please select an option"),
+    editGenger: Yup.string().required("please select an option"),
+    editEmail: Yup.string()
+      .email("invalid email format")
+      .required("email is required"),
+    editPassword: Yup.string().required("please enter a number"),
+    editNumber: Yup.string()
+      .min(8, "password must be atleast 8 charaters")
+      .required("password is required"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      editName: editItem.studentName,
+      editClass: editItem.studentClass,
+      editGenger: editItem.studentGender,
+      editEmail: editItem.studentEmail,
+      editPassword: editItem.studentPassword,
+      editNumber: editItem.studentNumber,
+    },
+    validationSchema: teaherDataSchema,
+    onSubmit: (value) => {
+      const editdata = {
+        id: editItem.id,
+        studentName: value.editName,
+        studentClass: value.editClass,
+        studentGender: value.editGenger,
+        studentEmail: value.editEmail,
+        studentPassword: value.editPassword,
+        studentNumber: value.editNumber,
+      };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const editdata = {
-      id: editItem.id,
-      studentName: editName,
-      studentClass: editClass,
-      studentGender: editGenger,
-      studentEmail: editEmail,
-      studentPassword: editPassword,
-      studentNumber: editNumber,
-    };
+      const updatedStudents = studentData.map((student) =>
+        student.id === editdata.id ? editdata : student
+      );
+      localStorage.setItem("students", JSON.stringify(updatedStudents));
+      setStudentData(updatedStudents);
+      setModal(false);
+    },
+  });
 
-    const updatedStudents = studentData.map((student) =>
-      student.id === editdata.id ? editdata : student
-    );
-    localStorage.setItem("students", JSON.stringify(updatedStudents));
-    setStudentData(updatedStudents);
-    setModal(false);
-  };
-  // useEffect(() => {}, [items]);
   return (
     <div>
       <div className="fixed inset-0 z-50 flex items-center justify-center   text-start">
@@ -54,25 +74,36 @@ const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
             </div>
 
             <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 gap-6 text-gray-700"
+              onSubmit={formik.handleSubmit}
+              className="grid grid-cols-1 laptop:grid-cols-2 laptop-lg:grid-cols-2 desktop:grid-cols-2 laptop-lg:gap-2 gap-6 text-gray-700"
             >
               <label className="flex flex-col font-medium">
                 Name
                 <input
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
+                  name="editName"
+                  value={formik.values.editName}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   type="text"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   placeholder=""
                 />
+                {formik.touched.editName && formik.errors.editName ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editName}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <label className="flex flex-col font-medium">
                 Class
                 <select
-                  onChange={(e) => setEditClass(e.target.value)}
-                  value={editClass}
+                  name="editClass"
+                  onChange={formik.handleChange}
+                  value={formik.values.editClass}
+                  onBlur={formik.handleBlur}
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   <option>9th</option>
@@ -80,51 +111,94 @@ const StudentModal = ({ setModal, editItem, studentData, setStudentData }) => {
                   <option>First Year</option>
                   <option>Second Year</option>
                 </select>
+                {formik.touched.editClass && formik.errors.editClass ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editClass}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <label className="flex flex-col font-medium">
                 Gender
                 <select
-                  value={editGenger}
-                  onChange={(e) => setEditGender(e.target.value)}
+                  name="editGenger"
+                  value={formik.values.editGenger}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   <option>Male</option>
                   <option>Female</option>
                 </select>
+                {formik.touched.editGenger && formik.errors.editGenger ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editGenger}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <label className="flex flex-col font-medium">
                 Email
                 <input
+                  name="editEmail"
                   type="email"
-                  value={editEmail}
-                  onChange={(e) => setEditEmail(e.target.value)}
+                  value={formik.values.editEmail}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   placeholder=""
                 />
+                {formik.touched.editEmail && formik.errors.editEmail ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editEmail}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <label className="flex flex-col font-medium">
                 Phone Number
                 <input
-                  value={editNumber}
-                  onChange={(e) => setEditNumber(e.target.value)}
+                  name="editNumber"
+                  value={formik.values.editNumber}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   type="number"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   placeholder=""
                 />
+                {formik.touched.editNumber && formik.errors.editNumber ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editNumber}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <label className="flex flex-col font-medium">
                 Password
                 <input
-                  value={editPassword}
-                  onChange={(e) => setEditPassword(e.target.value)}
+                  name="editPassword"
+                  value={formik.values.editPassword}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   type="password"
                   className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
                   placeholder=""
                 />
+                {formik.touched.editPassword && formik.errors.editPassword ? (
+                  <p className=" text-red-400 font-medium">
+                    {formik.errors.editPassword}
+                  </p>
+                ) : (
+                  ""
+                )}
               </label>
 
               <div className="col-span-1 laptop:col-span-2 laptop-lg:col-span-2 desktop:col-span-2 flex justify-between items-center mt-3">

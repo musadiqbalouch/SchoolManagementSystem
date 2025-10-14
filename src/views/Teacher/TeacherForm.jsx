@@ -2,10 +2,31 @@ import React, { useState } from "react";
 import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
+import * as Yup from "yup";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
-  // const data = JSON.parse(localStorage.getItem("teacher")) || [];
+
+  const studentFormSchema = Yup.object().shape({
+    designation: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    name: Yup.string()
+      .min(4, "name must be 4 character")
+      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
+      .required("name  is required"),
+    email: Yup.string()
+      .email("invalid email format")
+      .required("email is required"),
+    password: Yup.string()
+      .min(8, "password must be atleast 8 charaters")
+      .required("password is required"),
+    number: Yup.number().required("please enter a number"),
+    gender: Yup.string().required("please select an option"),
+    className: Yup.string().required("please select an option"),
+    subject: Yup.string().required("please select an option"),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -18,6 +39,7 @@ const TeacherForm = () => {
       className: "",
       subject: "",
     },
+    validationSchema: studentFormSchema,
     onSubmit: (value) => {
       const data = JSON.parse(localStorage.getItem("teacher")) || [];
       const teacher = {
@@ -52,7 +74,7 @@ const TeacherForm = () => {
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
+        className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 laptop-lg:gap-2 gap-4 text-gray-700"
       >
         <div>
           <label className="font-semibold">Designation</label>
@@ -61,9 +83,17 @@ const TeacherForm = () => {
             type="text"
             value={formik.values.designation}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="e.g. Senior Teacher"
           />
+          {formik.touched.designation && formik.errors.designation ? (
+            <p className=" text-red-400 font-medium">
+              {formik.errors.designation}
+            </p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -73,9 +103,15 @@ const TeacherForm = () => {
             type="text"
             value={formik.values.name}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
             placeholder="e.g. Arfin Nasir"
           />
+          {formik.touched.name && formik.errors.name ? (
+            <p className=" text-red-400 font-medium">{formik.errors.name}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -85,9 +121,15 @@ const TeacherForm = () => {
             type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
             placeholder="e.gArfinNasir@gmail.com"
           />
+          {formik.touched.email && formik.errors.email ? (
+            <p className=" text-red-400 font-medium">{formik.errors.email}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -97,9 +139,17 @@ const TeacherForm = () => {
             type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
             placeholder="Enter password"
           />
+          {formik.touched.password && formik.errors.password ? (
+            <p className=" text-red-400 font-medium">
+              {formik.errors.password}
+            </p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -109,9 +159,15 @@ const TeacherForm = () => {
             type="number"
             value={formik.values.number}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
             placeholder="03xxxxxxxxx"
           />
+          {formik.touched.number && formik.errors.number ? (
+            <p className=" text-red-400 font-medium">{formik.errors.number}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -120,12 +176,18 @@ const TeacherForm = () => {
             name="gender"
             value={formik.values.gender}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
           >
             <option value="">Select Gender</option>
             <option>Male</option>
             <option>Female</option>
           </select>
+          {formik.touched.gender && formik.errors.gender ? (
+            <p className=" text-red-400 font-medium">{formik.errors.gender}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -134,6 +196,7 @@ const TeacherForm = () => {
             name="className"
             value={formik.values.className}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Class</option>
@@ -142,6 +205,13 @@ const TeacherForm = () => {
             <option>First Year</option>
             <option>Inter</option>
           </select>
+          {formik.touched.className && formik.errors.className ? (
+            <p className=" text-red-400 font-medium">
+              {formik.errors.className}
+            </p>
+          ) : (
+            ""
+          )}
         </div>
 
         <div>
@@ -150,6 +220,7 @@ const TeacherForm = () => {
             name="subject"
             value={formik.values.subject}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
           >
             <option value="">Select Subject</option>
@@ -158,6 +229,11 @@ const TeacherForm = () => {
             <option>English</option>
             <option>Math</option>
           </select>
+          {formik.touched.subject && formik.errors.subject ? (
+            <p className=" text-red-400 font-medium">{formik.errors.subject}</p>
+          ) : (
+            ""
+          )}
         </div>
 
         {/* add teacher */}
