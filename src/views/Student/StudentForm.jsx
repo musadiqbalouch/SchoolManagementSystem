@@ -15,10 +15,10 @@ const StudentForm = () => {
     email: Yup.string()
       .email("invalid email format")
       .required("email is required"),
-    number: Yup.number().required("please enter a number"),
-    password: Yup.string()
+    number: Yup.string()
       .min(8, "password must be atleast 8 charaters")
       .required("password is required"),
+    password: Yup.string().required("please enter a number"),
   });
   const navigate = useNavigate();
   const formik = useFormik({

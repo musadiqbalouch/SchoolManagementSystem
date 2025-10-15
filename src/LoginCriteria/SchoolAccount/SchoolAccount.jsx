@@ -40,7 +40,6 @@ const SchoolAccount = () => {
         email: value.schoolEmail,
         password: value.schoolPassword,
       };
-      console.log(newUser);
       data.push(newUser);
       localStorage.setItem("user", JSON.stringify(data));
       formik.resetForm();

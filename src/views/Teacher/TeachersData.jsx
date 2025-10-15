@@ -7,7 +7,13 @@ import TeacherModal from "../../Common/Modal/Teachersmodal";
 import { GrView } from "react-icons/gr";
 import TeacherDetail from "./TeacherDetail";
 
-const TeachersData = ({ teacherData, settTeacherData, search }) => {
+const TeachersData = ({
+  teacherData,
+  settTeacherData,
+  search,
+  currentPost,
+  firstPostIndex,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [teacherDetail, setTeacherDetail] = useState(false);
   const [editItem, setEditItem] = useState(null);
@@ -36,11 +42,13 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
   };
 
   return (
-    <div className={`p-0 w-full m-auto flex flex-col gap-3 mt-3 `}>
+    <div
+      className={`p-0 w-full laptop:h-80  laptop-lg:h-100 m-auto flex flex-col gap-3 mt-3 `}
+    >
       <Dataheader title={"Teacher ID"} />
       <table className="w-full border-separate border-spacing-y-2 ">
         <tbody>
-          {teacherData
+          {currentPost
             .filter((teacher) => {
               return search.toLowerCase() === ""
                 ? teacher
@@ -74,14 +82,14 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
                   className=" laptop:w-16  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
                 >
                   <MdEdit
-                    onClick={() => editList(id)}
+                    onClick={() => editList(firstPostIndex + id)}
                     className="cursor-pointer laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12 "
                   />
                 </td>
                 <td className=" laptop:w-16  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
                     className="cursor-pointer laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7  laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12 "
-                    onClick={() => handleDelete(id)}
+                    onClick={() => handleDelete(firstPostIndex + id)}
                   />
                 </td>
                 <td
@@ -89,7 +97,7 @@ const TeachersData = ({ teacherData, settTeacherData, search }) => {
                   className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
                 >
                   <GrView
-                    onClick={() => editList(id)}
+                    onClick={() => editList(firstPostIndex + id)}
                     className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
                   />
                 </td>

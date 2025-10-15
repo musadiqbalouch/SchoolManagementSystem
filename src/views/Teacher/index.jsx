@@ -6,11 +6,20 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import TeachersData from "./TeachersData";
 import AddUserOption from "../../Common/AddUserOption/AddUserOption";
+import Paginatation from "../../Common/Paginatation/Paginatation";
 
 const TeacherPage = () => {
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("teacher")) || []
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage, setDataPerPage] = useState(5);
+
+  const lastPostIndex = currentPage * dataPerPage;
+  const firstPostIndex = lastPostIndex - dataPerPage;
+  const currentPost = data.slice(firstPostIndex, lastPostIndex);
+
   const [search, setSearch] = useState("");
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
@@ -44,25 +53,24 @@ const TeacherPage = () => {
           </div>
         </div>
       ) : (
-        <TeachersData
-          search={search}
-          teacherData={data}
-          settTeacherData={setData}
-        />
+        <>
+          <TeachersData
+            search={search}
+            currentPost={currentPost}
+            teacherData={data}
+            settTeacherData={setData}
+            firstPostIndex={firstPostIndex}
+          />
+          <Paginatation
+            totalPages={data.length}
+            postPerPage={dataPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        </>
       )}
     </div>
   );
 };
 
 export default TeacherPage;
-
-// const handleSearch = (event) => {
-//   setSearchTerm(event.target.value);
-// };
-
-// useEffect(() => {
-//   const results = items.filter((item) =>
-//     item.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
-//   setFilteredItems(results);
-// }, [searchTerm, data]);

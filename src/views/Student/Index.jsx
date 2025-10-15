@@ -6,12 +6,20 @@ import SupportBtn from "../../Common/SupportBtn/SupportBtn";
 import NoNotification from "../../assets/nonotification.png";
 import { Link } from "react-router-dom";
 import StudentData from "./StudentData";
+import Paginatation from "../../Common/Paginatation/Paginatation";
 const Student = () => {
   // filteringdata state
   const [search, setSearch] = useState("");
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [dataPerPage, setDataPerPage] = useState(5);
+
+  const lastPostIndex = currentPage * dataPerPage;
+  const firstPostIndex = lastPostIndex - dataPerPage;
+  const currentPost = data.slice(firstPostIndex, lastPostIndex);
 
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
@@ -53,12 +61,22 @@ const Student = () => {
           <SupportBtn />
         </div>
       ) : (
-        <StudentData
-          search={search}
-          studentData={data}
-          setStudentData={setData}
-        />
+        <>
+          <StudentData
+            search={search}
+            currentPost={currentPost}
+            studentData={data}
+            setStudentData={setData}
+            firstPostIndex={firstPostIndex}
+          />
+        </>
       )}
+      <Paginatation
+        totalPages={data.length}
+        postPerPage={dataPerPage}
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
