@@ -14,20 +14,20 @@ const AddUserOption = ({ user, addUser, StudentData, TeachersData }) => {
             </h3>
           </div>
           <div className=" flex font-semibold  px-2 gap-2">
-            <button className="bgred-400 laptop:text-base  px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-lg desktop:text-xl ">
+            <button className="cursor-pointer bgred-400 laptop:text-base  px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-lg desktop:text-xl ">
               Export CSV
             </button>
-            <button className="bg-[#2671B1] laptop:text-base  px-2 py-2 rounded-md text-white text-center  desktop:text-xl     ">
+            <button className="bg-[#2671B1] cursor-pointer laptop:text-base  px-2 py-2 rounded-md text-white text-center  desktop:text-xl     ">
               {addUser}
             </button>
           </div>
         </div>
       ) : (
         <div className="bg-red500 py-2 flex laptop-lg:py-5 laptop:py-4 laptop:w-180 laptop-lg:w-230 desktop:w-240  font-semibold px-2 gap-2 mr170">
-          <button className="laptop:text-sm px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-sm desktop:text-base">
+          <button className="cursor-pointer laptop:text-sm px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-sm desktop:text-base">
             Export CSV
           </button>
-          <button className="bg-[#2671B1] laptop:text-sm laptop-lg:txt-sm px-2 py-2 rounded-md text-white text-center desktop:text-base">
+          <button className="bg-[#2671B1] cursor-pointer laptop:text-sm laptop-lg:txt-sm px-2 py-2 rounded-md text-white text-center desktop:text-base">
             {addUser}
           </button>
         </div>

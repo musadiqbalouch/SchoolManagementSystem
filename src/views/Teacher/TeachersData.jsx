@@ -3,9 +3,11 @@ import SearchBar from "../../Common/SearchBar/SearchBar";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import Dataheader from "../../Common/Dataheader/Dataheader";
-import TeacherModal from "../../Common/Modal/Teachersmodal";
+// import TeacherModal from "../../Common/Modal/Teachersmodal";
 import { GrView } from "react-icons/gr";
 import TeacherDetail from "./TeacherDetail";
+import Modal from "../../Common/Modal/Modal";
+import TeacherEditform from "./TeacherEditform";
 
 const TeachersData = ({
   teacherData,
@@ -106,19 +108,23 @@ const TeachersData = ({
         </tbody>
       </table>
       {showModal && (
-        <TeacherModal
-          editItem={editItem}
-          settTeacherData={settTeacherData}
-          teacherData={teacherData}
-          setShowModal={setShowModal}
-          showModal={showModal}
-        />
+        <Modal>
+          <TeacherEditform
+            editItem={editItem}
+            settTeacherData={settTeacherData}
+            teacherData={teacherData}
+            showModal={showModal}
+            setShowModal={setShowModal}
+          />
+        </Modal>
       )}
       {teacherDetail && (
-        <TeacherDetail
-          editItem={editItem}
-          setTeacherDetail={setTeacherDetail}
-        />
+        <Modal>
+          <TeacherDetail
+            editItem={editItem}
+            setTeacherDetail={setTeacherDetail}
+          />
+        </Modal>
       )}
     </div>
   );

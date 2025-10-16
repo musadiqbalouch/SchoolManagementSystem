@@ -12,7 +12,7 @@ const Paginatation = ({
     pages.push(i);
   }
   return (
-    <div>
+    <div className=" border-1 border-black px-2 py-1 rounded-lg ">
       {pages.map((page, index) => {
         return (
           <button

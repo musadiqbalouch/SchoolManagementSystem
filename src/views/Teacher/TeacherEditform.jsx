@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { ImCross } from "react-icons/im";
-import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const TeacherModal = ({
-  setShowModal,
+const TeacherEditform = ({
   editItem,
   teacherData,
   settTeacherData,
+  setShowModal,
 }) => {
   const tacherFormSchema = Yup.object().shape({
     editDesignation: Yup.string()
@@ -65,15 +64,8 @@ const TeacherModal = ({
   });
 
   return (
-    <div className="transform transition-all duration-1000 fixed inset-0 z-50 flex items-center justify-center text-start">
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ease-in-out opacity-100"></div>
-
-      {/* Modal content */}
+    <div>
       <div className="relative z-10 laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
-        <ImCross
-          onClick={() => setShowModal(false)}
-          className="absolute right-4 top-4 h-5 w-5 cursor-pointer text-gray-700"
-        />
         <div className="bg-white border border-gray-400 rounded-xl shadow-md laptop:mx-10 laptop:p-3 laptop-lg:px-10 laptop-lg:m-auto laptop-lg:mt-10 laptop-lg:py-5 mx-auto mt-10 max-w-4xl desktop:m-auto desktop:mt-10 ease-in duration-300 ">
           <div className="text-gray-700 mb-6">
             <h1 className="text-2xl font-bold mb-2">Add Teacher</h1>
@@ -250,7 +242,15 @@ const TeacherModal = ({
               )}
             </div>
 
-            <div className="laptop:col-span-3  flex justify-center">
+            {/* submit edit form and cancel edit form */}
+            <div className="laptop:col-span-3 flex justify-between items-center mt-6">
+              <button
+                onClick={() => setShowModal(false)}
+                type="button"
+                className="cursor-pointer px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              >
+                Close
+              </button>
               <button
                 type="submit"
                 className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
@@ -265,4 +265,4 @@ const TeacherModal = ({
   );
 };
 
-export default TeacherModal;
+export default TeacherEditform;

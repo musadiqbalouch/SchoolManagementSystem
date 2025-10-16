@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Dataheader from "../../Common/Dataheader/Dataheader";
-import StudentModal from "../../Common/Modal/StudentModal";
 import StudentDetail from "./StudentDetail";
 import { GrView } from "react-icons/gr";
+import Modal from "../../Common/Modal/Modal";
+import StudentEditForm from "./StudentEditForm";
 
 const StudentData = ({
   studentData,
@@ -26,11 +27,11 @@ const StudentData = ({
   }, []);
 
   // editdata modal
-  const [modal, setModal] = useState(false);
+  const [showmodal, setShowModal] = useState(false);
   // userdetailmodal
   // edit modal
   const handleModal = () => {
-    setModal(true);
+    setShowModal(true);
   };
 
   const [studentDetail, setStudentDetail] = useState(false);
@@ -112,19 +113,23 @@ const StudentData = ({
             ))}
         </tbody>
       </table>
-      {modal && (
-        <StudentModal
-          editItem={editItem}
-          setModal={setModal}
-          studentData={studentData}
-          setStudentData={setStudentData}
-        />
+      {showmodal && (
+        <Modal>
+          <StudentEditForm
+            editItem={editItem}
+            setShowModal={setShowModal}
+            studentData={studentData}
+            setStudentData={setStudentData}
+          />
+        </Modal>
       )}
       {studentDetail && (
-        <StudentDetail
-          setStudentDetail={setStudentDetail}
-          editItem={editItem}
-        />
+        <Modal>
+          <StudentDetail
+            setStudentDetail={setStudentDetail}
+            editItem={editItem}
+          />
+        </Modal>
       )}
     </div>
   );
