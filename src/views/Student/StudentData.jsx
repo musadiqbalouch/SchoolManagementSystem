@@ -5,6 +5,7 @@ import StudentDetail from "./StudentDetail";
 import { GrView } from "react-icons/gr";
 import Modal from "../../Common/Modal/Modal";
 import StudentEditForm from "./StudentEditForm";
+import DeleteStudent from "./DeleteStudent";
 
 const StudentData = ({
   studentData,
@@ -13,11 +14,13 @@ const StudentData = ({
   currentPost,
   firstPostIndex,
 }) => {
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const handleDelete = (index) => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     items.splice(index, 1);
     localStorage.setItem("students", JSON.stringify(items));
     setStudentData(items);
+    setConfirmDelete(null);
   };
 
   const [editItem, setEditItem] = useState(null);
@@ -96,7 +99,11 @@ const StudentData = ({
                 </td>
                 <td className=" cursor-pointer laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
-                    onClick={() => handleDelete(firstPostIndex + id)}
+                    onClick={() => {
+                      setConfirmDelete(
+                        () => () => handleDelete(firstPostIndex + id)
+                      );
+                    }}
                     className=" laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
                   />
                 </td>
@@ -128,6 +135,14 @@ const StudentData = ({
           <StudentDetail
             setStudentDetail={setStudentDetail}
             editItem={editItem}
+          />
+        </Modal>
+      )}
+      {confirmDelete && (
+        <Modal>
+          <DeleteStudent
+            confirmDelete={confirmDelete}
+            setConfirmDelete={setConfirmDelete}
           />
         </Modal>
       )}

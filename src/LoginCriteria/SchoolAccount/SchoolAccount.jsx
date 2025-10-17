@@ -35,6 +35,7 @@ const SchoolAccount = () => {
       const data = JSON.parse(localStorage.getItem("user")) || [];
 
       const newUser = {
+        teacherId: data.length + 1,
         name: value.adminName,
         school: value.schoolName,
         email: value.schoolEmail,

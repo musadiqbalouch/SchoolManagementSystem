@@ -8,6 +8,7 @@ import { GrView } from "react-icons/gr";
 import TeacherDetail from "./TeacherDetail";
 import Modal from "../../Common/Modal/Modal";
 import TeacherEditform from "./TeacherEditform";
+import DeleteTeacher from "./DeleteTeacher";
 
 const TeachersData = ({
   teacherData,
@@ -19,6 +20,7 @@ const TeachersData = ({
   const [showModal, setShowModal] = useState(false);
   const [teacherDetail, setTeacherDetail] = useState(false);
   const [editItem, setEditItem] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   const toggleModal = () => {
     setShowModal(true);
@@ -29,6 +31,7 @@ const TeachersData = ({
     items.splice(index, 1);
     localStorage.setItem("teacher", JSON.stringify(items));
     settTeacherData(items);
+    setConfirmDelete(false);
   };
   useEffect(() => {
     settTeacherData(JSON.parse(localStorage.getItem("teacher")) || []);
@@ -90,8 +93,12 @@ const TeachersData = ({
                 </td>
                 <td className=" laptop:w-16  laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
-                    className="cursor-pointer laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7  laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12 "
-                    onClick={() => handleDelete(firstPostIndex + id)}
+                    onClick={() => {
+                      setConfirmDelete(
+                        () => () => handleDelete(firstPostIndex + id)
+                      );
+                    }}
+                    className="cursor-pointer laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
                   />
                 </td>
                 <td
@@ -123,6 +130,14 @@ const TeachersData = ({
           <TeacherDetail
             editItem={editItem}
             setTeacherDetail={setTeacherDetail}
+          />
+        </Modal>
+      )}
+      {confirmDelete && (
+        <Modal>
+          <DeleteTeacher
+            setConfirmDelete={setConfirmDelete}
+            confirmDelete={confirmDelete}
           />
         </Modal>
       )}

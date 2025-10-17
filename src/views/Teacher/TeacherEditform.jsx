@@ -247,13 +247,13 @@ const TeacherEditform = ({
               <button
                 onClick={() => setShowModal(false)}
                 type="button"
-                className="cursor-pointer px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                className="cursor-pointer px-5 py-2  text-white bg-gray-700 hover:bg-gray-800 rounded-lg  transition-colors text-sm font-medium"
               >
                 Close
               </button>
               <button
                 type="submit"
-                className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
+                className=" cursor-pointer px-8 py-2 rounded-md font-semibold text-white  border border-gray-400  bg-blue-600 hover:bg-blue-700"
               >
                 Save Edit
               </button>

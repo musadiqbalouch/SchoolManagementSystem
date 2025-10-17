@@ -194,13 +194,13 @@ const StudentEditForm = ({
             <button
               type="button"
               onClick={() => setShowModal(false)}
-              className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+              className=" cursor-pointer bg-gray-700 hover:bg-gray-800 px-5 py-2  text-white rounded-lg  transition-colors text-sm font-medium"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-6 py-2 rounded-md font-semibold bg-gray-700 text-white hover:bg-gray-800 transition-all"
+              className="px-6 cursor-pointer py-2 rounded-md font-semibold bg-blue-600 hover:bg-blue-700  text-white  transition-all"
             >
               Save Edit
             </button>

@@ -32,16 +32,21 @@ const StudentForm = () => {
     },
     validationSchema: teaherFormSchema,
     onSubmit: (value) => {
+      let teacherArray = JSON.parse(localStorage.getItem("loggedIn")) || [];
+      console.log(teacherArray);
+      console.log(teacher.teacherId);
       const data = JSON.parse(localStorage.getItem("students")) || [];
       const student = {
-        id: data.length + 1,
         studentName: value.name,
         studentClass: value.className,
         studentGender: value.gender,
         studentEmail: value.email,
         studentNumber: value.number,
         studentPassword: value.password,
+        // teacherId: teacher.teacherId,
       };
+      // console.log(student.teacherId);
+      // console.log(student.studentName);
       data.push(student);
       localStorage.setItem("students", JSON.stringify(data));
       formik.resetForm();

@@ -16,12 +16,20 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
     },
     onSubmit: (value) => {
       let detail = JSON.parse(localStorage.getItem("user")) || [];
-
+      let user = JSON.parse(localStorage.getItem("loggedIn")) || [];
+      let loggedIn = {
+        id: value.teacherId,
+        userName: value.checkName,
+        userPassword: value.Checkpassword,
+      };
       let isValid = detail.some(
         (data) =>
           data.name === value.checkName && data.password === value.Checkpassword
       );
       if (isValid) {
+        // user.push(loggedIn);
+        console.log(user.teacherId);
+        localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
         setIsLoggedIn(true);
         navigate("/");
         setValidation(true);
@@ -60,7 +68,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
           >
             Enter right password & name{" "}
           </h2>
-          <Button />
+          <Button type={"submit"} />
           <Link
             to={"/createAccount"}
             className="p-2 text-gray-500 cursor-pointer"
