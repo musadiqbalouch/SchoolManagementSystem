@@ -16,19 +16,18 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
     },
     onSubmit: (value) => {
       let detail = JSON.parse(localStorage.getItem("user")) || [];
-      let user = JSON.parse(localStorage.getItem("loggedIn")) || [];
-      let loggedIn = {
-        id: value.teacherId,
-        userName: value.checkName,
-        userPassword: value.Checkpassword,
-      };
-      let isValid = detail.some(
+
+      let isValid = detail.find(
         (data) =>
           data.name === value.checkName && data.password === value.Checkpassword
       );
       if (isValid) {
-        // user.push(loggedIn);
-        console.log(user.teacherId);
+        let loggedIn = {
+          userName: value.checkName,
+          userPassword: value.Checkpassword,
+          id: isValid.teacherId,
+        };
+
         localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
         setIsLoggedIn(true);
         navigate("/");
@@ -64,7 +63,9 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
             type={"password"}
           />
           <h2
-            className={`${validation ? " hidden" : " block text-red-400 font-medium"} `}
+            className={`${
+              validation ? " hidden" : " block text-red-400 font-medium"
+            } `}
           >
             Enter right password & name{" "}
           </h2>
