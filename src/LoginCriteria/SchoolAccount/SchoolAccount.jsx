@@ -122,7 +122,7 @@ const SchoolAccount = () => {
           <p className="p-2 text-gray-500">
             Already have an account?
             <Link to={"/loginaccount"} className="text-blue-500 font-bold">
-              Sign up
+              Login
             </Link>
           </p>
         </form>

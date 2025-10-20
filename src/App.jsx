@@ -51,7 +51,10 @@ function App() {
                   <>
                     <Route path="/" element={<Dashbaord />} />
                     <Route path="/teacher" element={<TeacherPage />} />
-                    <Route path="/student&classes" element={<Student />} />
+                    <Route
+                      path="/student&classes"
+                      element={<Student isLoggedIn={isLoggedIn} />}
+                    />
                     <Route path="/billing" element={<Billing />} />
                     <Route path="/setting" element={<Setting />} />
                     <Route path="/exam" element={<Exam />} />

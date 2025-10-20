@@ -28,7 +28,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
           id: isValid.teacherId,
         };
 
-        localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
+        localStorage.setItem("loggedInUser", JSON.stringify(loggedIn));
         setIsLoggedIn(true);
         navigate("/");
         setValidation(true);

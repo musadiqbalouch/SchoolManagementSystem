@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+
 const StudentEditForm = ({
   editItem,
   studentData,
@@ -12,7 +13,7 @@ const StudentEditForm = ({
       .matches(/^[A-Za-z\s]+$/, "Invalid user name")
       .required("name  is required"),
     editClass: Yup.string().required("please select an option"),
-    editGenger: Yup.string().required("please select an option"),
+    editGender: Yup.string().required("please select an option"),
     editEmail: Yup.string()
       .email("invalid email format")
       .required("email is required"),
@@ -21,30 +22,38 @@ const StudentEditForm = ({
       .min(8, "password must be atleast 8 charaters")
       .required("password is required"),
   });
+
   const formik = useFormik({
     initialValues: {
       editName: editItem.studentName,
       editClass: editItem.studentClass,
-      editGenger: editItem.studentGender,
+      editGender: editItem.studentGender,
       editEmail: editItem.studentEmail,
       editPassword: editItem.studentPassword,
       editNumber: editItem.studentNumber,
+      teacherId: editItem.teacherId,
     },
     validationSchema: teaherDataSchema,
     onSubmit: (value) => {
       const editdata = {
-        id: editItem.id,
+        studentId: editItem.studentId,
         studentName: value.editName,
         studentClass: value.editClass,
-        studentGender: value.editGenger,
+        studentGender: value.editGender,
         studentEmail: value.editEmail,
         studentPassword: value.editPassword,
         studentNumber: value.editNumber,
+        teacherId: editItem.teacherId,
       };
+      // full data lo localStorage se
+      let allStudents = JSON.parse(localStorage.getItem("students")) || [];
 
-      const updatedStudents = studentData.map((student) =>
-        student.id === editdata.id ? editdata : student
+      // edit wala student replace karo
+      const updatedStudents = allStudents.map((student) =>
+        student.studentId === editdata.studentId ? editdata : student
       );
+
+      // localStorage aur state update karo
       localStorage.setItem("students", JSON.stringify(updatedStudents));
       setStudentData(updatedStudents);
       setShowModal(false);
@@ -112,8 +121,8 @@ const StudentEditForm = ({
           <label className="flex flex-col font-medium">
             Gender
             <select
-              name="editGenger"
-              value={formik.values.editGenger}
+              name="editGender"
+              value={formik.values.editGender}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
@@ -121,9 +130,9 @@ const StudentEditForm = ({
               <option>Male</option>
               <option>Female</option>
             </select>
-            {formik.touched.editGenger && formik.errors.editGenger ? (
+            {formik.touched.editGender && formik.errors.editGender ? (
               <p className=" text-red-400 font-medium">
-                {formik.errors.editGenger}
+                {formik.errors.editGender}
               </p>
             ) : (
               ""

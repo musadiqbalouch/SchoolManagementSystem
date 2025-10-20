@@ -6,6 +6,11 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar = ({ setIsLoggedIn }) => {
   const location = useLocation();
   const pathname = location.pathname;
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser");
+    setIsLoggedIn(false);
+  };
   return (
     <>
       {pathname === "/" ? (
@@ -47,7 +52,7 @@ const Navbar = ({ setIsLoggedIn }) => {
             className=" text-black text-base h-8 text-center px-5 rounded-lg   mt-3 laptop:mt-0 laptop:h-8 
              laptop:text-base  cursor-pointer hover:bg-[#509CDB] ease-in duration-200 hover:text-white py-1 font-medium
              laptop-lg:text-base  laptop-lg:py-1 laptop-lg:h-8  desktop:py-1.5 desktop:h-10 desktop:text-lg desktop:text-center desktop:w-30  desktop:ml-5"
-            onClick={() => setIsLoggedIn(false)}
+            onClick={handleLogout}
           >
             Logout
           </Link>
