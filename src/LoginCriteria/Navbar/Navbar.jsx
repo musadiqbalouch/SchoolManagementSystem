@@ -1,15 +1,18 @@
 import React from "react";
 // import { FaBell } from "react-icons/fa";
 import { FaRegBell } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = ({ setIsLoggedIn }) => {
   const location = useLocation();
   const pathname = location.pathname;
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
     setIsLoggedIn(false);
+    navigate("/");
   };
   return (
     <>

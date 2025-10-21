@@ -2,12 +2,13 @@ import React from "react";
 import Button from "../../Common/Button/Button";
 import LoginHeading from "../../Common/LoginHeading/LoginHeading";
 import Input from "../../Common/Input/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 
 const SchoolAccount = () => {
+  const navigate = useNavigate();
   const signupSchema = Yup.object().shape({
     adminName: Yup.string()
       .min(4, "name must be 4 character")
@@ -43,6 +44,7 @@ const SchoolAccount = () => {
       };
       data.push(newUser);
       localStorage.setItem("user", JSON.stringify(data));
+      navigate("/loginaccount");
       formik.resetForm();
     },
   });

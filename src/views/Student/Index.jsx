@@ -25,6 +25,12 @@ const Student = ({ isLoggedIn }) => {
   const currentPost = fillteredData.slice(firstPostIndex, lastPostIndex);
 
   useEffect(() => {
+    const totalPages = Math.ceil(fillteredData.length / dataPerPage);
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(1);
+    }
+  }, [fillteredData.length, dataPerPage, currentPage]);
+  useEffect(() => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     setData(items);
   }, []);
@@ -42,10 +48,10 @@ const Student = ({ isLoggedIn }) => {
         setSearch={setSearch}
         placeholder={"Search for a student by name or email"}
       />
-      {data.length === 0 ? (
+      {currentPost.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
-             laptop-lg:w-230 laptop-lg:h-100 laptop:w-172 
+             laptop-lg:w-247 laptop-lg:h-100 laptop:w-172 
              mt-10 flex flex-col items-center justify-center m-auto text-center gap-4 
              desktop:w-235 desktop:h-100"
         >
@@ -72,14 +78,18 @@ const Student = ({ isLoggedIn }) => {
             setStudentData={setData}
             firstPostIndex={firstPostIndex}
           />
+          {fillteredData.length > 5 ? (
+            <Paginatation
+              totalPages={fillteredData.length}
+              postPerPage={dataPerPage}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+          ) : (
+            ""
+          )}
         </>
       )}
-      <Paginatation
-        totalPages={data.length}
-        postPerPage={dataPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
     </div>
   );
 };

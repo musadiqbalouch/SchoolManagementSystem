@@ -62,6 +62,7 @@ function App() {
                     <Route path="/teacherform" element={<TeacherForm />} />
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
+                    <Route path="*" element={<Dashbaord />} />
                   </>
                 ) : (
                   //  </div>
@@ -78,6 +79,7 @@ function App() {
                       element={<LogintoAccount setIsLoggedIn={setIsLoggedIn} />}
                     />
                     <Route path="/choosestaff" element={<ChooseStaff />} />
+                    <Route path="*" element={<LandingPage />} />
                   </>
                 )}
               </Routes>

@@ -14,120 +14,113 @@ const StudentData = ({
   currentPost,
   firstPostIndex,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [studentDetail, setStudentDetail] = useState(false);
+  const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(true);
+  };
 
   const handleDelete = (index) => {
     let students = JSON.parse(localStorage.getItem("students")) || [];
-    let teacher = JSON.parse(localStorage.getItem("loggedInUser")) || [];
-
-    const filtred = students.filter((student) => {
-      return student.teacherId === teacher.id;
-    });
-    filtred.splice(index, 1);
-    localStorage.setItem("students", JSON.stringify(filtred));
-    setStudentData(filtred);
+    students.splice(index, 1);
+    localStorage.setItem("students", JSON.stringify(students));
+    setStudentData(students);
     setConfirmDelete(false);
   };
-
-  const [editItem, setEditItem] = useState(null);
 
   useEffect(() => {
     setStudentData(JSON.parse(localStorage.getItem("students")) || []);
   }, []);
 
-  // editdata modal
-  const [showmodal, setShowModal] = useState(false);
-  // userdetailmodal
-  // edit modal
-  const handleModal = () => {
-    setShowModal(true);
-  };
-
-  const finalArray = currentPost.filter((student) => {
-    return search.toLowerCase() === ""
-      ? student
-      : student.studentName.toLowerCase().includes(search) ||
-          student.studentEmail.toLowerCase().includes(search);
-  });
-
-  const [studentDetail, setStudentDetail] = useState(false);
-  // userdetailmodal
-  const Detail = () => {
+  const detail = () => {
     setStudentDetail(true);
   };
 
-  const editlist = (id) => {
+  const editList = (id) => {
     const updateItem = [...studentData];
-    console.log("🚀 ~ editlist ~ updateItem:", updateItem[id]);
     setEditItem(updateItem[id]);
   };
+
   return (
     <div
-      className={`p-0 w-full m-auto flex  laptop:h-80  laptop-lg:h-100  flex-col gap-3 mt-3 `}
+      className={`p-0 w-full laptop:h-80 laptop-lg:h-100 m-auto flex flex-col gap-3 mt-3`}
     >
       <Dataheader title={"Student ID"} />
 
-      <table className="w-full bg-red400  border-separate border-spacing-y-2">
+      <table className="w-full border-separate border-spacing-y-2">
         <tbody>
-          {/* filtering data */}
-          {finalArray.map((student, id) => (
-            <tr
-              className={`${
-                id % 2 === 0 ? `bg-[#EBF6FF80]` : ``
-              } border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
-              key={id}
-            >
-              <td
-                // onClick={() => editlist(id)}
-                className="laptop:w-40 cursor-pointer laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50"
+          {currentPost
+            .filter((student) => {
+              return search.toLowerCase() === ""
+                ? student
+                : student.studentName.toLowerCase().includes(search) ||
+                    student.studentEmail.toLowerCase().includes(search);
+            })
+            .map((student, id) => (
+              <tr
+                key={id}
+                className={`${
+                  id % 2 === 0 ? `bg-[#EBF6FF80]` : ``
+                } border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
               >
-                {student.studentName}
-              </td>
-              <td className="laptop:w-23 laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22">
-                {student.studentNumber}
-              </td>
-              <td className="laptop:w-50 laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
-                {student.studentEmail}
-              </td>
-              <td className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
-                {student.studentClass}
-              </td>
-              <td className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
-                {student.studentGender}
-              </td>
-              <td
-                onClick={handleModal}
-                className="cursor-pointer laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
-              >
-                <MdEdit
-                  onClick={() => editlist(id)}
-                  className="laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12"
-                />
-              </td>
-              <td className=" cursor-pointer laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
-                <MdDelete
-                  onClick={() => {
-                    setConfirmDelete(
-                      () => () => handleDelete(firstPostIndex + id)
-                    );
-                  }}
-                  className=" laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
-                />
-              </td>
-              <td
-                onClick={Detail}
-                className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
-              >
-                <GrView
-                  onClick={() => editlist(firstPostIndex + id)}
-                  className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
-                />
-              </td>
-            </tr>
-          ))}
+                <td className="laptop:w-40 laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
+                  {student.studentName}
+                </td>
+                <td className="laptop:w-23 laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22">
+                  {student.studentNumber}
+                </td>
+                <td className="laptop:w-50 laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
+                  {student.studentEmail}
+                </td>
+                <td className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
+                  {student.studentClass}
+                </td>
+                <td className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
+                  {student.studentGender}
+                </td>
+
+                {/* Edit */}
+                <td
+                  onClick={toggleModal}
+                  className="laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
+                >
+                  <MdEdit
+                    onClick={() => editList(firstPostIndex + id)}
+                    className="cursor-pointer laptop:h-6 laptop:w-8 text-blue-500 inline-block laptop-lg:h-7 laptop-lg:w-10 desktop:h-9 desktop:w-12"
+                  />
+                </td>
+
+                {/* Delete */}
+                <td className="laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
+                  <MdDelete
+                    onClick={() =>
+                      setConfirmDelete(
+                        () => () => handleDelete(firstPostIndex + id)
+                      )
+                    }
+                    className="cursor-pointer laptop:h-6 laptop:w-8 text-red-500 laptop-lg:h-7 laptop-lg:w-10 inline-block desktop:h-9 desktop:w-12"
+                  />
+                </td>
+
+                {/* View */}
+                <td
+                  onClick={detail}
+                  className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
+                >
+                  <GrView
+                    onClick={() => editList(firstPostIndex + id)}
+                    className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
+                  />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
-      {showmodal && (
+
+      {showModal && (
         <Modal>
           <StudentEditForm
             editItem={editItem}
@@ -137,19 +130,21 @@ const StudentData = ({
           />
         </Modal>
       )}
+
       {studentDetail && (
         <Modal>
           <StudentDetail
-            setStudentDetail={setStudentDetail}
             editItem={editItem}
+            setStudentDetail={setStudentDetail}
           />
         </Modal>
       )}
+
       {confirmDelete && (
         <Modal>
           <DeleteStudent
-            confirmDelete={confirmDelete}
             setConfirmDelete={setConfirmDelete}
+            confirmDelete={confirmDelete}
           />
         </Modal>
       )}
