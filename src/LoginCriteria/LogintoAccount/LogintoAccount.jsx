@@ -5,9 +5,17 @@ import { useFormik } from "formik";
 import Button from "../../Common/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+// import { IoMdEye } from "react-icons/io";
 
 const LogintoAccount = ({ setIsLoggedIn }) => {
   const [validation, setValidation] = useState(true);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -15,12 +23,21 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
       Checkpassword: "",
     },
     onSubmit: (value) => {
-      let detail = JSON.parse(localStorage.getItem("user")) || [];
+      let userDetail = JSON.parse(localStorage.getItem("user")) || [];
+      let registeredStudent =
+        JSON.parse(localStorage.getItem("students")) || [];
 
-      let isValid = detail.find(
+      let isValid = userDetail.find(
         (data) =>
           data.name === value.checkName && data.password === value.Checkpassword
       );
+
+      let studentValid = registeredStudent.find(
+        (student) =>
+          student.studentName === value.checkName &&
+          student.studentPassword === value.Checkpassword
+      );
+
       if (isValid) {
         let loggedIn = {
           userName: value.checkName,
@@ -34,6 +51,24 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
         setValidation(true);
       } else {
         setValidation(false);
+      }
+
+      if (studentValid) {
+        if (studentValid) {
+          let studentLggedIn = {
+            registeredStudentName: value.checkName,
+            registeredStudentPassword: value.Checkpassword,
+            registeredStudentId: studentValid.studentId,
+          };
+
+          localStorage.setItem(
+            "loggedInStudent",
+            JSON.stringify(studentLggedIn)
+          );
+          setIsLoggedIn(true);
+          navigate("/studentinterface");
+          setValidation(true);
+        }
       }
     },
   });
@@ -60,7 +95,8 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
             value={formik.values.Checkpassword}
             onChange={formik.handleChange}
             placeholder={"Enter Password"}
-            type={"password"}
+            type={showPassword ? " text" : "password"}
+            togglePasswordVisibility={togglePasswordVisibility}
           />
           <h2
             className={`${

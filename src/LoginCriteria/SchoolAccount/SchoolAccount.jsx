@@ -6,8 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import { CgSlack } from "react-icons/cg";
 
 const SchoolAccount = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // const data = JSON.parse(localStorage.getItem("user")) || [];
+
+  // let same = data.filter((dta) => dta.email === "test@gmail.com");
+  // console.log("🚀 ~ SchoolAccount ~ same:", same);
+
   const navigate = useNavigate();
   const signupSchema = Yup.object().shape({
     adminName: Yup.string()
@@ -42,10 +54,18 @@ const SchoolAccount = () => {
         email: value.schoolEmail,
         password: value.schoolPassword,
       };
-      data.push(newUser);
-      localStorage.setItem("user", JSON.stringify(data));
-      navigate("/loginaccount");
-      formik.resetForm();
+
+      let same = data.find((dta) => dta.email === newUser.email);
+      if (same) {
+        {
+          formik.setFieldError("schoolEmail", "Email is already registered");
+        }
+      } else {
+        data.push(newUser);
+        localStorage.setItem("user", JSON.stringify(data));
+        navigate("/loginaccount");
+        formik.resetForm();
+      }
     },
   });
 
@@ -107,7 +127,8 @@ const SchoolAccount = () => {
           )}
           <Input
             placeholder={"Choose a password"}
-            type={"password"}
+            type={showPassword ? " text" : "password"}
+            togglePasswordVisibility={togglePasswordVisibility}
             name={"schoolPassword"}
             value={formik.values.schoolPassword}
             onChange={formik.handleChange}

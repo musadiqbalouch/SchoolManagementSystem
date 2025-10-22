@@ -18,6 +18,7 @@ import LandingPage from "./Components/LandingPage/LandingPage";
 import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
 import TeachersData from "./views/Teacher/TeachersData";
 import StudentData from "./views/Student/StudentData";
+import Studentinterface from "./Studentsinterface/Studentinterface";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -63,6 +64,10 @@ function App() {
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
                     <Route path="*" element={<Dashbaord />} />
+                    <Route
+                      path="/studentinterface"
+                      element={<Studentinterface />}
+                    />
                   </>
                 ) : (
                   //  </div>
