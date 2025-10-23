@@ -15,7 +15,13 @@ const Student = ({ isLoggedIn }) => {
   );
   let teacher = JSON.parse(localStorage.getItem("loggedInUser")) || [];
 
-  let fillteredData = data.filter((post) => post.teacherId === teacher.id);
+  let fillteredData = [];
+
+  if (teacher && teacher.userName === "admin") {
+    fillteredData = data;
+  } else {
+    fillteredData = data.filter((post) => post.teacherId === teacher.id);
+  }
 
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(5);

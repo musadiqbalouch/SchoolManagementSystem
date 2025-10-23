@@ -43,6 +43,7 @@ const StudentForm = () => {
         studentNumber: value.number,
         studentPassword: value.password,
         teacherId: teacher.id,
+        attendance: "",
       };
       // console.log(student.studentName);
       data.push(student);

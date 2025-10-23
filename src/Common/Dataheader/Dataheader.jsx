@@ -29,6 +29,9 @@ const Dataheader = ({ title }) => {
           <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
             View Data
           </th>
+          <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+            Attendance
+          </th>
         </tr>
       </thead>
     </table>

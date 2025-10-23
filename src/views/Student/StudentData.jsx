@@ -6,6 +6,7 @@ import { GrView } from "react-icons/gr";
 import Modal from "../../Common/Modal/Modal";
 import StudentEditForm from "./StudentEditForm";
 import DeleteStudent from "./DeleteStudent";
+import AttendanceModal from "./AttendanceModal";
 
 const StudentData = ({
   studentData,
@@ -19,6 +20,10 @@ const StudentData = ({
   const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
+  const [attendance, setAttendance] = useState(false);
+  const [attvalue, setAttValue] = useState(null);
+
+  // console.log(studentData);
   const toggleModal = () => {
     setShowModal(true);
   };
@@ -43,6 +48,13 @@ const StudentData = ({
     const updateItem = [...studentData];
     setEditItem(updateItem[id]);
   };
+
+  let att = (id) => {
+    const updateItem = [...studentData];
+    setAttValue(updateItem[id]);
+    setAttendance(true);
+  };
+  // console.log(attvalue);
 
   return (
     <div
@@ -115,6 +127,9 @@ const StudentData = ({
                     className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
                   />
                 </td>
+                <td onClick={() => att(firstPostIndex + id)}>
+                  {student.attendance ? student.attendance : "absent"}
+                </td>
               </tr>
             ))}
         </tbody>
@@ -145,6 +160,16 @@ const StudentData = ({
           <DeleteStudent
             setConfirmDelete={setConfirmDelete}
             confirmDelete={confirmDelete}
+          />
+        </Modal>
+      )}
+      {attendance && (
+        <Modal>
+          <AttendanceModal
+            setAttendance={setAttendance}
+            attvalue={attvalue}
+            currentPost={currentPost}
+            setStudentData={setStudentData}
           />
         </Modal>
       )}
