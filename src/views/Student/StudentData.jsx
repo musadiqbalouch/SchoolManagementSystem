@@ -7,6 +7,7 @@ import Modal from "../../Common/Modal/Modal";
 import StudentEditForm from "./StudentEditForm";
 import DeleteStudent from "./DeleteStudent";
 import AttendanceModal from "./AttendanceModal";
+import { useLocation } from "react-router-dom";
 
 const StudentData = ({
   studentData,
@@ -84,7 +85,7 @@ const StudentData = ({
                 <td className="laptop:w-23 laptop-lg:w-20 laptop-lg:pl-2 text-center desktop:w-22">
                   {student.studentNumber}
                 </td>
-                <td className="laptop:w-50 laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
+                <td className="laptop:w-50 laptop-lg:w-60 laptop-lg:pl-2 text-center desktop:w-67">
                   {student.studentEmail}
                 </td>
                 <td className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27">
@@ -127,8 +128,13 @@ const StudentData = ({
                     className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
                   />
                 </td>
-                <td onClick={() => att(firstPostIndex + id)}>
-                  {student.attendance ? student.attendance : "absent"}
+                <td
+                  className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
+                  onClick={() => att(firstPostIndex + id)}
+                >
+                  {student.attendance && student.attendance.length > 0
+                    ? `${student.attendance[student.attendance.length - 1].status}`
+                    : "No attendance"}
                 </td>
               </tr>
             ))}

@@ -32,8 +32,11 @@ const StudentForm = () => {
     },
     validationSchema: teaherFormSchema,
     onSubmit: (value) => {
+      // const today = new Date().toLocaleDateString();
+
       const data = JSON.parse(localStorage.getItem("students")) || [];
       let teacher = JSON.parse(localStorage.getItem("loggedInUser")) || [];
+
       const student = {
         studentId: data.length + 1,
         studentName: value.name,
@@ -43,7 +46,12 @@ const StudentForm = () => {
         studentNumber: value.number,
         studentPassword: value.password,
         teacherId: teacher.id,
-        attendance: "",
+        attendance: [
+          {
+            date: null,
+            status: "",
+          },
+        ],
       };
       // console.log(student.studentName);
       data.push(student);

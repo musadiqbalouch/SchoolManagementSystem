@@ -13,7 +13,11 @@ const Student = ({ isLoggedIn }) => {
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
+  // for teahers
   let teacher = JSON.parse(localStorage.getItem("loggedInUser")) || [];
+
+  // when student is loggedin
+  const loggedInStuent = JSON.parse(localStorage.getItem("loggedInStudent"));
 
   let fillteredData = [];
 
@@ -43,13 +47,15 @@ const Student = ({ isLoggedIn }) => {
 
   return (
     <div className=" container m-auto relative flex flex-col items-center justify-center w-full ">
-      <Link to={"/studentForm"}>
-        <AddUserOption
-          StudentData={data}
-          user={"Students"}
-          addUser={"Add Students"}
-        />
-      </Link>
+      {!loggedInStuent && (
+        <Link to={"/studentForm"}>
+          <AddUserOption
+            StudentData={data}
+            user={"Students"}
+            addUser={"Add Students"}
+          />
+        </Link>
+      )}
       <SearchBar
         setSearch={setSearch}
         placeholder={"Search for a student by name or email"}

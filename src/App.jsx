@@ -28,6 +28,8 @@ function App() {
     localStorage.setItem("isLoggedIn", isLoggedIn);
   }, [isLoggedIn]);
 
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
   return (
     <BrowserRouter>
       <div className=" desktop:flex desktop:w-full  flex w-full">
@@ -50,7 +52,12 @@ function App() {
               <Routes>
                 {isLoggedIn ? (
                   <>
-                    <Route path="/" element={<Dashbaord />} />
+                    <Route
+                      path="/"
+                      element={
+                        loggedInUser ? <Dashbaord /> : <Studentinterface />
+                      }
+                    />
                     <Route path="/teacher" element={<TeacherPage />} />
                     <Route
                       path="/student&classes"
@@ -64,10 +71,6 @@ function App() {
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
                     <Route path="*" element={<Dashbaord />} />
-                    <Route
-                      path="/studentinterface"
-                      element={<Studentinterface />}
-                    />
                   </>
                 ) : (
                   //  </div>

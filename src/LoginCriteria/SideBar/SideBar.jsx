@@ -35,7 +35,7 @@ const SideBar = () => {
     {
       path: "/setting",
       image: <IoSettings />,
-      title: "Setting and profile",
+      title: "Assigment",
     },
     {
       path: "/exam",

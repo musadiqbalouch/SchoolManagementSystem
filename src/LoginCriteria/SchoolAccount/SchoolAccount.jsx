@@ -14,7 +14,8 @@ const SchoolAccount = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  //   const data = JSON.parse(localStorage.getItem("user")) || [];
+  //  console.log(Object.keys(data).length);
   // const data = JSON.parse(localStorage.getItem("user")) || [];
 
   // let same = data.filter((dta) => dta.email === "test@gmail.com");
@@ -48,21 +49,21 @@ const SchoolAccount = () => {
       const data = JSON.parse(localStorage.getItem("user")) || [];
 
       const newUser = {
-        teacherId: data.length + 1,
+        // teacherId: data.length + 1,
         name: value.adminName,
         school: value.schoolName,
         email: value.schoolEmail,
         password: value.schoolPassword,
       };
+      // console.log(data.length);
 
-      let same = data.find((dta) => dta.email === newUser.email);
-      if (same) {
+      let d = Object.keys(data).length;
+      if (d > 0) {
         {
-          formik.setFieldError("schoolEmail", "Email is already registered");
+          formik.setFieldError("schoolEmail", "admin is alrady crated");
         }
       } else {
-        data.push(newUser);
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify(newUser));
         navigate("/loginaccount");
         formik.resetForm();
       }

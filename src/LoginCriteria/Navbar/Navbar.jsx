@@ -1,5 +1,4 @@
-import React from "react";
-// import { FaBell } from "react-icons/fa";
+import React, { useEffect } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -10,7 +9,9 @@ const Navbar = ({ setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    console.log("Logout clicked");
     localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInStudent");
     setIsLoggedIn(false);
     navigate("/");
   };
@@ -36,7 +37,7 @@ const Navbar = ({ setIsLoggedIn }) => {
                 className="bg-[#509CDB] text-white text-base h-8 text-center px-5 rounded-lg   mt-3 laptop:mt-0 laptop:h-8 
              laptop:text-base  cursor-pointer py-1 font-medium
              laptop-lg:text-base  laptop-lg:py-1 laptop-lg:h-8  desktop:py-1.5 desktop:h-10 desktop:text-lg desktop:text-center desktop:w-30  desktop:ml-5"
-                onClick={() => setIsLoggedIn(false)}
+                onClick={handleLogout}
               >
                 Logout
               </Link>

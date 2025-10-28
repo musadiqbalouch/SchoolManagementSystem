@@ -1,7 +1,13 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-const AddUserOption = ({ user, addUser, StudentData, TeachersData }) => {
+const AddUserOption = ({
+  user,
+  addUser,
+  StudentData,
+  TeachersData,
+  disabled,
+}) => {
   const check = TeachersData || StudentData;
 
   return (
@@ -17,7 +23,10 @@ const AddUserOption = ({ user, addUser, StudentData, TeachersData }) => {
             <button className="cursor-pointer bgred-400 laptop:text-base  px-2 py-2 rounded-md text-[#2671B1] text-center laptop-lg:text-lg desktop:text-xl ">
               Export CSV
             </button>
-            <button className="bg-[#2671B1] cursor-pointer laptop:text-base  px-2 py-2 rounded-md text-white text-center  desktop:text-xl     ">
+            <button
+              disabled={disabled}
+              className="bg-[#2671B1] cursor-pointer laptop:text-base  px-2 py-2 rounded-md text-white text-center  desktop:text-xl     "
+            >
               {addUser}
             </button>
           </div>

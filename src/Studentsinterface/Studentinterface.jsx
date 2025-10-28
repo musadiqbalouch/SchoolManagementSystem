@@ -1,21 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Studentinterface = () => {
+  let [num, setNum] = useState(0);
+  let totalDays = 30;
+
   let studentLoggedIn =
     JSON.parse(localStorage.getItem("loggedInStudent")) || [];
-
   let student = JSON.parse(localStorage.getItem("students")) || [];
+  let studentAsignment =
+    JSON.parse(localStorage.getItem("studentAsignment")) || [];
 
   let xxx = student.find(
     (std) => std.studentId === studentLoggedIn.registeredStudentId
   );
 
-  //   console.log(xxx);
-  //   if (studentLoggedIn.registeredStudentId === student.studentId) {
-  //     console.log(true);
-  //   } else {
-  //     console.log(false);
-  //   }
+  // const items = teacher.find((tch) => tch.id === xxx.teacherId);
+  let details = xxx.attendance.map((att) => att.status);
+
+  // filtering only present
+  let presentCount = details.filter((status) => status === "Present").length;
+  // calculating percentage
+  let avg = Math.floor((presentCount / totalDays) * 100);
+
+  const matchedAssignment = studentAsignment.find((assi) =>
+    assi.data.some((dta) => dta.teacherId === studentLoggedIn.teacherid)
+  );
+
+  // agar mila to uska homework print karo
+  if (matchedAssignment) {
+    console.log("🚀 ~ Homework:", matchedAssignment.work);
+  } else {
+    console.log("No homework found for this student.");
+  }
+
   return (
     <div className=" bg-gray-50 font-sans">
       {/* ===== Top Bar ===== */}
@@ -55,7 +72,7 @@ const Studentinterface = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
             <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
               <p className="text-white text-sm">Attendance</p>
-              <h3 className="text-2xl font-semibold text-white mt-1">92%</h3>
+              <h3 className="text-2xl font-semibold text-white mt-1">{avg}%</h3>
               <p className="text-xs text-white mt-1">This month</p>
             </div>
             <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
@@ -146,6 +163,7 @@ const Studentinterface = () => {
             </ul>
           </div>
         </aside>
+        <div>{matchedAssignment ? matchedAssignment.work : ""}</div>
       </main>
     </div>
   );

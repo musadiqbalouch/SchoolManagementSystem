@@ -7,11 +7,12 @@ const AttendanceModal = ({
   setStudentData,
 }) => {
   const handleAttendane = (status) => {
+    const today = new Date().toLocaleDateString();
     let allStudent = [...currentPost];
     let index = allStudent.findIndex(
       (std) => std.studentId === attvalue.studentId
     );
-    allStudent[index].attendance = status;
+    allStudent[index].attendance.push({ date: today, status: status });
     localStorage.setItem("students", JSON.stringify(allStudent));
     setStudentData(allStudent);
   };
@@ -30,7 +31,7 @@ const AttendanceModal = ({
         <select
           className="w-3/4 p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           onChange={(e) => handleAttendane(e.target.value)}
-          defaultValue={"Absent"}
+          // defaultValue={"Absent"}
         >
           <option>Select</option>
           <option value="Present">Present</option>

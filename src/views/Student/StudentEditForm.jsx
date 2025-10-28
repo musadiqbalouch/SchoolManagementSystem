@@ -32,6 +32,10 @@ const StudentEditForm = ({
       editPassword: editItem.studentPassword,
       editNumber: editItem.studentNumber,
       teacherId: editItem.teacherId,
+      Editattendance: editItem.attendance.map((att) => ({
+        date: att.date,
+        status: att.status,
+      })),
     },
     validationSchema: teaherDataSchema,
     onSubmit: (value) => {
@@ -44,6 +48,7 @@ const StudentEditForm = ({
         studentPassword: value.editPassword,
         studentNumber: value.editNumber,
         teacherId: editItem.teacherId,
+        attendance: value.Editattendance,
       };
       // full data lo localStorage se
       let allStudents = JSON.parse(localStorage.getItem("students")) || [];
