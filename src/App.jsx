@@ -64,7 +64,7 @@ function App() {
                       element={<Student isLoggedIn={isLoggedIn} />}
                     />
                     <Route path="/billing" element={<Billing />} />
-                    <Route path="/setting" element={<Setting />} />
+                    <Route path="/assignment" element={<Setting />} />
                     <Route path="/exam" element={<Exam />} />
                     <Route path="/studentForm" element={<StudentForm />} />
                     <Route path="/teacherform" element={<TeacherForm />} />

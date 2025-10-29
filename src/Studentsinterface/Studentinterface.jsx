@@ -7,8 +7,6 @@ const Studentinterface = () => {
   let studentLoggedIn =
     JSON.parse(localStorage.getItem("loggedInStudent")) || [];
   let student = JSON.parse(localStorage.getItem("students")) || [];
-  let studentAsignment =
-    JSON.parse(localStorage.getItem("studentAsignment")) || [];
 
   let xxx = student.find(
     (std) => std.studentId === studentLoggedIn.registeredStudentId
@@ -21,17 +19,6 @@ const Studentinterface = () => {
   let presentCount = details.filter((status) => status === "Present").length;
   // calculating percentage
   let avg = Math.floor((presentCount / totalDays) * 100);
-
-  const matchedAssignment = studentAsignment.find((assi) =>
-    assi.data.some((dta) => dta.teacherId === studentLoggedIn.teacherid)
-  );
-
-  // agar mila to uska homework print karo
-  if (matchedAssignment) {
-    console.log("🚀 ~ Homework:", matchedAssignment.work);
-  } else {
-    console.log("No homework found for this student.");
-  }
 
   return (
     <div className=" bg-gray-50 font-sans">
@@ -163,7 +150,7 @@ const Studentinterface = () => {
             </ul>
           </div>
         </aside>
-        <div>{matchedAssignment ? matchedAssignment.work : ""}</div>
+        {/* <div>{matchedAssignment ? matchedAssignment.work : ""}</div> */}
       </main>
     </div>
   );

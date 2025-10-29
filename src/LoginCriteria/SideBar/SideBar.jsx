@@ -33,7 +33,7 @@ const SideBar = () => {
       title: "Billing",
     },
     {
-      path: "/setting",
+      path: "/assignment",
       image: <IoSettings />,
       title: "Assigment",
     },
