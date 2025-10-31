@@ -46,6 +46,8 @@ const StudentForm = () => {
         studentNumber: value.number,
         studentPassword: value.password,
         teacherId: teacher.id,
+        grade: "",
+        marks: "  ",
         attendance: [
           {
             date: null,

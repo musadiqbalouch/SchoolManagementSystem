@@ -9,6 +9,8 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
   const [validation, setValidation] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
+  const data = JSON.parse(localStorage.getItem("user")) || [];
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -135,7 +137,11 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
           <Button type={"submit"} />
           <Link
             to={"/createAccount"}
-            className="p-2 text-gray-500 cursor-pointer"
+            className={
+              data.name === "admin"
+                ? "hidden"
+                : "p-2 text-gray-500 cursor-pointer"
+            }
           >
             Create an account?{" "}
             <span className="text-blue-500 font-bold cursor-pointer ">

@@ -14,12 +14,6 @@ const SchoolAccount = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  //   const data = JSON.parse(localStorage.getItem("user")) || [];
-  //  console.log(Object.keys(data).length);
-  // const data = JSON.parse(localStorage.getItem("user")) || [];
-
-  // let same = data.filter((dta) => dta.email === "test@gmail.com");
-  // console.log("🚀 ~ SchoolAccount ~ same:", same);
 
   const navigate = useNavigate();
   const signupSchema = Yup.object().shape({

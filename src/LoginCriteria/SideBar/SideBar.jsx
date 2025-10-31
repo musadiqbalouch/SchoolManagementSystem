@@ -7,8 +7,8 @@ import {
   PiStudentBold,
   PiBankBold,
 } from "react-icons/pi";
-import { IoSettings } from "react-icons/io5";
 import { GiNewspaper } from "react-icons/gi";
+import { LuNotebookPen } from "react-icons/lu";
 
 const SideBar = () => {
   const udamyDashboard = [
@@ -34,7 +34,7 @@ const SideBar = () => {
     },
     {
       path: "/assignment",
-      image: <IoSettings />,
+      image: <LuNotebookPen />,
       title: "Assigment",
     },
     {
