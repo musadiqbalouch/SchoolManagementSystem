@@ -9,6 +9,7 @@ import {
 } from "react-icons/pi";
 import { GiNewspaper } from "react-icons/gi";
 import { LuNotebookPen } from "react-icons/lu";
+import { TfiAnnouncement } from "react-icons/tfi";
 
 const SideBar = () => {
   const udamyDashboard = [
@@ -28,11 +29,6 @@ const SideBar = () => {
       title: "Student/classes",
     },
     {
-      path: "/billing",
-      image: <PiBankBold />,
-      title: "Billing",
-    },
-    {
       path: "/assignment",
       image: <LuNotebookPen />,
       title: "Assigment",
@@ -41,6 +37,11 @@ const SideBar = () => {
       path: "/exam",
       image: <GiNewspaper />,
       title: "Exam",
+    },
+    {
+      path: "/announcement",
+      image: <TfiAnnouncement />,
+      title: "Announcement",
     },
   ];
   return (

@@ -8,7 +8,7 @@ import Exam from "./views/Exam";
 import Setting from "./views/Setting";
 import Student from "./views/Student/Index";
 import TeacherPage from "./views/Teacher";
-import Billing from "./views/Billing";
+import Announcement from "./views/Announcement/index";
 import StudentForm from "./views/Student/StudentForm";
 import LogintoAccount from "./LoginCriteria/LogintoAccount/LogintoAccount";
 import ChoosePassword from "./LoginCriteria/ChoosePassword/ChoosePassword";
@@ -63,7 +63,7 @@ function App() {
                       path="/student&classes"
                       element={<Student isLoggedIn={isLoggedIn} />}
                     />
-                    <Route path="/billing" element={<Billing />} />
+                    <Route path="//announcement" element={<Announcement />} />
                     <Route path="/assignment" element={<Setting />} />
                     <Route path="/exam" element={<Exam />} />
                     <Route path="/studentForm" element={<StudentForm />} />

@@ -7,13 +7,18 @@ const Studentinterface = () => {
   let studentLoggedIn =
     JSON.parse(localStorage.getItem("loggedInStudent")) || [];
   let student = JSON.parse(localStorage.getItem("students")) || [];
+  let teacher = JSON.parse(localStorage.getItem("teacher")) || [];
 
-  let xxx = student.find(
+  const xoxo = teacher.find((tch) => tch.id === studentLoggedIn.teacherid);
+  console.log("🚀 ~ Studentinterface ~ xoxo:", xoxo);
+
+  let loggedInStudent = student.find(
     (std) => std.studentId === studentLoggedIn.registeredStudentId
   );
+  console.log("🚀 ~ Studentinterface ~ loggedInStudent:", loggedInStudent);
 
   // const items = teacher.find((tch) => tch.id === xxx.teacherId);
-  let details = xxx.attendance.map((att) => att.status);
+  let details = loggedInStudent.attendance.map((att) => att.status);
 
   // filtering only present
   let presentCount = details.filter((status) => status === "Present").length;
@@ -46,7 +51,9 @@ const Studentinterface = () => {
               <p className="text-sm font-medium text-gray-700">
                 {studentLoggedIn.registeredStudentName}
               </p>
-              <p className="text-xs text-gray-500">{xxx.studentClass}</p>
+              <p className="text-xs text-gray-500">
+                {loggedInStudent.studentClass}
+              </p>
             </div>
           </div>
         </div>
@@ -64,7 +71,9 @@ const Studentinterface = () => {
             </div>
             <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
               <p className="text-white text-sm">Average Grade</p>
-              <h3 className="text-2xl font-semibold text-white">B+</h3>
+              <h3 className="text-2xl font-semibold text-white">
+                {loggedInStudent.grade}
+              </h3>
               <p className="text-xs text-white mt-1">Current term</p>
             </div>
             <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
@@ -73,9 +82,13 @@ const Studentinterface = () => {
               <p className="text-xs text-white mt-1">Due this week</p>
             </div>
             <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
-              <p className="text-white text-sm">Upcoming Exams</p>
-              <h3 className="text-2xl font-semibold text-white mt-1">1</h3>
-              <p className="text-xs text-white mt-1">Next Monday</p>
+              <p className="text-white text-sm">Obtain Marks</p>
+              <h3 className="text-2xl font-semibold text-white mt-1">
+                {loggedInStudent.marks}
+              </h3>
+              <p className="text-xs text-white mt-1">
+                In : {xoxo.teacherSubject}
+              </p>
             </div>
           </div>
 
@@ -101,27 +114,9 @@ const Studentinterface = () => {
               <tbody className="text-sm text-gray-700">
                 <tr className="border-t">
                   <td className="py-2">8:00 - 8:45</td>
-                  <td>Mathematics</td>
-                  <td>Mr. Ahmed</td>
+                  <td>{xoxo.teacherSubject}</td>
+                  <td>{xoxo.teacherName}</td>
                   <td>R-101</td>
-                </tr>
-                <tr className="border-t">
-                  <td className="py-2">8:50 - 9:35</td>
-                  <td>Physics</td>
-                  <td>Mrs. Noor</td>
-                  <td>R-102</td>
-                </tr>
-                <tr className="border-t">
-                  <td className="py-2">9:45 - 10:30</td>
-                  <td>English</td>
-                  <td>Ms. Iqra</td>
-                  <td>R-201</td>
-                </tr>
-                <tr className="border-t">
-                  <td className="py-2">10:45 - 11:30</td>
-                  <td>Computer</td>
-                  <td>Mr. Bilal</td>
-                  <td>Lab-1</td>
                 </tr>
               </tbody>
             </table>
