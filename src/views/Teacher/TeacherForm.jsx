@@ -3,9 +3,37 @@ import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import { IoMdEye } from "react-icons/io";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const Subject = [
+    "Mathematics",
+    "Science",
+    "English",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "History",
+    "Computer Science",
+  ];
+  // const [selectSubject, setSelectSubject] = useState([]);
+
+  const toggleSubject = (subject) => {
+    const selected = formik.values.selectSubject;
+    const updatedSubject = selected.includes(subject)
+      ? selected.filter((s) => s !== subject)
+      : [...selected, subject];
+
+    formik.setFieldValue("selectSubject", updatedSubject);
+  };
 
   const studentFormSchema = Yup.object().shape({
     designation: Yup.string()
@@ -24,8 +52,10 @@ const TeacherForm = () => {
       .required("password is required"),
     number: Yup.number().required("please enter a number"),
     gender: Yup.string().required("please select an option"),
-    className: Yup.string().required("please select an option"),
-    subject: Yup.string().required("please select an option"),
+    // className: Yup.string().required("please select an option"),
+    selectSubject: Yup.array()
+      .required("please select a subject")
+      .min(5, "Select atleast five subject"),
   });
 
   const formik = useFormik({
@@ -36,8 +66,7 @@ const TeacherForm = () => {
       password: "",
       number: "",
       gender: "",
-      className: "",
-      subject: "",
+      selectSubject: [],
     },
     validationSchema: studentFormSchema,
     onSubmit: (value) => {
@@ -50,8 +79,7 @@ const TeacherForm = () => {
         teacherPassword: value.password,
         teacherNumber: value.number,
         teacherGender: value.gender,
-        teacherClassName: value.className,
-        teacherSubject: value.subject,
+        teacherSubjects: value.selectSubject,
       };
       data.push(teacher);
       localStorage.setItem("teacher", JSON.stringify(data));
@@ -133,10 +161,16 @@ const TeacherForm = () => {
         </div>
 
         <div>
-          <label className="font-semibold">Password</label>
+          <label className="font-semibold relative">Password</label>
+          <span>
+            <IoMdEye
+              onClick={togglePasswordVisibility}
+              className="absolute  h-4 laptop:mt-4 laptop:ml-42  laptop-lg:mt-4  laptop-lg:ml-57 desktop:mt-4 w-10 cursor-pointer text-gray-500"
+            />
+          </span>
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -156,7 +190,7 @@ const TeacherForm = () => {
           <label className="font-semibold">Phone Number</label>
           <input
             name="number"
-            type="number"
+            type="  "
             value={formik.values.number}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -189,51 +223,32 @@ const TeacherForm = () => {
             ""
           )}
         </div>
-
-        <div>
-          <label className="font-semibold">Class</label>
-          <select
-            name="className"
-            value={formik.values.className}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
-          >
-            <option value="">Select Class</option>
-            <option>9th</option>
-            <option>10th</option>
-            <option>First Year</option>
-            <option>Inter</option>
-          </select>
-          {formik.touched.className && formik.errors.className ? (
-            <p className=" text-red-400 font-medium">
-              {formik.errors.className}
+        <div className="laptop:col-span-3 laptop-lg:col-span-3 desktop:col-span-3">
+          <label className="font-semibold block mb-2">Select Subjects</label>
+          <div className="grid grid-cols-2 laptop:grid-cols-3 laptop-lg:grid-cols-4 desktop:grid-cols-4 gap-3">
+            {Subject.map((sub, index) => {
+              const isSelected = formik.values.selectSubject.includes(sub);
+              return (
+                <div
+                  key={index}
+                  onClick={() => toggleSubject(sub)}
+                  onBlur={formik.handleBlur}
+                  className={`cursor-pointer border rounded-lg text-center py-2 px-3 font-medium transition-all duration-200 ${
+                    isSelected
+                      ? "bg-blue-500 text-white border-blue-600 shadow-md scale-105"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300"
+                  }`}
+                >
+                  {sub}
+                </div>
+              );
+            })}
+          </div>
+          {formik.touched.selectSubject && formik.errors.selectSubject ? (
+            <p className="text-red-400 font-medium mt-2">
+              {formik.errors.selectSubject}
             </p>
-          ) : (
-            ""
-          )}
-        </div>
-
-        <div>
-          <label className="font-semibold">Subject</label>
-          <select
-            name="subject"
-            value={formik.values.subject}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
-          >
-            <option value="">Select Subject</option>
-            <option>Science</option>
-            <option>Physics</option>
-            <option>English</option>
-            <option>Math</option>
-          </select>
-          {formik.touched.subject && formik.errors.subject ? (
-            <p className=" text-red-400 font-medium">{formik.errors.subject}</p>
-          ) : (
-            ""
-          )}
+          ) : null}
         </div>
 
         {/* add teacher */}
@@ -248,7 +263,7 @@ const TeacherForm = () => {
           <button
             // disabled={validatation}
             type="submit"
-            className="px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
+            className="cursor-pointer px-8 py-2 rounded-md font-semibold text-black bg-gray-300 border border-gray-400 hover:bg-gray-400"
           >
             Add Teacher
           </button>

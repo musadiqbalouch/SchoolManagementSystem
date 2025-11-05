@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 const StudentAnnouncementPortal = () => {
   const SchoolAnnouncement = JSON.parse(
-    localStorage.getItem("schoolAnnouncement") || "[]"
+    localStorage.getItem("schoolAnnouncement") || []
   );
 
   return (
-    <div className="w-full flex flex-col items-center min-h-screen bg-gray-50 py-6">
+    <div className="w-full flex flex-col items-center  bg-gray-50 py-6">
       <h1 className="text-3xl font-bold text-[#1B2A55] mb-4">
-        School Announcements From Admin
+        {SchoolAnnouncement.length < 0
+          ? "Not"
+          : " School Announcements From Admin"}
       </h1>
 
       {SchoolAnnouncement.map((announcement, index) => (

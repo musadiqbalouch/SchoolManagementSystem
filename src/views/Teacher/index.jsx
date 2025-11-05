@@ -9,6 +9,7 @@ import AddUserOption from "../../Common/AddUserOption/AddUserOption";
 import Paginatation from "../../Common/Paginatation/Paginatation";
 
 const TeacherPage = () => {
+  const [search, setSearch] = useState("");
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("teacher")) || []
   );
@@ -30,7 +31,6 @@ const TeacherPage = () => {
     currentPost = "";
   }
 
-  const [search, setSearch] = useState("");
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
     setData(items);

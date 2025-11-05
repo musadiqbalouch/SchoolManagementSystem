@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { IoMdEye } from "react-icons/io";
 
 const TeacherEditform = ({
   editItem,
@@ -9,6 +10,11 @@ const TeacherEditform = ({
   settTeacherData,
   setShowModal,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const tacherFormSchema = Yup.object().shape({
     editDesignation: Yup.string()
       .min(4, "name must be 4 character")
@@ -139,12 +145,18 @@ const TeacherEditform = ({
 
             <div>
               <label className="font-semibold">Password</label>
+              <span>
+                <IoMdEye
+                  onClick={togglePasswordVisibility}
+                  className="absolute  h-4 laptop:mt-4 laptop:ml-23   laptop-lg:mt-5  laptop-lg:ml-40 desktop:mt-4 w-10 cursor-pointer text-gray-500"
+                />
+              </span>
               <input
                 name="editPassword"
                 value={formik.values.editPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
               />
               {formik.touched.editPassword && formik.errors.editPassword ? (

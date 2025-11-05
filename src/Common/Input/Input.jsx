@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { IoMdEye } from "react-icons/io";
 
 const Input = ({
@@ -11,9 +11,9 @@ const Input = ({
   togglePasswordVisibility,
 }) => {
   return (
-    <div className=" relative ">
+    <div className="relative">
       <input
-        className="border-3 px-5 py-2  font-medium border-gray-200 rounded-md w-full "
+        className="border-3 px-5 py-2 font-medium border-gray-200 rounded-md w-full"
         type={type}
         placeholder={placeholder}
         value={value}
@@ -21,13 +21,14 @@ const Input = ({
         name={name}
         onBlur={onBlur}
       />
-      {name === "Checkpassword" ||
-        (name === "schoolPassword" && (
-          <IoMdEye
-            onClick={togglePasswordVisibility}
-            className="absolute right-3 bottom-3 cursor-pointer text-gray-500"
-          />
-        ))}
+
+      {/* ✅ eye icon condition sahi likhi hai */}
+      {(name === "schoolPassword" || name === "checkPassword") && (
+        <IoMdEye
+          onClick={togglePasswordVisibility}
+          className="absolute right-3 bottom-3 cursor-pointer text-gray-500"
+        />
+      )}
     </div>
   );
 };

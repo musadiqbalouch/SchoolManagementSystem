@@ -1,45 +1,37 @@
 import React, { useEffect, useState } from "react";
-import AddUserOption from "../../Common/AddUserOption/AddUserOption";
-import SearchBar from "../../Common/SearchBar/SearchBar";
 import LoginHeading from "../../Common/LoginHeading/LoginHeading";
 import SupportBtn from "../../Common/SupportBtn/SupportBtn";
-import NoNotification from "../../assets/nonotification.png";
+import AddUserOption from "../../Common/AddUserOption/AddUserOption";
+import SearchBar from "../../Common/SearchBar/SearchBar";
 import { Link } from "react-router-dom";
 import StudentData from "./StudentData";
 import Paginatation from "../../Common/Paginatation/Paginatation";
-const Student = ({ isLoggedIn }) => {
-  // filteringdata state
+import NoNotification from "../../assets/nonotification.png";
+
+const Student = () => {
   const [search, setSearch] = useState("");
   let [data, setData] = useState(
     JSON.parse(localStorage.getItem("students")) || []
   );
-  // for teahers
-  let teacher = JSON.parse(localStorage.getItem("loggedInUser")) || [];
-
-  // when student is loggedin
-  const loggedInStuent = JSON.parse(localStorage.getItem("loggedInStudent"));
-
-  let fillteredData = [];
-
-  if (teacher && teacher.userName === "admin") {
-    fillteredData = data;
-  } else {
-    fillteredData = data.filter((post) => post.teacherId === teacher.id);
-  }
 
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage, setDataPerPage] = useState(5);
 
   const lastPostIndex = currentPage * dataPerPage;
   const firstPostIndex = lastPostIndex - dataPerPage;
-  const currentPost = fillteredData.slice(firstPostIndex, lastPostIndex);
+  let currentPost = [];
 
-  useEffect(() => {
-    const totalPages = Math.ceil(fillteredData.length / dataPerPage);
-    if (currentPage > totalPages && totalPages > 0) {
-      setCurrentPage(1);
-    }
-  }, [fillteredData.length, dataPerPage, currentPage]);
+  const loggedInStuent = JSON.parse(localStorage.getItem("loggedInStudent"));
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (loggedInStuent) {
+    currentPost = "";
+  } else if (loggedInUser.userName === "admin") {
+    currentPost = data.slice(firstPostIndex, lastPostIndex);
+  } else {
+    currentPost = "";
+  }
+
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("students")) || [];
     setData(items);
@@ -47,7 +39,7 @@ const Student = ({ isLoggedIn }) => {
 
   return (
     <div className=" container m-auto relative flex flex-col items-center justify-center w-full ">
-      {!loggedInStuent && (
+      {!loggedInStuent && loggedInUser.userName === "admin" ? (
         <Link to={"/studentForm"}>
           <AddUserOption
             StudentData={data}
@@ -55,11 +47,15 @@ const Student = ({ isLoggedIn }) => {
             addUser={"Add Students"}
           />
         </Link>
+      ) : (
+        ""
       )}
+
       <SearchBar
         setSearch={setSearch}
         placeholder={"Search for a student by name or email"}
       />
+
       {currentPost.length === 0 ? (
         <div
           className="bg-[#FCFAFA]  laptop:mr-0 laptop:m-3 mr-25 h-85 laptop:h-75 
@@ -86,20 +82,16 @@ const Student = ({ isLoggedIn }) => {
           <StudentData
             search={search}
             currentPost={currentPost}
-            studentData={fillteredData}
+            studentData={data}
             setStudentData={setData}
             firstPostIndex={firstPostIndex}
           />
-          {fillteredData.length > 5 ? (
-            <Paginatation
-              totalPages={fillteredData.length}
-              postPerPage={dataPerPage}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-            />
-          ) : (
-            ""
-          )}
+          <Paginatation
+            totalPages={data.length}
+            postPerPage={dataPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </>
       )}
     </div>

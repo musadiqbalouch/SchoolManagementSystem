@@ -3,8 +3,15 @@ import { HiOutlinePlusCircle } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
+import { IoMdEye } from "react-icons/io";
 
 const StudentForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const teaherFormSchema = Yup.object().shape({
     name: Yup.string()
       .min(4, "name must be 4 character")
@@ -45,7 +52,6 @@ const StudentForm = () => {
         studentEmail: value.email,
         studentNumber: value.number,
         studentPassword: value.password,
-        teacherId: teacher.id,
         grade: "",
         marks: "  ",
         attendance: [
@@ -177,9 +183,15 @@ const StudentForm = () => {
 
         <label className="flex flex-col font-medium">
           Password
+          <span>
+            <IoMdEye
+              onClick={togglePasswordVisibility}
+              className="absolute  h-4 laptop:mt-4 laptop:ml-76  laptop-lg:mt-4  laptop-lg:ml-90 desktop:mt-4 w-10 cursor-pointer text-gray-500"
+            />
+          </span>
           <input
             name="password"
-            type="password"
+            type={showPassword ? "text " : "password"}
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

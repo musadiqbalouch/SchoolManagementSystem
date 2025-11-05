@@ -122,30 +122,6 @@ const Studentinterface = () => {
             </table>
           </div>
         </section>
-
-        {/* ===== Right: Notifications ===== */}
-        <aside className="w-full lg:w-1/3 flex flex-col gap-6">
-          <div className="bg-white p-5 rounded-2xl shadow-sm">
-            <h2 className="text-lg font-medium text-gray-800 mb-3">
-              Recent Notifications
-            </h2>
-            <ul className="space-y-3 text-sm text-gray-700">
-              <li className="border-b pb-2">
-                📢 Math quiz on Friday (Chapter 5)
-                <p className="text-xs text-gray-400">2 hours ago</p>
-              </li>
-              <li className="border-b pb-2">
-                📝 New assignment uploaded: History Project
-                <p className="text-xs text-gray-400">1 day ago</p>
-              </li>
-              <li>
-                🏫 Parent-Teacher Meeting on 20 Nov (Main Hall)
-                <p className="text-xs text-gray-400">3 days ago</p>
-              </li>
-            </ul>
-          </div>
-        </aside>
-        {/* <div>{matchedAssignment ? matchedAssignment.work : ""}</div> */}
       </main>
     </div>
   );

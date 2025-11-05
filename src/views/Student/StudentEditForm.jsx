@@ -1,5 +1,7 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { IoMdEye } from "react-icons/io";
+import { useState } from "react";
 
 const StudentEditForm = ({
   editItem,
@@ -7,6 +9,11 @@ const StudentEditForm = ({
   setStudentData,
   setShowModal,
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const teaherDataSchema = Yup.object().shape({
     editName: Yup.string()
       .min(4, "name must be 4 character")
@@ -31,7 +38,9 @@ const StudentEditForm = ({
       editEmail: editItem.studentEmail,
       editPassword: editItem.studentPassword,
       editNumber: editItem.studentNumber,
-      teacherId: editItem.teacherId,
+      // teacherId: editItem.teacherId,
+      editgrade: editItem.grade,
+      editmarks: editItem.marks,
       Editattendance: editItem.attendance.map((att) => ({
         date: att.date,
         status: att.status,
@@ -47,7 +56,9 @@ const StudentEditForm = ({
         studentEmail: value.editEmail,
         studentPassword: value.editPassword,
         studentNumber: value.editNumber,
-        teacherId: editItem.teacherId,
+        grade: value.editgrade,
+        marks: value.editmarks,
+        // teacherId: editItem.teacherId,
         attendance: value.Editattendance,
       };
       // full data lo localStorage se
@@ -186,12 +197,18 @@ const StudentEditForm = ({
 
           <label className="flex flex-col font-medium">
             Password
+            <span>
+              <IoMdEye
+                onClick={togglePasswordVisibility}
+                className="absolute  h-4 laptop:mt-4 laptop:ml-40  laptop-lg:mt-4  laptop-lg:ml-66 desktop:mt-4 w-10 cursor-pointer text-gray-500"
+              />
+            </span>
             <input
               name="editPassword"
               value={formik.values.editPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              type="password"
+              type={showPassword ? "text" : "password"}
               className="border border-gray-400 rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-gray-500"
               placeholder=""
             />
