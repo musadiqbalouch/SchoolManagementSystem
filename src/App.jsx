@@ -19,6 +19,7 @@ import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
 import TeachersData from "./views/Teacher/TeachersData";
 import StudentData from "./views/Student/StudentData";
 import Studentinterface from "./Studentsinterface/Studentinterface";
+import TeacherSubjectList from "./Studentsinterface/TeacherSubjectList";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -58,10 +59,17 @@ function App() {
                         loggedInUser ? <Dashbaord /> : <Studentinterface />
                       }
                     />
-                    <Route path="/teacher" element={<TeacherPage />} />
+                    <Route
+                      path="/teacher"
+                      element={
+                        loggedInUser ? <TeacherPage /> : <TeacherSubjectList />
+                      }
+                    />
                     <Route
                       path="/student&classes"
-                      element={<Student isLoggedIn={isLoggedIn} />}
+                      element={
+                        loggedInUser ? <Student isLoggedIn={isLoggedIn} /> : ""
+                      }
                     />
                     <Route path="//announcement" element={<Announcement />} />
                     <Route path="/assignment" element={<Setting />} />

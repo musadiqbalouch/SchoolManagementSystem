@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ImCross } from "react-icons/im";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
@@ -10,30 +9,49 @@ const TeacherEditform = ({
   settTeacherData,
   setShowModal,
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const Subject = [
+    "Mathematics",
+    "Science",
+    "English",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "History",
+    "Computer Science",
+  ];
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const toggleSubject = (subject) => {
+    const selected = formik.values.editteacherSubjects;
+    const updatedSubject = selected.includes(subject)
+      ? selected.filter((s) => s !== subject)
+      : [...selected, subject];
+    formik.setFieldValue("editteacherSubjects", updatedSubject);
   };
+
   const tacherFormSchema = Yup.object().shape({
     editDesignation: Yup.string()
-      .min(4, "name must be 4 character")
-      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
-      .required("name  is required"),
+      .min(4, "Minimum 4 characters required")
+      .matches(/^[A-Za-z\s]+$/, "Invalid designation name")
+      .required("Designation is required"),
     editName: Yup.string()
-      .min(4, "name must be 4 character")
-      .matches(/^[A-Za-z\s]+$/, "Invalid user name")
-      .required("name  is required"),
+      .min(4, "Minimum 4 characters required")
+      .matches(/^[A-Za-z\s]+$/, "Invalid name format")
+      .required("Name is required"),
     editEmail: Yup.string()
-      .email("invalid email format")
-      .required("email is required"),
+      .email("Invalid email format")
+      .required("Email is required"),
     editPassword: Yup.string()
-      .min(8, "password must be atleast 8 charaters")
-      .required("password is required"),
-    editNumber: Yup.number().required("please enter a number"),
-    editGender: Yup.string().required("please select an option"),
-    editClass: Yup.string().required("please select an option"),
-    editSubject: Yup.string().required("please select an option"),
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+    editNumber: Yup.number().required("Number is required"),
+    editGender: Yup.string().required("Please select gender"),
+    editteacherSubjects: Yup.array()
+      .required("Please select subjects")
+      .max(5, "Maximum 5 subjects can be selected")
+      .min(3, "Select at least 3 subjects"),
   });
 
   const formik = useFormik({
@@ -44,234 +62,207 @@ const TeacherEditform = ({
       editPassword: editItem.teacherPassword,
       editNumber: editItem.teacherNumber,
       editGender: editItem.teacherGender,
-      editClass: editItem.teacherClassName,
-      editSubject: editItem.teacherSubject,
+      editteacherSubjects: editItem.teacherSubjects,
     },
     validationSchema: tacherFormSchema,
-    onSubmit: (value) => {
-      const editData = {
+    onSubmit: (values) => {
+      const updatedTeacher = {
         id: editItem.id,
-        teacherDesignation: value.editDesignation,
-        teacherName: value.editName,
-        teacherEmail: value.editEmail,
-        teacherPassword: value.editPassword,
-        teacherNumber: value.editNumber,
-        teacherGender: value.editGender,
-        teacherClassName: value.editClass,
-        teacherSubject: value.editSubject,
+        teacherDesignation: values.editDesignation,
+        teacherName: values.editName,
+        teacherEmail: values.editEmail,
+        teacherPassword: values.editPassword,
+        teacherNumber: values.editNumber,
+        teacherGender: values.editGender,
+        teacherSubjects: values.editteacherSubjects,
       };
-      const updateTeacher = teacherData.map((teacher) =>
-        teacher.id === editData.id ? editData : teacher
+
+      const updateTeacherList = teacherData.map((teacher) =>
+        teacher.id === updatedTeacher.id ? updatedTeacher : teacher
       );
-      localStorage.setItem("teacher", JSON.stringify(updateTeacher));
-      settTeacherData(updateTeacher);
+      localStorage.setItem("teacher", JSON.stringify(updateTeacherList));
+      settTeacherData(updateTeacherList);
       setShowModal(false);
     },
   });
 
   return (
-    <div>
-      <div className="relative z-10 laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
-        <div className="bg-white border border-gray-400 rounded-xl shadow-md laptop:mx-10 laptop:p-3 laptop-lg:px-10 laptop-lg:m-auto laptop-lg:mt-10 laptop-lg:py-5 mx-auto mt-10 max-w-4xl desktop:m-auto desktop:mt-10 ease-in duration-300 ">
-          <div className="text-gray-700 mb-6">
-            <h1 className="text-2xl font-bold mb-2">Add Teacher</h1>
-            <div className="flex gap-6 font-medium text-gray-500">
-              <h2 className="cursor-pointer hover:text-gray-700">Manually</h2>
-              <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
-            </div>
+    <div className="relative z-10 laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
+      <div className="bg-white border border-gray-400 rounded-xl shadow-md mx-auto mt-10 max-w-4xl laptop:p-4 laptop-lg:p-6 ease-in duration-300">
+        <div className="text-gray-700 mb-6">
+          <h1 className="text-2xl font-bold mb-2">Edit Teacher</h1>
+          <div className="flex gap-6 font-medium text-gray-500">
+            <h2 className="cursor-pointer hover:text-gray-700">Manually</h2>
+            <h2 className="cursor-pointer hover:text-gray-700">Import CSV</h2>
           </div>
+        </div>
 
-          <form
-            onSubmit={formik.handleSubmit}
-            className="grid grid-cols-1 laptop:grid-cols-3 laptop-lg:grid-cols-3 desktop:grid-cols-3 gap-4 text-gray-700"
-          >
-            <div>
-              <label className="font-semibold">Designation</label>
-              <input
-                name="editDesignation"
-                value={formik.values.editDesignation}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                type="text"
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-              />
-              {formik.touched.editDesignation &&
-              formik.errors.editDesignation ? (
-                <p className=" text-red-400 font-medium">
+        <form
+          onSubmit={formik.handleSubmit}
+          className="grid grid-cols-1 laptop:grid-cols-3 gap-5 text-gray-700"
+        >
+          {/* Designation */}
+          <div>
+            <label className="font-semibold">Designation</label>
+            <input
+              name="editDesignation"
+              value={formik.values.editDesignation}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text"
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            />
+            {formik.touched.editDesignation &&
+              formik.errors.editDesignation && (
+                <p className="text-red-400 font-medium text-sm mt-1">
                   {formik.errors.editDesignation}
                 </p>
-              ) : (
-                ""
               )}
-            </div>
+          </div>
 
-            <div>
-              <label className="font-semibold">Name</label>
-              <input
-                name="editName"
-                value={formik.values.editName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                type="text"
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
-              />
-              {formik.touched.editName && formik.errors.editName ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editName}
+          {/* Name */}
+          <div>
+            <label className="font-semibold">Name</label>
+            <input
+              name="editName"
+              value={formik.values.editName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="text"
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            />
+            {formik.touched.editName && formik.errors.editName && (
+              <p className="text-red-400 font-medium text-sm mt-1">
+                {formik.errors.editName}
+              </p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="font-semibold">Email</label>
+            <input
+              name="editEmail"
+              value={formik.values.editEmail}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="email"
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            />
+            {formik.touched.editEmail && formik.errors.editEmail && (
+              <p className="text-red-400 font-medium text-sm mt-1">
+                {formik.errors.editEmail}
+              </p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="relative">
+            <label className="font-semibold">Password</label>
+            <IoMdEye
+              onClick={togglePasswordVisibility}
+              className="absolute right-3 top-9 w-5 h-5 text-gray-500 cursor-pointer"
+            />
+            <input
+              name="editPassword"
+              value={formik.values.editPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type={showPassword ? "text" : "password"}
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            />
+            {formik.touched.editPassword && formik.errors.editPassword && (
+              <p className="text-red-400 font-medium text-sm mt-1">
+                {formik.errors.editPassword}
+              </p>
+            )}
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="font-semibold">Phone Number</label>
+            <input
+              name="editNumber"
+              value={formik.values.editNumber}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="number"
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            />
+            {formik.touched.editNumber && formik.errors.editNumber && (
+              <p className="text-red-400 font-medium text-sm mt-1">
+                {formik.errors.editNumber}
+              </p>
+            )}
+          </div>
+
+          {/* Gender */}
+          <div>
+            <label className="font-semibold">Gender</label>
+            <select
+              name="editGender"
+              value={formik.values.editGender}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:ring-2 focus:ring-gray-400 focus:outline-none"
+            >
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+            {formik.touched.editGender && formik.errors.editGender && (
+              <p className="text-red-400 font-medium text-sm mt-1">
+                {formik.errors.editGender}
+              </p>
+            )}
+          </div>
+
+          {/* Subjects */}
+          <div className="laptop:col-span-3 mt-3">
+            <label className="font-semibold block mb-2">Select Subjects</label>
+            <div className="flex flex-wrap gap-3">
+              {Subject.map((sub, index) => {
+                const isSelected =
+                  formik.values.editteacherSubjects.includes(sub);
+                return (
+                  <div
+                    key={index}
+                    onClick={() => toggleSubject(sub)}
+                    className={`cursor-pointer border rounded-lg text-center py-2 px-4 font-medium transition-all duration-200 ${
+                      isSelected
+                        ? "bg-blue-500 text-white border-blue-600 shadow-md scale-105"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-300"
+                    }`}
+                  >
+                    {sub}
+                  </div>
+                );
+              })}
+            </div>
+            {formik.touched.editteacherSubjects &&
+              formik.errors.editteacherSubjects && (
+                <p className="text-red-400 font-medium text-sm mt-2">
+                  {formik.errors.editteacherSubjects}
                 </p>
-              ) : (
-                ""
               )}
-            </div>
+          </div>
 
-            <div>
-              <label className="font-semibold">Email</label>
-              <input
-                name="editEmail"
-                value={formik.values.editEmail}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                type="email"
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
-              />
-              {formik.touched.editEmail && formik.errors.editEmail ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editEmail}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
-              <label className="font-semibold">Password</label>
-              <span>
-                <IoMdEye
-                  onClick={togglePasswordVisibility}
-                  className="absolute  h-4 laptop:mt-4 laptop:ml-23   laptop-lg:mt-5  laptop-lg:ml-40 desktop:mt-4 w-10 cursor-pointer text-gray-500"
-                />
-              </span>
-              <input
-                name="editPassword"
-                value={formik.values.editPassword}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                type={showPassword ? "text" : "password"}
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2     focus:ring-gray-400"
-              />
-              {formik.touched.editPassword && formik.errors.editPassword ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editPassword}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
-              <label className="font-semibold">Phone Number</label>
-              <input
-                name="editNumber"
-                value={formik.values.editNumber}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                type="number"
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
-              />
-              {formik.touched.editNumber && formik.errors.editNumber ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editNumber}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
-              <label className="font-semibold">Gender</label>
-              <select
-                name="editGender"
-                value={formik.values.editGender}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2  focus:ring-gray-400"
-              >
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-              {formik.touched.editGender && formik.errors.editGender ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editGender}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
-              <label className="font-semibold">Class</label>
-              <select
-                name="editClass"
-                value={formik.values.editClass}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
-              >
-                <option>9th</option>
-                <option>10th</option>
-                <option>First Year</option>
-                <option>Inter</option>
-              </select>
-              {formik.touched.editClass && formik.errors.editClass ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editClass}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            <div>
-              <label className="font-semibold">Subject</label>
-              <select
-                name="editSubject"
-                value={formik.values.editSubject}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                className="w-full mt-1 border border-gray-400 rounded-md px-3 py-2 focus:outline-none "
-              >
-                <option>Science</option>
-                <option>Physics</option>
-                <option>English</option>
-                <option>Math</option>
-              </select>
-              {formik.touched.editSubject && formik.errors.editSubject ? (
-                <p className=" text-red-400 font-medium">
-                  {formik.errors.editSubject}
-                </p>
-              ) : (
-                ""
-              )}
-            </div>
-
-            {/* submit edit form and cancel edit form */}
-            <div className="laptop:col-span-3 flex justify-between items-center mt-6">
-              <button
-                onClick={() => setShowModal(false)}
-                type="button"
-                className="cursor-pointer px-5 py-2  text-white bg-gray-700 hover:bg-gray-800 rounded-lg  transition-colors text-sm font-medium"
-              >
-                Close
-              </button>
-              <button
-                type="submit"
-                className=" cursor-pointer px-8 py-2 rounded-md font-semibold text-white  border border-gray-400  bg-blue-600 hover:bg-blue-700"
-              >
-                Save Edit
-              </button>
-            </div>
-          </form>
-        </div>
+          {/* Buttons */}
+          <div className="laptop:col-span-3 flex justify-between items-center mt-6">
+            <button
+              onClick={() => setShowModal(false)}
+              type="button"
+              className="px-6 py-2 text-white bg-gray-700 hover:bg-gray-800 rounded-lg transition-all text-sm font-medium"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              className="px-8 py-2 rounded-md font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all"
+            >
+              Save Edit
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

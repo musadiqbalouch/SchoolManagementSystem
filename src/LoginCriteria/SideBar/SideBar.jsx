@@ -12,6 +12,7 @@ import { LuNotebookPen } from "react-icons/lu";
 import { TfiAnnouncement } from "react-icons/tfi";
 
 const SideBar = () => {
+  const loggedInStudent = JSON.parse(localStorage.getItem("loggedInStudent"));
   const udamyDashboard = [
     {
       path: "/",
@@ -61,13 +62,17 @@ const SideBar = () => {
           <NavLink
             to={board.path}
             key={index}
-            className={({ isActive }) =>
-              isActive
-                ? "flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-1 ease-in duration-300 rounded-lg w-45 laptop-lg:w45  bg-[#509CDB] cursor-pointer desktop:w-45 desktop:text-lg "
-                : " flex flex-row gap-2 m-auto items-center justify-start text-sm desktop:text-lg px-3 py-3 w-45 laptop-lg:w45  bgred-400 cursor-pointer  "
-            }
+            className={({ isActive }) => {
+              if (loggedInStudent && index === 2) {
+                return "hidden";
+              }
+
+              return isActive
+                ? "flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-1 ease-in duration-300 rounded-lg w-45 laptop-lg:w45 bg-[#509CDB] cursor-pointer desktop:w-45 desktop:text-lg"
+                : "flex flex-row gap-2 m-auto items-center justify-start text-sm desktop:text-lg px-3 py-3 w-45 laptop-lg:w45 cursor-pointer";
+            }}
           >
-            <span className="object-cover h-6 w-6 text-white mt-2  desktop:h-8 desktop:w-8 desktop:mt-3">
+            <span className="object-cover h-6 w-6 text-white mt-2 desktop:h-8 desktop:w-8 desktop:mt-3">
               {board.image}
             </span>
             <h3 className="text-white font-medium ">{board.title}</h3>

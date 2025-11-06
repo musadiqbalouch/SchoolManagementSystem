@@ -38,12 +38,10 @@ const TeacherDetail = ({ setTeacherDetail, editItem }) => {
           <h4 className="font-medium text-base">{editItem.teacherNumber}</h4>
         </div>
         <div>
-          <p className="text-gray-500 text-sm">Class</p>
-          <h4 className="font-medium text-base">{editItem.teacherClassName}</h4>
-        </div>
-        <div>
-          <p className="text-gray-500 text-sm">Subject</p>
-          <h4 className="font-medium text-base">{editItem.teacherSubject}</h4>
+          <p className="text-gray-500 text-sm">Subject Assigned</p>
+          {editItem.teacherSubjects.map((sub) => (
+            <h4 className="font-medium text-base">{sub}</h4>
+          ))}
         </div>
       </div>
 

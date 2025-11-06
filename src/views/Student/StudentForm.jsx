@@ -53,7 +53,7 @@ const StudentForm = () => {
         studentNumber: value.number,
         studentPassword: value.password,
         grade: "",
-        marks: "  ",
+        marks: "",
         attendance: [
           {
             date: null,

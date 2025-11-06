@@ -9,8 +9,8 @@ const Studentinterface = () => {
   let student = JSON.parse(localStorage.getItem("students")) || [];
   let teacher = JSON.parse(localStorage.getItem("teacher")) || [];
 
-  const xoxo = teacher.find((tch) => tch.id === studentLoggedIn.teacherid);
-  console.log("🚀 ~ Studentinterface ~ xoxo:", xoxo);
+  // const xoxo = teacher.find((tch) => tch.id === studentLoggedIn.teacherid);
+  // console.log("🚀 ~ Studentinterface ~ xoxo:", xoxo);
 
   let loggedInStudent = student.find(
     (std) => std.studentId === studentLoggedIn.registeredStudentId
@@ -86,9 +86,9 @@ const Studentinterface = () => {
               <h3 className="text-2xl font-semibold text-white mt-1">
                 {loggedInStudent.marks}
               </h3>
-              <p className="text-xs text-white mt-1">
+              {/* <p className="text-xs text-white mt-1">
                 In : {xoxo.teacherSubject}
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -114,8 +114,8 @@ const Studentinterface = () => {
               <tbody className="text-sm text-gray-700">
                 <tr className="border-t">
                   <td className="py-2">8:00 - 8:45</td>
-                  <td>{xoxo.teacherSubject}</td>
-                  <td>{xoxo.teacherName}</td>
+                  {/* <td>{xoxo.teacherSubject}</td> */}
+                  {/* <td>{xoxo.teacherName}</td> */}
                   <td>R-101</td>
                 </tr>
               </tbody>

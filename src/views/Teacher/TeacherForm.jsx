@@ -55,7 +55,8 @@ const TeacherForm = () => {
     // className: Yup.string().required("please select an option"),
     selectSubject: Yup.array()
       .required("please select a subject")
-      .min(5, "Select atleast five subject"),
+      .max(5, "maximum 5 subjects can be selected")
+      .min(3, "Select atleast three subject"),
   });
 
   const formik = useFormik({
