@@ -20,6 +20,7 @@ import TeachersData from "./views/Teacher/TeachersData";
 import StudentData from "./views/Student/StudentData";
 import Studentinterface from "./Studentsinterface/Studentinterface";
 import TeacherSubjectList from "./Studentsinterface/TeacherSubjectList";
+import RegisteredStudents from "./views/RegisteredStudents/RegisteredStudents";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -68,7 +69,11 @@ function App() {
                     <Route
                       path="/student&classes"
                       element={
-                        loggedInUser ? <Student isLoggedIn={isLoggedIn} /> : ""
+                        loggedInUser && loggedInUser.userName === "admin" ? (
+                          <Student isLoggedIn={isLoggedIn} />
+                        ) : (
+                          <RegisteredStudents />
+                        )
                       }
                     />
                     <Route path="//announcement" element={<Announcement />} />

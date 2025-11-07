@@ -13,6 +13,9 @@ import { TfiAnnouncement } from "react-icons/tfi";
 
 const SideBar = () => {
   const loggedInStudent = JSON.parse(localStorage.getItem("loggedInStudent"));
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  // console.log("🚀 ~ SideBar ~ loggedInUser:", loggedInUser);
+
   const udamyDashboard = [
     {
       path: "/",
@@ -27,7 +30,7 @@ const SideBar = () => {
     {
       path: "/student&classes",
       image: <PiStudentBold />,
-      title: "Student/classes",
+      title: "Student",
     },
     {
       path: "/assignment",
@@ -45,6 +48,13 @@ const SideBar = () => {
       title: "Announcement",
     },
   ];
+  // const updateTitle = udamyDashboard.map((item, index) => {
+  //   if (loggedInUser && loggedInUser.userName === "admin") {
+  //     index[2].title === "students";
+  //   } else {
+  //     index[2].title === "registred STUDENT";
+  //   }
+  // });
   return (
     <div className="bg-[#152259] h-screen  flex flex-col px-8 py2 laptop:w-55 laptop-lg:w-65  laptop:px-5  desktop:w-70  ">
       <div className="flex flex-col m-auto items-center justify-center p-5">
@@ -64,6 +74,13 @@ const SideBar = () => {
             key={index}
             className={({ isActive }) => {
               if (loggedInStudent && index === 2) {
+                return "hidden";
+              }
+              if (
+                !loggedInStudent &&
+                loggedInUser?.userName !== "admin" &&
+                index === 1
+              ) {
                 return "hidden";
               }
 
