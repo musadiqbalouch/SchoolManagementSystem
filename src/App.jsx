@@ -19,8 +19,9 @@ import SchoolAccount from "./LoginCriteria/SchoolAccount/SchoolAccount";
 import TeachersData from "./views/Teacher/TeachersData";
 import StudentData from "./views/Student/StudentData";
 import Studentinterface from "./Studentsinterface/Studentinterface";
-import TeacherSubjectList from "./Studentsinterface/TeacherSubjectList";
-import RegisteredStudents from "./views/RegisteredStudents/RegisteredStudents";
+import TeacherSubjectList from "./Studentsinterface/RegisterSubjects";
+// import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
+import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(

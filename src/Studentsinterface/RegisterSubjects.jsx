@@ -1,8 +1,15 @@
 import React, { useState } from "react";
+// import RegisteredStudents from "../views/TeacherStudents/RegisteredStudents";
+import StudentSubject from "./StudentSubject";
+import Modal from "../Common/Modal/Modal";
+import RegistrationLimitModal from "./RegistrationLimitModal";
 
-const TeacherSubjectList = () => {
+const RegisterSubjects = () => {
   const teacher = JSON.parse(localStorage.getItem("teacher")) || [];
+  console.log("🚀 ~ RegisterSubjects ~ teacher:", teacher);
   const loggedInStudent = JSON.parse(localStorage.getItem("loggedInStudent"));
+
+  const [showModal, setShowModal] = useState(false);
 
   const [selectedTeacherId, setSelectedTeacherId] = useState("");
   const [selectSubject, setSelectSubject] = useState([]);
@@ -31,20 +38,47 @@ const TeacherSubjectList = () => {
       subjects: selectSubject,
     };
 
-    // Dekho pehle se ye student exist karta hai ya nahi
-    const sameStudent = allStudents.find(
-      (s) => s.studentid === newStudent.studentid
+    for (let subject of newStudent.subjects) {
+      const registeForThisSubject = allStudents.filter(
+        (sub) =>
+          sub.teacherid === newStudent.teacherid &&
+          sub.subjects.includes(subject)
+      );
+      if (registeForThisSubject.length >= 2) {
+        setShowModal(true);
+        // setTimeout(() => {
+        //   setShowModal(false);
+        // }, 1000);
+        return;
+      }
+    }
+
+    // all subjects of this student
+    let totalSubjects = 0;
+    for (let s of allStudents) {
+      if (s.studentid === newStudent.studentid) {
+        totalSubjects += s.subjects.length;
+      }
+    }
+
+    // 2️⃣ Check total length
+    if (totalSubjects + newStudent.subjects.length > 5) {
+      alert("You can't register more than 5 subjects total!");
+      return;
+    }
+
+    //  Check if student already registered with this teacher
+    let sameStudent = allStudents.find(
+      (s) =>
+        s.studentid === newStudent.studentid &&
+        s.teacherid === newStudent.teacherid
     );
 
     if (sameStudent) {
       // if subect are alrady selected add new subjct for that students
       sameStudent.subjects = [...sameStudent.subjects, ...newStudent.subjects];
     } else {
-      // if not then add students for new student
       allStudents.push(newStudent);
-    }
-    if (newStudent.subjects.length > 5) {
-      alert("you can regsiter morw then 5 subjects");
     }
 
     localStorage.setItem("registredStudent", JSON.stringify(allStudents));
@@ -52,20 +86,17 @@ const TeacherSubjectList = () => {
     setSelectSubject([]);
     setSelectedTeacherId("");
   };
-  let allStudents = JSON.parse(localStorage.getItem("registredStudent")) || [];
+  // let allStudents = JSON.parse(localStorage.getItem("registredStudent")) || [];
+  // allStudents.forEach((tchid) => {
+  //   <div>{console.log(tch)}</div>;
+  // });
 
-  let registredSubjects = allStudents.find(
-    (std) =>
-      std.studentid === loggedInStudent.registeredStudentId &&
-      std.studentName === loggedInStudent.registeredStudentName
-  );
-  console.log("🚀 ~ registredStudent ~ registredSubjects:", registredSubjects);
   return (
-    <div className="flex flex-wrap gap-6 justify-center w-full items-center py-6">
+    <div className="flex flex-wrap gap-6 justify-center w-full items-center py-2">
       {teacher.map((tch, index) => (
         <div
           key={index}
-          className={`flex flex-col items-center justify-between border rounded-xl shadow-md p-5 transition-all duration-200 hover:shadow-lg w-[260px] laptop:w-[300px] ${
+          className={`flex flex-col items-center justify-between border rounded-xl shadow-md p-3 transition-all duration-200 hover:shadow-lg w-[260px] laptop:w-[300px] ${
             selectedTeacherId === tch.id
               ? "border-blue-500 bg-blue-50"
               : "border-gray-400 bg-white"
@@ -97,7 +128,7 @@ const TeacherSubjectList = () => {
           </div>
 
           <button
-            className="bg-[#509CDB] text-white px-4 py-1 rounded-md font-medium border border-gray-400 
+            className="bg-[#509CDB] text-white px-4 py-1 rounded-md font-medium border border-gray-400
                        hover:bg-[#3b8ac4] transition-all"
             onClick={registredStudent}
           >
@@ -105,16 +136,16 @@ const TeacherSubjectList = () => {
           </button>
         </div>
       ))}
-      <div className="flex flex-col w-full bg-red-300 items-center justify-center gap-2">
-        <h1 className="text-xl">Student Name </h1>
-        <h1 className="text-lg">{registredSubjects.studentName}</h1>
-        <h1 className="text-xl">Teacher Name </h1>
-        <h3 className="text-lg">{registredSubjects.teacherName}</h3>
-        <h3 className="text-xl">Subjects Register by You </h3>
-        <h3 className="text-lg">{registredSubjects.subjects}</h3>
-      </div>
+      <h2 className={`${showModal === true ? "visible" : "hidden"}`}>sjjs</h2>
+      {/* userSubjects which are registred */}
+      <StudentSubject />
+      {showModal && (
+        <Modal>
+          <RegistrationLimitModal setShowModal={setShowModal} />
+        </Modal>
+      )}
     </div>
   );
 };
 
-export default TeacherSubjectList;
+export default RegisterSubjects;

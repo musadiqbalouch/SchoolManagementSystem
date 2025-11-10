@@ -29,7 +29,7 @@ const RegisteredStudents = () => {
             <h1 className="text-gray-800 text-lg font-semibold mb-3 text-center">
               {student.studentName}
             </h1>
-
+            {/* <h1 className="text-6xl">ss</h1> */}
             <div className="flex flex-wrap justify-center gap-2">
               {student.subjects.map((subject, i) => (
                 <span
