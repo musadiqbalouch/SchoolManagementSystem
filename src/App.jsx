@@ -22,6 +22,7 @@ import Studentinterface from "./Studentsinterface/Studentinterface";
 import TeacherSubjectList from "./Studentsinterface/RegisterSubjects";
 // import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
 import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
+import ViewAssignments from "./views/Teacher/ViewAssignments";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -84,6 +85,10 @@ function App() {
                     <Route path="/teacherform" element={<TeacherForm />} />
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
+                    <Route
+                      path="/studentsAssignments"
+                      element={<ViewAssignments />}
+                    />
                     <Route path="*" element={<Dashbaord />} />
                   </>
                 ) : (

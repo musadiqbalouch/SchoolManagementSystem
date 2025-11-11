@@ -1,79 +1,105 @@
 // TeacherPanel.jsx
 import React, { useState } from "react";
+import Paginatation from "../../Common/Paginatation/Paginatation";
+import { Link } from "react-router-dom";
 
 const TeacherAsignAssignment = ({ loggedInTeacher }) => {
   const [assignment, setAssignment] = useState("");
+  const [subjectAssignment, setSubjectAssignment] = useState("");
 
-  const students = JSON.parse(localStorage.getItem("students")) || [];
+  const handleSubjctChange = (e) => {
+    setSubjectAssignment(e.target.value);
+  };
+
+  // const students = JSON.parse(localStorage.getItem("students")) || [];
   const submittedAssignments =
     JSON.parse(localStorage.getItem("submittedAssighment")) || [];
 
+  // filtering student for teacher
+  const RegistredStudent =
+    JSON.parse(localStorage.getItem("registredStudent")) || [];
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser")) || [];
+
+  const sss = RegistredStudent.filter(
+    (std) =>
+      std.teacherid === loggedInUser.id &&
+      std.teacherName === loggedInUser.userName
+  );
+  // console.log("🚀 ~ TeacherAsignAssignment ~ sss:", sss);
+
   // Filter assignments submitted to this teacher
   const filteredAssignments = submittedAssignments.filter(
-    (detail) => detail.teacherId === loggedInTeacher?.id
+    (id) => id.teacherId === loggedInTeacher?.id
   );
 
   // Assign homework
   const submitAssignment = () => {
-    const same = students.filter((std) => std.teacherId === loggedInTeacher.id);
     const homeWork = JSON.parse(localStorage.getItem("studentAsignment")) || [];
 
     const assi = {
-      data: same,
+      teacherID: loggedInTeacher.id,
+      subject: subjectAssignment,
       work: assignment,
       isSubmitted: false,
     };
     homeWork.push(assi);
-
+    console.log(assi);
     localStorage.setItem("studentAsignment", JSON.stringify(homeWork));
     setAssignment("");
   };
 
+  let teacher = JSON.parse(localStorage.getItem("teacher")) || [];
+  const filteredTeacher = teacher.find(
+    (tch) =>
+      tch.id === loggedInUser.id && tch.teacherName === loggedInUser.userName
+  );
+  // const currentPost = filteredAssignments.slice(firstPostIndex, lastPostIndex);
+
   return (
-    <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+    <div className="flex flex-col gap-4 max-w-5xl mx-auto">
       {/* Assignment Form */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-4">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-4">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-2">
           Assign Homework / Assignment
         </h1>
+        <select
+          value={subjectAssignment}
+          onChange={handleSubjctChange}
+          name=""
+          id=""
+        >
+          {filteredTeacher?.teacherSubjects?.map((sub, index) => (
+            <option
+              key={sub}
+              value={sub.value}
+              onChange={(e) => setSubjectAssignment(e.target.value)}
+            >
+              {sub}
+            </option>
+          ))}
+        </select>
+
         <textarea
           value={assignment}
           onChange={(e) => setAssignment(e.target.value)}
           className="w-full h-32 border border-gray-300 rounded-lg p-3 text-gray-700 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"
           placeholder="Write assignment details here..."
         ></textarea>
+
         <button
           onClick={submitAssignment}
-          className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-all"
+          className="mt-1 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-all"
         >
           Assign
         </button>
       </div>
-
+      <Link
+        className="bg-[#2671B1] w-fit py-1 px-2 text-white rounded-lg font-medium cursor-pointer"
+        to={"/studentsAssignments"}
+      >
+        view Assignments
+      </Link>
       {/* Submitted Assignments */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">
-          Submitted Assignments
-        </h2>
-
-        {filteredAssignments.length > 0 ? (
-          <div className="space-y-4">
-            {filteredAssignments.map((fil, index) => (
-              <div
-                key={index}
-                className="border border-gray-100 rounded-lg p-4 bg-gray-50 hover:bg-gray-100 transition-all"
-              >
-                <h1 className="font-medium text-gray-900">{fil.studentName}</h1>
-                <p className="text-gray-700 text-sm mt-1">
-                  {fil.assigmentsubmitted}
-                </p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-gray-500 text-center py-3">No submissions yet.</p>
-        )}
-      </div>
     </div>
   );
 };

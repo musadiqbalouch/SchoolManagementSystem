@@ -27,7 +27,9 @@ const RegisteredStudents = () => {
                      transition-all duration-200 hover:shadow-md hover:scale-[1.01]"
           >
             <h1 className="text-gray-800 text-lg font-semibold mb-3 text-center">
-              {student.studentName}
+              {student.studentName.charAt(0).toUpperCase() +
+                student.studentName.slice(1).toLowerCase()}
+              <span> ID {student.studentid}</span>
             </h1>
             {/* <h1 className="text-6xl">ss</h1> */}
             <div className="flex flex-wrap justify-center gap-2">

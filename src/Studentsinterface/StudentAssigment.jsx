@@ -1,19 +1,40 @@
 // StudentPanel.jsx
 import React, { useEffect, useState } from "react";
 
-const StudentAssigment = ({ loggedInStudent }) => {
+const StudentAssigment = () => {
   const [task, setTask] = useState([]);
   const [selected, setSelected] = useState(null);
   const [submittedList, setSubmittedList] = useState([]);
-  const studentAssignments =
-    JSON.parse(localStorage.getItem("studentAsignment")) || [];
+
   let submittedAssignments =
     JSON.parse(localStorage.getItem("submittedAssighment")) || [];
 
-  // Match assignment from student's teacher
-  const matchedAssignment = studentAssignments.filter((assi) =>
-    assi.data.some((dta) => dta.teacherId === loggedInStudent?.teacherid)
+  const studentAssignments =
+    JSON.parse(localStorage.getItem("studentAsignment")) || [];
+
+  const RegistredStudent =
+    JSON.parse(localStorage.getItem("registredStudent")) || [];
+
+  const loggedInStudent =
+    JSON.parse(localStorage.getItem("loggedInStudent")) || {};
+
+  const currentStudent = RegistredStudent.find(
+    (std) => std.studentid === loggedInStudent.registeredStudentId
   );
+  // console.log("🚀 ~ StudentAssigment ~ currentStudent:", currentStudent);
+
+  const filteredAssignments = studentAssignments.filter(
+    (std) =>
+      std.teacherID === currentStudent?.teacherid &&
+      currentStudent.subjects.includes(std.subject)
+  );
+
+  console.log(filteredAssignments);
+
+  // Match assignment from student's teacher
+  // const matchedAssignment = studentAssignments.filter((assi) =>
+  //   assi.data.some((dta) => dta.teacherId === loggedInStudent?.teacherid)
+  // );
 
   const handleTextareaChange = (e, index) => {
     const newTasks = [...task];
@@ -22,12 +43,16 @@ const StudentAssigment = ({ loggedInStudent }) => {
   };
 
   const studentAssignmentSubmit = (index) => {
+    const matchedAssignment = filteredAssignments[index];
     const submittedAssigment = {
       studentName: loggedInStudent.registeredStudentName,
       studentId: loggedInStudent.registeredStudentId,
-      teacherId: loggedInStudent.teacherid,
+      teacherId: matchedAssignment.teacherID,
+      // subject: filteredAssignments.subject,
       assigmentsubmitted: task[index],
       isSubmitted: true,
+      subject: matchedAssignment.subject,
+      work: matchedAssignment.work,
     };
     if (submittedAssigment.isSubmitted === true) {
       setSelected(index);
@@ -45,8 +70,8 @@ const StudentAssigment = ({ loggedInStudent }) => {
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto mt-10">
-      {matchedAssignment.length > 0 ? (
-        matchedAssignment.map((matched, index) => (
+      {filteredAssignments?.length > 0 ? (
+        filteredAssignments?.map((matched, index) => (
           <div
             key={index}
             className="w-full bg-blue-50 text-blue-900 rounded-xl border border-blue-200 p-5 space-y-3 shadow-sm hover:shadow-md transition-all"
@@ -54,6 +79,7 @@ const StudentAssigment = ({ loggedInStudent }) => {
             <h1 className="text-xl font-semibold text-blue-800">
               New Assignment #{index + 1}
             </h1>
+            <h2>{matched.subject}</h2>
 
             <p className="text-gray-800 bg-white rounded-lg p-3 border border-blue-100 shadow-inner">
               {matched.work}
@@ -86,18 +112,3 @@ const StudentAssigment = ({ loggedInStudent }) => {
 };
 
 export default StudentAssigment;
-
-// const addMarks = (marks) => {
-//   if (marks >= 90) {
-//     console.log("a");
-//   } else if (marks >= 80) {
-//     console.log("b");
-//   } else if (marks >= 70) {
-//     console.log("c");
-//   } else if (marks >= 60) console.log("d");
-//   else if (marks >= 50) {
-//     console.log("e");
-//   } else {
-//     console.log("f");
-//   }
-// };
