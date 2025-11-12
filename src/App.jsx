@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SideBar from "./LoginCriteria/SideBar/SideBar";
 import Navbar from "./LoginCriteria/Navbar/Navbar";
 import Dashbaord from "./views/DashBoard";
-import Exam from "./views/Exam";
+import Exam from "./views/MarkAttendance";
 import Setting from "./views/Setting";
 import Student from "./views/Student/Index";
 import TeacherPage from "./views/Teacher";
@@ -23,6 +23,8 @@ import TeacherSubjectList from "./Studentsinterface/RegisterSubjects";
 // import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
 import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
 import ViewAssignments from "./views/Teacher/ViewAssignments";
+import StudentSubject from "./Studentsinterface/StudentSubject";
+import AdminView from "./views/Announcement/AdminView";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -86,9 +88,14 @@ function App() {
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
                     <Route
+                      path="/registredSubjects"
+                      element={<StudentSubject />}
+                    />
+                    <Route
                       path="/studentsAssignments"
                       element={<ViewAssignments />}
                     />
+                    <Route path="/ViewAnnouncement" element={<AdminView />} />
                     <Route path="*" element={<Dashbaord />} />
                   </>
                 ) : (

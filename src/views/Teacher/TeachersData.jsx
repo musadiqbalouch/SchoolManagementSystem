@@ -76,9 +76,6 @@ const TeachersData = ({
                 <td className=" laptop:w-50  laptop-lg:w-65 laptop-lg:pl-2 text-center desktop:w-67">
                   {teacher.teacherEmail}
                 </td>
-                <td className=" laptop:w-19  laptop-lg:w-25 laptop-lg:pl-2 text-center desktop:w-27 ">
-                  {teacher.teacherClassName}
-                </td>
                 <td className=" laptop:w-19  laptop-lg:w-25 laptop-lg:pl-2 text-center  desktop:w-27 ">
                   {teacher.teacherGender}
                 </td>

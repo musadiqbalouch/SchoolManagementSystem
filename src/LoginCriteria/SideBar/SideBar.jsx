@@ -40,7 +40,7 @@ const SideBar = () => {
     {
       path: "/exam",
       image: <GiNewspaper />,
-      title: "Exam",
+      title: "Mark Attendance",
     },
     {
       path: "/announcement",
@@ -81,6 +81,23 @@ const SideBar = () => {
                 loggedInUser?.userName !== "admin" &&
                 index === 1
               ) {
+                return "hidden";
+              }
+              if (
+                loggedInUser &&
+                loggedInUser?.userName === "admin" &&
+                index === 3
+              ) {
+                return "hidden";
+              }
+              if (
+                loggedInUser &&
+                loggedInUser?.userName === "admin" &&
+                index === 4
+              ) {
+                return "hidden";
+              }
+              if (loggedInStudent && index === 4) {
                 return "hidden";
               }
 

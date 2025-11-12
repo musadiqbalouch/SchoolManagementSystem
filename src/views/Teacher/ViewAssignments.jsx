@@ -11,7 +11,7 @@ const ViewAssignments = () => {
     JSON.parse(localStorage.getItem("submittedAssighment")) || [];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [dataPerPage, setDataPerPage] = useState(5);
+  const [dataPerPage, setDataPerPage] = useState(3);
 
   const lastPostIndex = currentPage * dataPerPage;
   const firstPostIndex = lastPostIndex - dataPerPage;
@@ -28,17 +28,17 @@ const ViewAssignments = () => {
   const currentPost = filteredAssignments.slice(firstPostIndex, lastPostIndex);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 max-w-5xl mx-auto mt-10">
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 max-w-5xl mx-auto mt-2">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 border-b border-gray-200 pb-2">
         Submitted Assignments
       </h2>
 
       {currentPost.length > 0 ? (
-        <div className="space-y-5">
+        <div className="space-y-2">
           {currentPost.map((fil, index) => (
             <div
               key={index}
-              className="border border-gray-200 rounded-xl p-5 bg-gray-50 hover:bg-gray-100 shadow-sm transition-all duration-200"
+              className="border border-gray-200 rounded-xl px-3 py-1 bg-gray-50 hover:bg-gray-100 shadow-sm transition-all duration-200"
             >
               <h1 className="font-semibold text-gray-900 text-lg mb-1">
                 {fil.studentName.charAt(0).toUpperCase() +
@@ -74,7 +74,7 @@ const ViewAssignments = () => {
         </p>
       )}
 
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-end mt-2">
         <Link
           to={"/assignment"}
           className="bg-[#2671B1] hover:bg-[#1f5f96] text-white py-2 px-5 rounded-lg font-medium transition-all duration-200"

@@ -17,9 +17,13 @@ const Dataheader = ({ title }) => {
           <th className="laptop:w-50   chnge laptop-lg:w-65 laptop-lg:pl-2 desktop:w-67 font-normal">
             Email address
           </th>
-          <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
-            Class
-          </th>
+          {pathname === "/student&classes" ? (
+            <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
+              Class
+            </th>
+          ) : (
+            ""
+          )}
           <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
             Gender
           </th>

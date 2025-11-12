@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactQuill, { Quill } from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { TfiAnnouncement } from "react-icons/tfi";
-import { MdDeleteOutline } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Delta = Quill.import("delta");
 
@@ -10,12 +10,6 @@ const AdminAnnouncementPortal = () => {
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const quillRef = useRef(null);
-
-  const SchoolAnnouncement = JSON.parse(
-    localStorage.getItem("schoolAnnouncement") || "[]"
-  );
-
-  const [remove, setRemove] = useState();
 
   useEffect(() => {
     if (quillRef.current) {
@@ -47,15 +41,6 @@ const AdminAnnouncementPortal = () => {
 
   const modules = {
     toolbar: false,
-  };
-  const deleteAnnouncement = (index) => {
-    const updateAnnouncement = [...SchoolAnnouncement];
-    updateAnnouncement.splice(index, 1);
-    setRemove(updateAnnouncement);
-    localStorage.setItem(
-      "schoolAnnouncement",
-      JSON.stringify(updateAnnouncement)
-    );
   };
 
   return (
@@ -96,39 +81,13 @@ const AdminAnnouncementPortal = () => {
           </button>
         </div>
       </div>
-      <div className="w-full flex flex-col items-center  bg-gray-50 py-6">
-        <h1 className="text-3xl font-bold text-[#1B2A55] mb-4">
-          School Announcements From Admin
-        </h1>
-
-        {SchoolAnnouncement.map((announcement, index) => (
-          <div
-            key={index}
-            className="bg-[#1B2A55] w-3/4 my-3 p-5 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-200 text-white flex flex-col gap-3"
-          >
-            <div className="flex justify-between items-center border-b border-gray-400 pb-2">
-              <h2 className="font-semibold text-2xl">
-                <span className="text-blue-300">Title:</span>{" "}
-                {announcement.AnnouncementTitle}
-              </h2>
-              <span className="text-sm text-gray-300 italic">
-                {announcement.date}
-              </span>
-            </div>
-
-            <div className="mt-2">
-              <h3 className="font-semibold text-xl text-blue-300 mb-1">
-                Description:
-              </h3>
-              <div
-                className="text-base leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: announcement.description }}
-              ></div>
-            </div>
-            <MdDeleteOutline onClick={() => deleteAnnouncement(index)} />
-          </div>
-        ))}
-      </div>
+      <Link
+        className="mt-3 bg-[#152259] py-1 px-3 rounded-md text-white font-medium "
+        to={"/ViewAnnouncement"}
+      >
+        {" "}
+        View Annuouncemnet{" "}
+      </Link>
     </div>
   );
 };

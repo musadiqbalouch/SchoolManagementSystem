@@ -65,15 +65,13 @@ const TeacherAsignAssignment = ({ loggedInTeacher }) => {
         <select
           value={subjectAssignment}
           onChange={handleSubjctChange}
+          // onChange={handleSubjctChange}
           name=""
           id=""
         >
+          <option value="Select Subject">Select Subject</option>
           {filteredTeacher?.teacherSubjects?.map((sub, index) => (
-            <option
-              key={sub}
-              value={sub.value}
-              onChange={(e) => setSubjectAssignment(e.target.value)}
-            >
+            <option key={index} value={sub}>
               {sub}
             </option>
           ))}
