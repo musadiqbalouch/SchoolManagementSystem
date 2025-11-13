@@ -9,6 +9,7 @@ import TeacherDetail from "./TeacherDetail";
 import Modal from "../../Common/Modal/Modal";
 import TeacherEditform from "./TeacherEditform";
 import DeleteTeacher from "./DeleteTeacher";
+import { toast } from "react-toastify";
 
 const TeachersData = ({
   teacherData,
@@ -30,6 +31,7 @@ const TeachersData = ({
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
     items.splice(index, 1);
     localStorage.setItem("teacher", JSON.stringify(items));
+    toast.success("Teacher Deleted Succesfully");
     settTeacherData(items);
     setConfirmDelete(false);
   };

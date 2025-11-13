@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Navbar = ({ setIsLoggedIn }) => {
   const location = useLocation();
@@ -11,7 +12,9 @@ const Navbar = ({ setIsLoggedIn }) => {
   const handleLogout = () => {
     console.log("Logout clicked");
     localStorage.removeItem("loggedInUser");
+    toast.success("Logout Succesfully");
     localStorage.removeItem("loggedInStudent");
+    toast.success("Logout Succesfully");
     setIsLoggedIn(false);
     navigate("/");
   };

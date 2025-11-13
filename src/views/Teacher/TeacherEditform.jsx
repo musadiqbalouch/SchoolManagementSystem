@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const TeacherEditform = ({
   editItem,
@@ -81,6 +82,7 @@ const TeacherEditform = ({
         teacher.id === updatedTeacher.id ? updatedTeacher : teacher
       );
       localStorage.setItem("teacher", JSON.stringify(updateTeacherList));
+      toast.success("Teacher Edit Succesfully");
       settTeacherData(updateTeacherList);
       setShowModal(false);
     },
@@ -88,7 +90,7 @@ const TeacherEditform = ({
 
   return (
     <div className="relative z-10 laptop:w-[550px] laptop-lg:w-[750px] bg-white text-black rounded-2xl shadow-lg laptop:p-4 laptop-lg:p-6">
-      <div className="bg-white border border-gray-400 rounded-xl shadow-md mx-auto mt-10 max-w-4xl laptop:p-4 laptop-lg:p-6 ease-in duration-300">
+      <div className="bg-white border border-gray-400 rounded-xl shadow-md mx-auto mt-4 max-w-4xl laptop:p-4 laptop-lg:p-6 ease-in duration-300">
         <div className="text-gray-700 mb-6">
           <h1 className="text-2xl font-bold mb-2">Edit Teacher</h1>
           <div className="flex gap-6 font-medium text-gray-500">

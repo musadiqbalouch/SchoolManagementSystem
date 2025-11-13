@@ -56,75 +56,64 @@ const SideBar = () => {
   //   }
   // });
   return (
-    <div className="bg-[#152259] h-screen  flex flex-col px-8 py2 laptop:w-55 laptop-lg:w-65  laptop:px-5  desktop:w-70  ">
-      <div className="flex flex-col m-auto items-center justify-center p-5">
+    <div className="bg-[#152259] h-screen flex flex-col items-center laptop:w-55 laptop-lg:w-65 laptop:px-5 desktop:w-70">
+      {/* Top Logo Section */}
+      <div className="flex flex-col items-center justify-center mt-10">
         <img
-          className="h-13 w-15 object-cover rounded-[50%] "
+          className="h-13 w-15 object-cover rounded-full"
           src={udamyIcon}
-          alt=""
+          alt="Udemy Logo"
         />
-        <h2 className="text-white font-medium mt-2 w-35  text-sm text-center laptop-lg:text-lg laptop-lg:w-45 desktop:text-lg desktop:w-45 ">
+        <h2 className="text-white font-medium mt-2 text-center text-sm laptop-lg:text-lg desktop:text-lg">
           Udemy Inter. school
         </h2>
+        {/* Title ke neeche 10px ka gap */}
+        <div className="mt-[10px] w-full"></div>
       </div>
-      <div>
+
+      {/* Dashboard Links Section */}
+      <div className="flex flex-col gap-5 mt-10 flexgrow justify-center w-full">
         {udamyDashboard.map((board, index) => (
           <NavLink
             to={board.path}
             key={index}
             className={({ isActive }) => {
-              if (loggedInStudent && index === 2) {
-                return "hidden";
-              }
+              // Conditional visibility based on user role
+              if (loggedInStudent && index === 2) return "hidden";
               if (
                 !loggedInStudent &&
                 loggedInUser?.userName !== "admin" &&
                 index === 1
-              ) {
+              )
                 return "hidden";
-              }
               if (
-                loggedInUser &&
                 loggedInUser?.userName === "admin" &&
-                index === 3
-              ) {
+                (index === 3 || index === 4)
+              )
                 return "hidden";
-              }
-              if (
-                loggedInUser &&
-                loggedInUser?.userName === "admin" &&
-                index === 4
-              ) {
-                return "hidden";
-              }
-              if (loggedInStudent && index === 4) {
-                return "hidden";
-              }
+              if (loggedInStudent && index === 4) return "hidden";
 
               return isActive
-                ? "flex flex-row gap-2 m-auto items-center justify-start text-sm px-3 py-1 ease-in duration-300 rounded-lg w-45 laptop-lg:w45 bg-[#509CDB] cursor-pointer desktop:w-45 desktop:text-lg"
-                : "flex flex-row gap-2 m-auto items-center justify-start text-sm desktop:text-lg px-3 py-3 w-45 laptop-lg:w45 cursor-pointer";
+                ? "flex flex-row  gap-2 items-center justify-start text-sm px-3 py-1 rounded-lg w-45 laptop-lg:w45 bg-[#509CDB] cursor-pointer desktop:text-lg m-auto"
+                : "flex flex-row  gap-2 items-center justify-start text-sm px-3 py-3 w-45 laptop-lg:w45 cursor-pointer desktop:text-lg m-auto";
             }}
           >
-            <span className="object-cover h-6 w-6 text-white mt-2 desktop:h-8 desktop:w-8 desktop:mt-3">
+            <span className="h-6 w-6 text-white desktop:h-8 desktop:w-8">
               {board.image}
             </span>
-            <h3 className="text-white font-medium ">{board.title}</h3>
+            <h3 className="text-white font-medium">{board.title}</h3>
           </NavLink>
         ))}
       </div>
-      <div
-        className="flex flex-row gap-2 m-auto items-center justify-center text-sm
-           px-3 py-3 w-40 laptop:w-full  h-46 cursor-pointer "
-      >
-        <PiBankBold className="object-cover h-5 w-5 text-white mt-2 gap-2" />
-        <h3 className="text-white font-medium laptop-lg:text-sm  desktop:text-lg ">
-          Features
-        </h3>
-        <span className="text-black bg-[#B9D7F1] px-2 py1 rounded-3xl laptop-lg:text-sm laptop-lg:px-3 desktop:text-lg desktop:px-3 desktop:text-center ">
-          New
-        </span>
+
+      {/* Features button is commented out, layout intact */}
+      {/*
+      <div className="flex flex-row gap-2 m-auto items-center justify-center text-sm px-3 py-3 w-40 laptop:w-full h-46 cursor-pointer">
+        <PiBankBold className="h-5 w-5 text-white mt-2" />
+        <h3 className="text-white font-medium laptop-lg:text-sm desktop:text-lg">Features</h3>
+        <span className="text-black bg-[#B9D7F1] px-2 py-1 rounded-3xl laptop-lg:text-sm laptop-lg:px-3 desktop:text-lg desktop:px-3 desktop:text-center">New</span>
       </div>
+      */}
     </div>
   );
 };

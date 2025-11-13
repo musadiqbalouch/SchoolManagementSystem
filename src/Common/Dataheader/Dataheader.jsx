@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 
 const Dataheader = ({ title }) => {
   let pathname = location.pathname;
-  console.log("🚀 ~ StudentData ~ pathname:", pathname);
   return (
     <table className="w-full">
       <thead className="border border-black laptop:h-10 laptop-lg:h-10 text-base">
@@ -36,13 +35,6 @@ const Dataheader = ({ title }) => {
           <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
             View Data
           </th>
-          {pathname === "/student&classes" ? (
-            <th className="laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 desktop:w-27 font-normal">
-              Attendance
-            </th>
-          ) : (
-            ""
-          )}
         </tr>
       </thead>
     </table>

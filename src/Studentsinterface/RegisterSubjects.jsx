@@ -4,6 +4,7 @@ import StudentSubject from "./StudentSubject";
 import Modal from "../Common/Modal/Modal";
 import RegistrationLimitModal from "./RegistrationLimitModal";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterSubjects = () => {
   const teacher = JSON.parse(localStorage.getItem("teacher")) || [];
@@ -37,7 +38,7 @@ const RegisterSubjects = () => {
       teacherid: selectedTeacherId,
       teacherName: teacher.find((t) => t.id === selectedTeacherId)?.teacherName,
       subjects: selectSubject,
-      attendance: {},
+      attendance: [],
     };
 
     for (let subject of newStudent.subjects) {
@@ -65,7 +66,7 @@ const RegisterSubjects = () => {
 
     //  Check total length
     if (totalSubjects + newStudent.subjects.length > 5) {
-      alert("You can't register more than 5 subjects total!");
+      toast.error("You cant register more then 5 subjects");
       return;
     }
 
@@ -84,7 +85,7 @@ const RegisterSubjects = () => {
     }
 
     localStorage.setItem("registredStudent", JSON.stringify(allStudents));
-
+    toast.success("Sucessfully registred subject");
     setSelectSubject([]);
     setSelectedTeacherId("");
   };
@@ -94,7 +95,7 @@ const RegisterSubjects = () => {
   // });
 
   return (
-    <div className="flex flex-col flex-wrap gap-6 justify-center w-full items-center py-2">
+    <div className="flex flex-col flex-wrap gap-6 justify-center w-full items-center py-2 container">
       <div className="flex items-start justify-self-start bg-red400 w-full px-10">
         <Link
           className="bg-[#509CDB] px-3 py-1 rounded-md text-white font-medium"
@@ -103,7 +104,7 @@ const RegisterSubjects = () => {
           View Registred Subjects
         </Link>
       </div>
-      <div className="flex flex-wrap gap-5">
+      <div className="flex flex-wrap gap-5 px-5">
         {teacher.map((tch, index) => (
           <div
             key={index}

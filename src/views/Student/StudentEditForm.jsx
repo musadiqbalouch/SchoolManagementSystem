@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const StudentEditForm = ({
   editItem,
@@ -39,12 +40,6 @@ const StudentEditForm = ({
       editPassword: editItem.studentPassword,
       editNumber: editItem.studentNumber,
       // teacherId: editItem.teacherId,
-      editgrade: editItem.grade,
-      editmarks: editItem.marks,
-      Editattendance: editItem.attendance.map((att) => ({
-        date: att.date,
-        status: att.status,
-      })),
     },
     validationSchema: teaherDataSchema,
     onSubmit: (value) => {
@@ -56,10 +51,6 @@ const StudentEditForm = ({
         studentEmail: value.editEmail,
         studentPassword: value.editPassword,
         studentNumber: value.editNumber,
-        grade: value.editgrade,
-        marks: value.editmarks,
-        // teacherId: editItem.teacherId,
-        attendance: value.Editattendance,
       };
       // full data lo localStorage se
       let allStudents = JSON.parse(localStorage.getItem("students")) || [];
@@ -71,6 +62,8 @@ const StudentEditForm = ({
 
       // localStorage aur state update karo
       localStorage.setItem("students", JSON.stringify(updatedStudents));
+      toast.success("Form Edit Succesfully");
+
       setStudentData(updatedStudents);
       setShowModal(false);
     },

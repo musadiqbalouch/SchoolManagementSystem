@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import Modal from "../Common/Modal/Modal";
+import AttendanceModal from "../views/Student/AttendanceModal";
 
 const Studentinterface = () => {
-  let [num, setNum] = useState(0);
-  let totalDays = 30;
+  // let [num, setNum] = useState(0);
+  // let totalDays = 30;
+  const [showModal, setShowModal] = useState(false);
 
   let studentLoggedIn =
     JSON.parse(localStorage.getItem("loggedInStudent")) || [];
   let student = JSON.parse(localStorage.getItem("students")) || [];
-  let teacher = JSON.parse(localStorage.getItem("teacher")) || [];
+  // let teacher = JSON.parse(localStorage.getItem("teacher")) || [];
 
   // const xoxo = teacher.find((tch) => tch.id === studentLoggedIn.teacherid);
   // console.log("🚀 ~ Studentinterface ~ xoxo:", xoxo);
@@ -15,15 +18,15 @@ const Studentinterface = () => {
   let loggedInStudent = student.find(
     (std) => std.studentId === studentLoggedIn.registeredStudentId
   );
-  console.log("🚀 ~ Studentinterface ~ loggedInStudent:", loggedInStudent);
+  // console.log("🚀 ~ Studentinterface ~ loggedInStudent:", loggedInStudent);
 
-  // const items = teacher.find((tch) => tch.id === xxx.teacherId);
-  let details = loggedInStudent.attendance.map((att) => att.status);
+  // // const items = teacher.find((tch) => tch.id === xxx.teacherId);
+  // let details = loggedInStudent.attendance.map((att) => att.status);
 
   // filtering only present
-  let presentCount = details.filter((status) => status === "Present").length;
-  // calculating percentage
-  let avg = Math.floor((presentCount / totalDays) * 100);
+  // let presentCount = details.filter((status) => status === "Present").length;
+  // // calculating percentage
+  // let avg = Math.floor((presentCount / totalDays) * 100);
 
   return (
     <div className=" bg-gray-50 font-sans">
@@ -64,32 +67,36 @@ const Studentinterface = () => {
         {/* ===== Left: Summary Cards ===== */}
         <section className="flex-1 flex flex-col justify-between gap-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4">
-            <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
-              <p className="text-white text-sm">Attendance</p>
-              <h3 className="text-2xl font-semibold text-white mt-1">{avg}%</h3>
-              <p className="text-xs text-white mt-1">This month</p>
+            <div className="bg-[#509CDB] p-2 rounded-2xl shadow-sm cursor-pointer">
+              <h3
+                onClick={() => setShowModal(true)}
+                className="text-md font-semibold text-white "
+              >
+                View attendance
+              </h3>
+              {/* <p className="text-xs text-white mt-1">This month</p> */}
             </div>
-            <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
+            {/* <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
               <p className="text-white text-sm">Average Grade</p>
               <h3 className="text-2xl font-semibold text-white">
                 {loggedInStudent.grade}
               </h3>
               <p className="text-xs text-white mt-1">Current term</p>
-            </div>
-            <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
+            </div> */}
+            {/* <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
               <p className="text-white text-sm">Pending Assignments</p>
               <h3 className="text-2xl font-semibold text-white mt-1">3</h3>
               <p className="text-xs text-white mt-1">Due this week</p>
-            </div>
-            <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
+            </div> */}
+            {/* <div className="bg-[#777C6D] p-4 rounded-2xl shadow-sm">
               <p className="text-white text-sm">Obtain Marks</p>
               <h3 className="text-2xl font-semibold text-white mt-1">
                 {loggedInStudent.marks}
               </h3>
-              {/* <p className="text-xs text-white mt-1">
+              <p className="text-xs text-white mt-1">
                 In : {xoxo.teacherSubject}
-              </p> */}
-            </div>
+              </p>
+            </div> */}
           </div>
 
           {/* ===== Today’s Schedule ===== */}
@@ -123,6 +130,11 @@ const Studentinterface = () => {
           </div>
         </section>
       </main>
+      {showModal && (
+        <Modal>
+          <AttendanceModal setShowModal={setShowModal} />
+        </Modal>
+      )}
     </div>
   );
 };

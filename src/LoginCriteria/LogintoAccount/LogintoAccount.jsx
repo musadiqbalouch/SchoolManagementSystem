@@ -4,6 +4,7 @@ import Input from "../../Common/Input/Input";
 import { useFormik } from "formik";
 import Button from "../../Common/Button/Button";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const LogintoAccount = ({ setIsLoggedIn }) => {
   const [validation, setValidation] = useState(true);
@@ -43,6 +44,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
         };
         console.log("loggedin clicked");
         localStorage.setItem("loggedInUser", JSON.stringify(loggedIn));
+        toast.success("Login Succesfully");
         setIsLoggedIn(true);
         navigate("/");
         setValidation(true);
@@ -64,6 +66,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
         };
 
         localStorage.setItem("loggedInUser", JSON.stringify(loggedIn));
+        toast.success("Login Succesfully");
         setIsLoggedIn(true);
         navigate("/");
         setValidation(true);
@@ -91,6 +94,7 @@ const LogintoAccount = ({ setIsLoggedIn }) => {
           "loggedInStudent",
           JSON.stringify(studentLoggedIn)
         );
+        toast.success("Login Succesfully");
         setIsLoggedIn(true);
         navigate("/");
         setValidation(true);

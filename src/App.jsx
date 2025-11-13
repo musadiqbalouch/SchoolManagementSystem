@@ -25,6 +25,9 @@ import RegisteredStudents from "./views/TeacherStudents/RegisteredStudents";
 import ViewAssignments from "./views/Teacher/ViewAssignments";
 import StudentSubject from "./Studentsinterface/StudentSubject";
 import AdminView from "./views/Announcement/AdminView";
+import AttendanceModal from "./views/Student/AttendanceModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -53,6 +56,7 @@ function App() {
           )}
           {/* routes  */}
           <div className="desktop:w-full  w-full ">
+            <ToastContainer />
             <>
               {/* if user is loggedin */}
               <Routes>
@@ -87,6 +91,7 @@ function App() {
                     <Route path="/teacherform" element={<TeacherForm />} />
                     <Route path="/teachersdata" element={<TeachersData />} />
                     <Route path="/studentData" element={<StudentData />} />
+
                     <Route
                       path="/registredSubjects"
                       element={<StudentSubject />}

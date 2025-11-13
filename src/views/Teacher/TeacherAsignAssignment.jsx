@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import Paginatation from "../../Common/Paginatation/Paginatation";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const TeacherAsignAssignment = ({ loggedInTeacher }) => {
   const [assignment, setAssignment] = useState("");
@@ -45,6 +46,7 @@ const TeacherAsignAssignment = ({ loggedInTeacher }) => {
     homeWork.push(assi);
     console.log(assi);
     localStorage.setItem("studentAsignment", JSON.stringify(homeWork));
+    toast.success("Assignment Uploaded Succesfully");
     setAssignment("");
   };
 

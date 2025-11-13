@@ -3,6 +3,7 @@ import ReactQuill, { Quill } from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Delta = Quill.import("delta");
 
@@ -35,6 +36,7 @@ const AdminAnnouncementPortal = () => {
       "schoolAnnouncement",
       JSON.stringify(schoolAnnouncement)
     );
+    toast.success("uplaod Succesfully");
     setTitle("");
     setValue("");
   };

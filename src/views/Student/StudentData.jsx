@@ -6,8 +6,7 @@ import { GrView } from "react-icons/gr";
 import Modal from "../../Common/Modal/Modal";
 import StudentEditForm from "./StudentEditForm";
 import DeleteStudent from "./DeleteStudent";
-import AttendanceModal from "./AttendanceModal";
-import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StudentData = ({
   studentData,
@@ -21,18 +20,13 @@ const StudentData = ({
   const [editItem, setEditItem] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const [attendance, setAttendance] = useState(false);
-  const [attvalue, setAttValue] = useState(null);
-
-  // console.log(studentData);
-  const toggleModal = () => {
-    setShowModal(true);
-  };
+  const toggleModal = () => setShowModal(true);
 
   const handleDelete = (index) => {
     let students = JSON.parse(localStorage.getItem("students")) || [];
     students.splice(index, 1);
     localStorage.setItem("students", JSON.stringify(students));
+    toast.success("Deleted Succesfully");
     setStudentData(students);
     setConfirmDelete(false);
   };
@@ -41,42 +35,31 @@ const StudentData = ({
     setStudentData(JSON.parse(localStorage.getItem("students")) || []);
   }, []);
 
-  const detail = () => {
-    setStudentDetail(true);
-  };
+  const detail = () => setStudentDetail(true);
 
   const editList = (id) => {
     const updateItem = [...studentData];
     setEditItem(updateItem[id]);
   };
 
-  let att = (id) => {
-    const updateItem = [...studentData];
-    setAttValue(updateItem[id]);
-    setAttendance(true);
-  };
-  // console.log(attvalue);
-
   return (
-    <div
-      className={`p-0 w-full laptop:h-80 laptop-lg:h-100 m-auto flex flex-col gap-3 mt-3`}
-    >
+    <div className="p-0 w-full laptop:h-80 laptop-lg:h-100 m-auto flex flex-col gap-3 mt-3">
       <Dataheader title={"Student ID"} />
 
       <table className="w-full border-separate border-spacing-y-2">
         <tbody>
           {currentPost
-            .filter((student) => {
-              return search.toLowerCase() === ""
+            .filter((student) =>
+              search === ""
                 ? student
                 : student.studentName.toLowerCase().includes(search) ||
-                    student.studentEmail.toLowerCase().includes(search);
-            })
+                  student.studentEmail.toLowerCase().includes(search)
+            )
             .map((student, id) => (
               <tr
                 key={id}
                 className={`${
-                  id % 2 === 0 ? `bg-[#EBF6FF80]` : ``
+                  id % 2 === 0 ? "bg-[#EBF6FF80]" : ""
                 } border shadow-md laptop-lg:text-sm laptop:text-sm laptop-lg:h-10 border-[#FFFFFF] rounded-md overflow-hidden`}
               >
                 <td className="laptop:w-40 laptop-lg:w-48 laptop-lg:pl-2 text-center desktop:w-50">
@@ -95,7 +78,6 @@ const StudentData = ({
                   {student.studentGender}
                 </td>
 
-                {/* Edit */}
                 <td
                   onClick={toggleModal}
                   className="laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
@@ -106,7 +88,6 @@ const StudentData = ({
                   />
                 </td>
 
-                {/* Delete */}
                 <td className="laptop:w-16 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27">
                   <MdDelete
                     onClick={() =>
@@ -118,7 +99,6 @@ const StudentData = ({
                   />
                 </td>
 
-                {/* View */}
                 <td
                   onClick={detail}
                   className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
@@ -127,14 +107,6 @@ const StudentData = ({
                     onClick={() => editList(firstPostIndex + id)}
                     className="laptop:h-6 laptop:w-8 text-[#1F9B1B] inline-block laptop-lg:h-5 laptop-lg:w-8 desktop:h-9 desktop:w-12"
                   />
-                </td>
-                <td
-                  className="cursor-pointer laptop:w-19 laptop-lg:w-25 laptop-lg:pl-2 text-center align-middle desktop:w-27"
-                  onClick={() => att(firstPostIndex + id)}
-                >
-                  {student.attendance && student.attendance.length > 0
-                    ? `${student.attendance[student.attendance.length - 1].status}`
-                    : "No attendance"}
                 </td>
               </tr>
             ))}
@@ -166,16 +138,6 @@ const StudentData = ({
           <DeleteStudent
             setConfirmDelete={setConfirmDelete}
             confirmDelete={confirmDelete}
-          />
-        </Modal>
-      )}
-      {attendance && (
-        <Modal>
-          <AttendanceModal
-            setAttendance={setAttendance}
-            attvalue={attvalue}
-            currentPost={currentPost}
-            setStudentData={setStudentData}
           />
         </Modal>
       )}

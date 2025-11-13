@@ -19,17 +19,17 @@ const TeacherPage = () => {
 
   const lastPostIndex = currentPage * dataPerPage;
   const firstPostIndex = lastPostIndex - dataPerPage;
-  let currentPost = [];
+  let currentPost = data.slice(firstPostIndex, lastPostIndex);
   const loggedInStuent = JSON.parse(localStorage.getItem("loggedInStudent"));
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  if (loggedInStuent) {
-    currentPost = "";
-  } else if (loggedInUser.userName === "admin") {
-    currentPost = data.slice(firstPostIndex, lastPostIndex);
-  } else {
-    currentPost = "";
-  }
+  // if (loggedInStuent) {
+  //   currentPost = "";
+  // } else if (loggedInUser.userName === "admin") {
+  //   // currentPost = data.slice(firstPostIndex, lastPostIndex);
+  // } else {
+  //   currentPost = "";
+  // }
 
   useEffect(() => {
     let items = JSON.parse(localStorage.getItem("teacher")) || [];
@@ -77,12 +77,16 @@ const TeacherPage = () => {
             settTeacherData={setData}
             firstPostIndex={firstPostIndex}
           />
-          <Paginatation
-            totalPages={data.length}
-            postPerPage={dataPerPage}
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          />
+          {data.length > 5 ? (
+            <Paginatation
+              totalPages={data.length}
+              postPerPage={dataPerPage}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
+          ) : (
+            ""
+          )}
         </>
       )}
     </div>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const StudentForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -52,18 +53,11 @@ const StudentForm = () => {
         studentEmail: value.email,
         studentNumber: value.number,
         studentPassword: value.password,
-        grade: "",
-        marks: "",
-        attendance: [
-          {
-            date: null,
-            status: "",
-          },
-        ],
       };
       // console.log(student.studentName);
       data.push(student);
       localStorage.setItem("students", JSON.stringify(data));
+      toast.success("Form submitted succesfully");
       formik.resetForm();
       navigate("/student&classes");
     },

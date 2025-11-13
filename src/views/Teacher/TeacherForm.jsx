@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const TeacherForm = () => {
   const navigate = useNavigate();
@@ -84,6 +85,7 @@ const TeacherForm = () => {
       };
       data.push(teacher);
       localStorage.setItem("teacher", JSON.stringify(data));
+      toast.success("Form Submitted Succesfully");
       formik.resetForm();
       navigate("/teacher");
     },
