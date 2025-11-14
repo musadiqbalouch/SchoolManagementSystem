@@ -12,7 +12,7 @@ const Navbar = ({ setIsLoggedIn }) => {
   const handleLogout = () => {
     console.log("Logout clicked");
     localStorage.removeItem("loggedInUser");
-    toast.success("Logout Succesfully");
+    // toast.success("Logout Succesfully");
     localStorage.removeItem("loggedInStudent");
     toast.success("Logout Succesfully");
     setIsLoggedIn(false);

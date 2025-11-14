@@ -10,7 +10,7 @@ const AttendanceModal = ({ setShowModal }) => {
       std.studentid === loggedInStudent.registeredStudentId &&
       std.studentName === loggedInStudent.registeredStudentName
   );
-  console.log("🚀 ~ AttendanceModal ~ student:", student);
+  // console.log("🚀 ~ AttendanceModal ~ student:", student);
   return (
     <div className="bg-white flex flex-col items-center   justify-center py-2 px-5 rounded-md">
       <div>
@@ -18,7 +18,7 @@ const AttendanceModal = ({ setShowModal }) => {
           Attendance Details
         </h2>
         <div className="flex gap-5  ">
-          {student.attendance.map((std, index) => (
+          {student?.attendance.map((std, index) => (
             <div
               key={index}
               className="flex items-center justify-between gap-2 mt-2 mb-2 bg-[#F3F7FF] border border-[#D0E3FF] shadow-sm rounded-lg py-2 px-3 hover:bg-[#E8F1FF] transition-all duration-200"

@@ -5,6 +5,7 @@ import { Formik, useFormik } from "formik";
 import * as Yup from "yup";
 import { IoMdEye } from "react-icons/io";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StudentForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +58,9 @@ const StudentForm = () => {
       // console.log(student.studentName);
       data.push(student);
       localStorage.setItem("students", JSON.stringify(data));
-      toast.success("Form submitted succesfully");
+      toast.success("Form submitted succesfully", {
+        // className: "!bg-[#152259] !text-white !border-2 !border-white",
+      });
       formik.resetForm();
       navigate("/student&classes");
     },

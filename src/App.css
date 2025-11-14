@@ -20,3 +20,12 @@
   --breakpoint-desktop: 1439px;
   --breakpoint-_4k: 1920px;
 }
+/* Hide scrollbar but still scroll works */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* for IE/Edge */
+  scrollbar-width: none; /* for Firefox */
+}

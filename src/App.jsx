@@ -56,7 +56,7 @@ function App() {
           )}
           {/* routes  */}
           <div className="desktop:w-full  w-full ">
-            <ToastContainer />
+            <ToastContainer autoClose={2000} />
             <>
               {/* if user is loggedin */}
               <Routes>
